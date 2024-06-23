@@ -13,18 +13,18 @@ import { ReactComponent as TaurusIcon } from '../../assets/icons/zodiac/taurus.s
 import { ReactComponent as VirgoIcon } from '../../assets/icons/zodiac/virgo.svg';
 
 const IconsMap: any = {
-    aquarius: AquariusIcon,
-    aries: AriesIcon,
-    cancer: CancerIcon,
-    capricorn: CapricornIcon,
-    gemini: GeminiIcon,
-    leo: LeoIcon,
-    libra: LibraIcon,
-    pisces: PiscesIcon,
-    sagittarius: SagittariusIcon,
-    scorpio: ScorpioIcon,
-    taurus: TaurusIcon,
-    virgo: VirgoIcon
+    Aquarius: AquariusIcon,
+    Aries: AriesIcon,
+    Cancer: CancerIcon,
+    Capricorn: CapricornIcon,
+    Gemini: GeminiIcon,
+    Leo: LeoIcon,
+    Libra: LibraIcon,
+    Pisces: PiscesIcon,
+    Sagittarius: SagittariusIcon,
+    Scorpio: ScorpioIcon,
+    Taurus: TaurusIcon,
+    Virgo: VirgoIcon
 }
 
 export type IconProps = {

@@ -7,20 +7,44 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+  --fireColor: red;
+  --windColor: green;
+  --waterColor: blue;
+  --earchColor: black;
+  --JupiterColor: red;
+  --SunColor: orange;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .element.fire {
-  color: red;
+  color: var(--fireColor);
 }
 .element.earth {
-  color: black;
+  color: var(--earchColor);
 }
 .element.wind {
-  color: green;
+  color: var(--windColor);
 }
 .element.water {
-  color: blue;
+  color: var(--waterColor);
+}
+.planet.Jupiter {
+  color: var(--JupiterColor);
+  fill: var(--JupiterColor);
+}
+.planet.Sun {
+  color: var(--SunColor);
+  fill: var(--SunColor);
+}
+.planet-line-zodiac.Jupiter {
+  stroke: var(--JupiterColor);
+}
+
+.planet-line-zodiac.Sun {
+  stroke: var(--SunColor);
 }

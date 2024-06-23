@@ -1,18 +1,18 @@
-import { EAstroElements } from "../elements/main";
+import { EAstroElements } from "../elements/ElementsData";
 
 export enum EAstroZodiacSign {
-    ARIES = 'aries',
-    TAURUS = 'taurus',
-    GEMINI = 'gemini',
-    CANCER = 'cancer',
-    LEO = 'leo',
-    VIRGO = 'virgo',
-    LIBRA = 'libra',
-    SCORPIO = 'scorpio',
-    SAGITTARIUS = 'sagittarius',
-    CAPRICORN = 'capricorn',
-    AQUARIUS = 'aquarius',
-    PISCES = 'pisces'
+    ARIES = 'Aries',
+    TAURUS = 'Taurus',
+    GEMINI = 'Gemini',
+    CANCER = 'Cancer',
+    LEO = 'Leo',
+    VIRGO = 'Virgo',
+    LIBRA = 'Libra',
+    SCORPIO = 'Scorpio',
+    SAGITTARIUS = 'Sagittarius',
+    CAPRICORN = 'Capricorn',
+    AQUARIUS = 'Aquarius',
+    PISCES = 'Pisces'
 }
 
 export type ZodiacSymbolDataType = {

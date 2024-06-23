@@ -1,0 +1,4 @@
+.NatalCardContent {
+    display: flex;
+    flex-direction: column;
+}
