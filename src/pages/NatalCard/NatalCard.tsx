@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { DateTime, DateTimeValue } from "../../components/DateTime/DateTime";
-import { Zodiak } from "./components/Zodiac/Zodiac";
-import { IPlanet } from "../../types/palanets/IPlanet";
 import { NatalChart } from "./components/NatalChart/NatalChart";
 import styles from './NatalCard.module.css';
 export default function NatalCard () {
@@ -15,7 +13,7 @@ export default function NatalCard () {
                     <DateTime onChange={setSelectedDate}/>
                     <button onClick={() => setEnabled(true)}>Посчитать</button>
                 </div>
-                <NatalChart size={500} date={selectedDate} enabled={enabled} onClickPlanet={console.log}></NatalChart>
+                <NatalChart size={500} date={selectedDate} enabled={enabled} onClickSign={console.log}></NatalChart>
             </div>
         </div>
     )

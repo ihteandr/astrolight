@@ -33,18 +33,18 @@ code {
 .element.water {
   color: var(--waterColor);
 }
-.planet.Jupiter {
+.sign.Jupiter {
   color: var(--JupiterColor);
   fill: var(--JupiterColor);
 }
-.planet.Sun {
+.sign.Sun {
   color: var(--SunColor);
   fill: var(--SunColor);
 }
-.planet-line-zodiac.Jupiter {
+.sign-line-zodiac.Jupiter {
   stroke: var(--JupiterColor);
 }
 
-.planet-line-zodiac.Sun {
+.sign-line-zodiac.Sun {
   stroke: var(--SunColor);
 }

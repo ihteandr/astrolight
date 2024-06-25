@@ -1,7 +1,7 @@
 import { EAstroZodiacSign } from "../../data/zodiac/ZodiacData";
 import { EPlanetSigns } from "./EPlanets";
 
-export interface IPlanet {
+export interface ISign {
     name: EPlanetSigns,
     sign: EAstroZodiacSign,
     full_degree: number,
