@@ -17,11 +17,11 @@ export type DateTimeTypes = {
 
 export function DateTime ({ onChange }: DateTimeTypes) {
     const [selectedDate, setSelectedDate]= useState<DateTimeValue>({
-        day: 1,
-        month: 1,
-        year: 1950,
-        hour: 8,
-        minute: 1
+        day: 8,
+        month: 12,
+        year: 1988,
+        hour: 16,
+        minute: 50
     })
     const months = useMemo<{name: string, value: number}[]>(() => {
         return MONTHS.map((month, index) => {
@@ -32,7 +32,7 @@ export function DateTime ({ onChange }: DateTimeTypes) {
         })
     }, []);
     const days = useMemo<number[]>(() => {
-        let monthDays = MONTHS_DAYS[selectedDate.month]
+        let monthDays = MONTHS_DAYS[selectedDate.month - 1]
         if (selectedDate.year % 4 === 0 && selectedDate.month === 1) {
             monthDays++
         }

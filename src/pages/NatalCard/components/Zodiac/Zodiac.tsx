@@ -79,17 +79,18 @@ export function Zodiak ({ size }: ZodiakProps) {
         <svg height={size} width={size} xmlns="http://www.w3.org/2000/svg">
             {Object.values(ZODIAC_SYMBOL_DATA).map((symbolData) => {
                 const iconSize = size / 20;
-                const coords = getPointOnCircle(size / 2 - iconSize / 2, 12 - symbolData.order + 1, (innerRadius + outerRadius) / 2, Math.PI - Math.PI / 12)
-                const comp = <SvgIcon
-                    size={iconSize}
-                    key={symbolData.order}
-                    name={symbolData.sign}
-                    x={coords.x}
-                    y={coords.y}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => console.log(symbolData)}
-                    className={clsx('element', symbolData.element)}
-                />
+                const coords = getPointOnCircle(size / 2 - iconSize / 2, 12 - symbolData.order + 1, (innerRadius + outerRadius) / 2 + 8, Math.PI - Math.PI / 12)
+                const props = {
+                    size: iconSize,
+                    key: symbolData.order,
+                    name: symbolData.sign,
+                    x: coords.x,
+                    y: coords.y,
+                    style: { cursor: "pointer" },
+                    onClick: () => console.log(symbolData),
+                    className: clsx('element', symbolData.element)
+                }
+                const comp = <SvgIcon {...props} />
                 return comp 
             })}
             <g {...PenProps}>

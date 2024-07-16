@@ -1,0 +1,67 @@
+
+export enum EAstroSigns {
+    SUN = 'Sun',
+    MOON = 'Moon',
+    MERCURY = 'Mercury',
+    VENUS = 'Venus',
+    MARS = 'Mars',
+    JUPITER = 'Jupiter',
+    SATURN = 'Saturn',
+    URANUS = 'Uranus',
+    NEPTUNE = 'Neptune',
+    PLUTO = 'Pluto',
+    CHIRON = 'Chiron',
+    SELENA = 'Selena',
+    LILITH = 'Lilith',
+    UP_NODE = 'UpNode',
+    PROSERPINA = 'Proserpina',
+    CERES = 'Ceres',
+    JUNO = 'Juno',
+    VERTEX = 'Vertex',
+    DOWN_NODE = 'DownNode'
+}
+
+export enum EAstroZodiacSign {
+    ARIES = 'Aries',
+    TAURUS = 'Taurus',
+    GEMINI = 'Gemini',
+    CANCER = 'Cancer',
+    LEO = 'Leo',
+    VIRGO = 'Virgo',
+    LIBRA = 'Libra',
+    SCORPIO = 'Scorpio',
+    SAGITTARIUS = 'Sagittarius',
+    CAPRICORN = 'Capricorn',
+    AQUARIUS = 'Aquarius',
+    PISCES = 'Pisces'
+}
+
+export interface IZone {
+    hour: number,
+    minute: number,
+    second: number
+}
+
+export enum ESexSign {
+    MALE = 'male',
+    FEMALE = 'female'   
+}
+export enum ECrossSign {
+    CARDINAL = 'cardinal',
+    MUTABLE = 'mutable',
+    FIXED = 'fixed'
+}
+export interface ISign {
+    isRetro: boolean,
+    name: EAstroZodiacSign,
+    zodiac: EAstroZodiacSign,
+    zodicSignDegree: number,
+    zodiacZone: IZone,
+    longitude: number,
+    latitude: number,
+    distance: number,
+    longitudeSpeed: number,
+    latitudeSpeed: number,
+    distanceSpeed: number,
+    rflag: number
+}

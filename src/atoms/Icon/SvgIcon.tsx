@@ -1,3 +1,4 @@
+// Zadiac
 import { cloneElement, createElement } from 'react';
 import { ReactComponent as AquariusIcon } from '../../assets/icons/zodiac/aquarius.svg';
 import { ReactComponent as AriesIcon } from '../../assets/icons/zodiac/aries.svg';
@@ -11,8 +12,31 @@ import { ReactComponent as SagittariusIcon } from '../../assets/icons/zodiac/sag
 import { ReactComponent as ScorpioIcon } from '../../assets/icons/zodiac/scorpio.svg';
 import { ReactComponent as TaurusIcon } from '../../assets/icons/zodiac/taurus.svg';
 import { ReactComponent as VirgoIcon } from '../../assets/icons/zodiac/virgo.svg';
+// Sings
+import { ReactComponent as CeresIcon } from '../../assets/icons/sings/ceres.svg';
+import { ReactComponent as ChironIcon } from '../../assets/icons/sings/chiron.svg';
+import { ReactComponent as JunoIcon } from '../../assets/icons/sings/juno.svg';
+import { ReactComponent as JupiterIcon } from '../../assets/icons/sings/jupiter.svg';
+import { ReactComponent as MarsIcon } from '../../assets/icons/sings/mars.svg';
+import { ReactComponent as MercuryIcon } from '../../assets/icons/sings/mercury.svg';
+import { ReactComponent as MoonIcon } from '../../assets/icons/sings/moon.svg';
+import { ReactComponent as NeptuneIcon } from '../../assets/icons/sings/neptune.svg';
+import { ReactComponent as NodeIcon } from '../../assets/icons/sings/node.svg';
+import { ReactComponent as PallasIcon } from '../../assets/icons/sings/pallas.svg';
+import { ReactComponent as PlutoIcon } from '../../assets/icons/sings/pluto.svg';
+import { ReactComponent as SaturnIcon } from '../../assets/icons/sings/saturn.svg';
+import { ReactComponent as SelenaIcon } from '../../assets/icons/sings/selena.svg';
+import { ReactComponent as SunIcon } from '../../assets/icons/sings/sun.svg';
+import { ReactComponent as UranusIcon } from '../../assets/icons/sings/uranus.svg';
+import { ReactComponent as VenusIcon } from '../../assets/icons/sings/venus.svg';
+import { ReactComponent as VestaIcon } from '../../assets/icons/sings/vesta.svg';
+import { ReactComponent as ProserpinaIcon } from '../../assets/icons/sings/proserpina.svg';
+import { ReactComponent as LilithIcon } from '../../assets/icons/sings/lilith.svg';
+
+
 
 const IconsMap: any = {
+    // zodiac
     Aquarius: AquariusIcon,
     Aries: AriesIcon,
     Cancer: CancerIcon,
@@ -24,30 +48,58 @@ const IconsMap: any = {
     Sagittarius: SagittariusIcon,
     Scorpio: ScorpioIcon,
     Taurus: TaurusIcon,
-    Virgo: VirgoIcon
+    Virgo: VirgoIcon,
+
+    //signs
+    Ceres: CeresIcon,
+    Chiron: ChironIcon,
+    Juno: JunoIcon,
+    Jupiter: JupiterIcon,
+    Mars: MarsIcon,
+    Mercury: MercuryIcon,
+    Moon: MoonIcon,
+    Neptune: NeptuneIcon,
+    Node: NodeIcon,
+    Pallas: PallasIcon,
+    Pluto: PlutoIcon,
+    Saturn: SaturnIcon,
+    Selena: SelenaIcon,
+    Sun: SunIcon,
+    Uranus: UranusIcon,
+    Venus: VenusIcon,
+    Vesta: VestaIcon,
+    Proserpina: ProserpinaIcon,
+    Lilith: LilithIcon
+}
+
+export function isSvgIconExists (name: string) {
+    return !!IconsMap[name]
 }
 
 export type IconProps = {
     name: string,
-    size?: number,
+    size: number,
     onClick?: () => void,
     style?: any,
     className?: string,
     x?: number,
     y?: number
 }
+
 export function SvgIcon ({ x, y, className, style, name, size, onClick }: IconProps) {
     return (
-        <>
+        <svg xmlns="http://www.w3.org/2000/svg" x={x} y={y} width={size} height={size} className={className}>
             {createElement(IconsMap[name], {
-                onClick,
-                x,
-                y,
-                className,
                 width: size,
                 height: size,
                 style
             }, null)}
-        </>
+            <rect
+                width={size}
+                height={size}
+                stroke="none"
+                fill="transparent"
+                onClick={onClick} style={style}/>
+        </svg>
     )
 }
