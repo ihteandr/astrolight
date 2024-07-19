@@ -15,7 +15,9 @@ import { SignIcon } from "../../../../atoms/Icon/SingIcon";
 import { SIGNS_SYMBOL_DATA } from "../../../../data/sings-data/SignsData";
 import styles from './NatarCard.module.css'
 import { House } from "./components/House/House";
-import { ZodiacChart } from "./components/House/ZodiacChart/ZodiacChart";
+import { ZODIAC_SYMBOL_DATA } from "../../../../data/zodiac/ZodiacData";
+import { Zodiac } from "./components/Zodiac/Zodiac";
+import { Sign } from "./components/Sign/Sign";
 const SignsData: { [k: string]: { [k: string]: { [k: string]: { planets: ISign[] } } } } = data as any
 
 export type NatalChartTypes = {
@@ -28,11 +30,15 @@ export type NatalChartTypes = {
 }
 
 export function NatalChart ({ size, data, astroPlace, date, enabled = true, onClickSign }: NatalChartTypes) {
+    const signSize = 20
+    
     const [signs, setSigns] = useState<ISign[]>([])
     const [houses, setHouses] = useState<IHouse[]>([])
     const [selectedDate, setSelectedDate] = useState<DateTimeValue | undefined>()
-    const signSize = 20
-    
+    const center = {
+        x: size / 2,
+        y: size / 2
+    }
     useEffect(() => {
         if (data) {
             console.log('data', data)
@@ -50,13 +56,6 @@ export function NatalChart ({ size, data, astroPlace, date, enabled = true, onCl
         innerRadius: size / 4 - size / 20
     }
     const ALL_POINTS: IPoint[] = []
-    
-    useEffect(() => {
-        if (enabled) {
-            setSelectedDate(date)
-        }
-    }, [date, setSelectedDate, enabled])
-
     const getSignPostion = function (sign: ISign) {
         const angle = (sign.longitude) / 180 * Math.PI
         let point = getPointOnChart(size / 2, innerRadius - signSize, angle)
@@ -74,55 +73,14 @@ export function NatalChart ({ size, data, astroPlace, date, enabled = true, onCl
         }
         return point
     }
-    // console.clear()
+    useEffect(() => {
+        if (enabled) {
+            setSelectedDate(date)
+        }
+    }, [date, setSelectedDate, enabled])
+
     const renderSign = (sign: ISign) => {
-        const symbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
-        const radius = 5;
-        const angle = (sign.longitude) / 180 * Math.PI
-        const point = getSignPostion(sign)
-        ALL_POINTS.push(point)
-        const linePoint1 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius, angle)
-        const linePoint2 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius - signSize / 2, angle)
-        const innerLinePoint1 = getPointOnChart(size / 2 - PenProps.strokeWidth / 2, internalSpace.innerRadius, angle)
-        const innerLinePoint2 = getPointOnChart(size / 2 - PenProps.strokeWidth / 2, internalSpace.innerRadius - signSize / 4, angle)
-        return (
-            <g key={sign.name}>
-                <line
-                    {...ThinPenProps}
-                    x1={linePoint1.x}
-                    y1={linePoint1.y}
-                    x2={linePoint2.x}
-                    y2={linePoint2.y}
-                    className={clsx('sign-line-zodiac', sign.name, 'element', symbolData?.elements[0] || 'NoElement')} />
-                <line
-                    {...PenProps}
-                    x1={innerLinePoint1.x}
-                    y1={innerLinePoint1.y}
-                    x2={innerLinePoint2.x}
-                    y2={innerLinePoint2.y}
-                    className={clsx('sign-line-zodiac', sign.name, 'element', symbolData?.elements[0] || 'NoElement')} />
-                    {isSvgIconExists(sign.name) ? 
-                        <SignIcon
-                        isRetro={sign.isRetro} 
-                        name={sign.name}
-                        onClick={ () => onClickSign?.(sign)}
-                        x={point.x - signSize / 2}
-                        y={point.y - signSize / 2}
-                        size={20}
-                        className={clsx(
-                            'sign', sign.name, 
-                            'element', symbolData?.elements[0] || 'NoElement',
-                            styles.Sign)}/>
-                    :     <circle
-                        onClick={ () => onClickSign?.(sign)}
-                        cx={point.x}
-                        cy={point.y}
-                        r={radius}
-                        style={{ cursor: 'pointer' }}
-                        className={clsx('sign', sign.name)}  />
-                }
-            </g>
-        ) 
+        return <Sign size={size} sign={sign} getSignPostion={getSignPostion} signSize={signSize} />
     }
 
     const renderHouse = (house: IHouse) => {
@@ -131,7 +89,17 @@ export function NatalChart ({ size, data, astroPlace, date, enabled = true, onCl
 
     return (
         <svg height={size} width={size} xmlns="http://www.w3.org/2000/svg">
-            <ZodiacChart size={size}/>
+            <g {...PenProps}>
+                <circle cx={center.x} cy={center.y} r={outerRadius}/>
+                <circle cx={center.x} cy={center.y} r={innerRadius}/>
+            </g>
+            <g {...ThinPenProps}>
+                <circle cx={center.x} cy={center.y} r={internalSpace.outerRadius}/>
+                <circle cx={center.x} cy={center.y} r={internalSpace.innerRadius}/>
+            </g>
+            {Object.values(ZODIAC_SYMBOL_DATA).map((symbolData, index) => {
+                return <Zodiac data={symbolData} size={size} />
+            })}
             {houses.map(renderHouse)}
             {signs.map(renderSign)}
         </svg>

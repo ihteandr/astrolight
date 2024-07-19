@@ -1,0 +1,7 @@
+
+.Sign {
+    cursor: pointer;
+}
+.Sign:hover, .SignHightlith {
+    color: var(--chartHoverColor)!important;
+}

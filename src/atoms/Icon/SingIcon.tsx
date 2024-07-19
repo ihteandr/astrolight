@@ -10,6 +10,8 @@ export type IconProps = {
     x?: number,
     y?: number,
     isRetro?: boolean;
+    onMouseOver?: () => void,
+    onMouseLeave?: () => void
 }
 
 function calcX (name: string, size: number) {

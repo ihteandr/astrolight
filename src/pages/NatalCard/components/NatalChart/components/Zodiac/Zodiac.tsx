@@ -2,9 +2,9 @@ import clsx from "clsx";
 import styles from './Zodiac.module.css'
 import { useState } from "react";
 import { range } from "lodash";
-import { ZodiacSymbolDataType } from "../../../../../../../../../data/zodiac/ZodiacData";
-import { ThinPenProps } from "../../../../../../../../../utils/svg/ul-helpers";
-import { SvgIcon } from "../../../../../../../../../atoms/Icon/SvgIcon";
+import { ZodiacSymbolDataType } from "../../../../../../data/zodiac/ZodiacData";
+import { ThinPenProps } from "../../../../../../utils/svg/ul-helpers";
+import { SvgIcon } from "../../../../../../atoms/Icon/SvgIcon";
 export type ZodiacProps = {
     size: number,
     data: ZodiacSymbolDataType
@@ -44,7 +44,6 @@ export function Zodiac({ size, data }: ZodiacProps) {
         {angles.map((angle) => {
             let radius1 = innerRadius;
             let radius2;
-            console.log('angle', angle)
             if (angle % 10 === 0) {
                 radius2 = innerRadius + (outerRadius - innerRadius) / 2
             } else if (angle % 5 === 0) {
