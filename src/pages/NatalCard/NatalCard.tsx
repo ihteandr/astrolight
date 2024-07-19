@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { DateTime, DateTimeValue } from "../../components/DateTime/DateTime";
 import { NatalChart } from "./components/NatalChart/NatalChart";
 import styles from './NatalCard.module.css';
@@ -9,14 +9,25 @@ import { momentDateToDateTimeValue, parseDateTimeValue } from "../../utils/date.
 import moment from "moment";
 import { useNatalCardData } from "../../api/natal-card/natal-card.api";
 import { parseNatalCardData } from "../../utils/astro.utils";
+import ShouldRender from "../../atoms/functional/ShouldRender";
+import { SignsDetails } from "./components/SignsDetails/SintsDetails";
+import { HousesDetails } from "./components/HousesDetails/HousesDetails";
 export default function NatalCard () {
-    const [selectedDate, setSelectedDate] = useState<DateTimeValue>()
+    const [selectedDate, setSelectedDate] = useState<DateTimeValue>({
+        day: 8,
+        month: 12,
+        year: 1988,
+        hour: 16,
+        minute: 50
+    })
     const [realDate, setRealDate] = useState<DateTimeValue>()
     const [enabled, setEnabled] = useState<boolean>(false)
     const [place, setPlace] = useState('')
     const [astroPlace, setAstroPlace] = useState<IAstroPlace>()
     const [realPlace, setRealPlace] = useState('')
     const { mutate: fetchData, data } = useNatalCardData()
+    const [parsedNatalCardData, setParsedNatalCardData] = useState<any>()
+    
     const checkPlace = useCallback(async () => {
         setRealPlace('')
         const placeData: any[] = await findPlace(place)
@@ -33,17 +44,19 @@ export default function NatalCard () {
     const submitRequest = useCallback(() => {
         if (astroPlace && selectedDate) {
             const pdate = parseDateTimeValue(selectedDate as DateTimeValue)
+            console.log('pdate', pdate, astroPlace)
             googleTimezoneApi.data(
                 astroPlace?.latitude,
                 astroPlace?.longitude,
-                pdate.valueOf(),
+                pdate.valueOf() / 1000,
                  (err: any, res:any) => {
                     console.log('res', res)
+                    console.log('valueOf', pdate.valueOf(), res.raw_response, res.raw_response.rawOffset)
                     const utcDate = moment(pdate.valueOf()- res.raw_response.rawOffset * 1000)
+                    console.log('utcDate', utcDate)
                     const dateTimeValue = momentDateToDateTimeValue(utcDate)
                     console.log('dateTimevLue', dateTimeValue)
                     setRealDate(dateTimeValue)
-                    setEnabled(true)
                     fetchData({
                         ...dateTimeValue,
                         ...astroPlace
@@ -51,12 +64,19 @@ export default function NatalCard () {
                 })    
         }
     }, [selectedDate, astroPlace, setRealDate, setEnabled])
+
+    useEffect(() => {
+        if (data) {
+            setParsedNatalCardData(parseNatalCardData(data))
+            setEnabled(true)
+        }
+    }, [data, setParsedNatalCardData, setEnabled])
     return (
         <div>
             <h1>Natal Card</h1>
             <div className={styles.NatalCardContent}>
                 <div className={styles.NatalCardForm}>
-                    <DateTime onChange={setSelectedDate}/>
+                    <DateTime onChange={setSelectedDate} value={selectedDate}/>
                     <div className={styles.NatalCardFormPlace}>
                         <input onInput={(e) => setPlace(e.currentTarget.value)}/>
                         <button onClick={checkPlace}>Check</button>
@@ -64,7 +84,13 @@ export default function NatalCard () {
                     </div>
                     <button onClick={submitRequest}>Посчитать</button>
                 </div>
-                <NatalChart data={parseNatalCardData(data)} astroPlace={astroPlace} size={500} date={realDate} enabled={enabled} onClickSign={console.log}></NatalChart>
+                <ShouldRender should={!!parsedNatalCardData}>
+                    <div className={styles.NatalCardDetails}>
+                        <NatalChart data={parsedNatalCardData} astroPlace={astroPlace} size={500} date={realDate} enabled={enabled} onClickSign={console.log}></NatalChart>
+                        <SignsDetails data={parsedNatalCardData}/>
+                        <HousesDetails data={parsedNatalCardData}/>
+                    </div>
+                </ShouldRender>
             </div>
         </div>
     )

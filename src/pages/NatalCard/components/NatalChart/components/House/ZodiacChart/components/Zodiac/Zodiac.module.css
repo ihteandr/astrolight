@@ -1,0 +1,6 @@
+.Zodiac {
+    cursor: pointer;
+}
+.Zodiac:hover, .ZodiacHightlight {
+    fill: var(--chartHoverColor);
+}

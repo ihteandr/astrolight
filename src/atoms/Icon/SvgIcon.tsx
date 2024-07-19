@@ -79,14 +79,16 @@ export function isSvgIconExists (name: string) {
 export type IconProps = {
     name: string,
     size: number,
-    onClick?: () => void,
     style?: any,
     className?: string,
     x?: number,
-    y?: number
+    y?: number,
+    onClick?: () => void,
+    onMouseOver?: () => void,
+    onMouseLeave?: () => void
 }
 
-export function SvgIcon ({ x, y, className, style, name, size, onClick }: IconProps) {
+export function SvgIcon ({ x, y, className, style, name, size, onClick, onMouseLeave, onMouseOver }: IconProps) {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" x={x} y={y} width={size} height={size} className={className}>
             {createElement(IconsMap[name], {
@@ -99,7 +101,10 @@ export function SvgIcon ({ x, y, className, style, name, size, onClick }: IconPr
                 height={size}
                 stroke="none"
                 fill="transparent"
-                onClick={onClick} style={style}/>
+                onClick={onClick}
+                onMouseLeave={onMouseLeave}
+                onMouseOver={onMouseOver}
+                style={style}/>
         </svg>
     )
 }

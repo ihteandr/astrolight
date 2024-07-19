@@ -1,0 +1,19 @@
+.HousesDetails {
+    display: inline-flex;
+    width: 220px;
+    border: 1px solid black;
+    flex-direction: column;
+    padding: 16px;
+}
+.HouseRow {
+    display: flex;
+    justify-content: space-between;
+}
+.HouseInfo {
+    display: flex;
+    align-items: center;
+}
+.HouseSymbol {
+    display: flex;
+    align-items: center;   
+}

@@ -1,0 +1,6 @@
+.House {
+    cursor: pointer;
+}
+.House:hover, .HouseHightlight {
+    fill: var(--chartHoverColor);
+}

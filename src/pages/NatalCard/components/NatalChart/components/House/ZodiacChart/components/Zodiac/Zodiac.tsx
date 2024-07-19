@@ -1,0 +1,79 @@
+import clsx from "clsx";
+import styles from './Zodiac.module.css'
+import { useState } from "react";
+import { range } from "lodash";
+import { ZodiacSymbolDataType } from "../../../../../../../../../data/zodiac/ZodiacData";
+import { ThinPenProps } from "../../../../../../../../../utils/svg/ul-helpers";
+import { SvgIcon } from "../../../../../../../../../atoms/Icon/SvgIcon";
+export type ZodiacProps = {
+    size: number,
+    data: ZodiacSymbolDataType
+}
+
+export function Zodiac({ size, data }: ZodiacProps) {
+    const [hovered, setHovered] = useState(false)
+    const iconSize = size / 20;
+    const outerRadius = size / 2;
+    const innerRadius = outerRadius - size / 10;
+    
+    const getPointOnCircle = (offset: number, num: number, raduis: number, startAngle: number = 0, deltaAngle: number = Math.PI / 6) => {
+        return {
+            x: offset + raduis * Math.cos(startAngle + num * deltaAngle),
+            y: offset + raduis * Math.sin(startAngle + num * deltaAngle)
+        }
+    }
+    const num = 12 - data.order + 1
+    
+    const signBlockAngle = Math.PI
+    const angles = range((data.order - 1) * 30, data.order * 30);
+    const coords = getPointOnCircle(size / 2 - iconSize / 2, num, (innerRadius + outerRadius) / 2 + 4, signBlockAngle - Math.PI / 12)
+    
+    const startLinePoint1 = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2,  num, innerRadius, signBlockAngle)
+    const startLinePoint2 = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, num, outerRadius, signBlockAngle)
+    const endLinePoint1 = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, num - 1, outerRadius, signBlockAngle)
+    const endLinePoint2 = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, num - 1, innerRadius, signBlockAngle)
+    let d = `
+        M${startLinePoint1.x},${startLinePoint1.y}
+        L${startLinePoint2.x},${startLinePoint2.y} 
+        A${outerRadius},${outerRadius} 0 0 0 ${endLinePoint1.x},${endLinePoint1.y}
+        L${endLinePoint2.x},${endLinePoint2.y}
+        A${innerRadius},${innerRadius} 0 0 1 ${startLinePoint1.x},${startLinePoint1.y}
+        Z
+        `
+    return <svg>
+        {angles.map((angle) => {
+            let radius1 = innerRadius;
+            let radius2;
+            console.log('angle', angle)
+            if (angle % 10 === 0) {
+                radius2 = innerRadius + (outerRadius - innerRadius) / 2
+            } else if (angle % 5 === 0) {
+                radius2 = innerRadius + (outerRadius - innerRadius) / 3
+            } else {
+                radius2 = innerRadius + (outerRadius - innerRadius) / 6
+            }
+            let innerPoint = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, -1 * angle, radius1, signBlockAngle, Math.PI / 180);
+            let outerPoint = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, -1 * angle, radius2, signBlockAngle, Math.PI / 180);
+            return <>
+                <line {...ThinPenProps} x1={innerPoint.x} y1={innerPoint.y} x2={outerPoint.x} y2={outerPoint.y}  />
+            </>
+        })}
+        <path
+            d={d}
+            id={`zodiac-${data.sign}`}
+            {...ThinPenProps}
+            fill="transparent"
+            className={clsx(styles.Zodiac, { [styles.ZodiacHightlight]: hovered})} />
+        <SvgIcon
+            size={iconSize}
+            name={data.sign}
+            x={coords.x}
+            y={coords.y}
+            style={{ cursor: 'pointer' }}
+            onClick={() => console.log(data)}
+            onMouseLeave={() => setHovered(false)}
+            onMouseOver={() => setHovered(true)}
+            className={clsx('element', data.element)} 
+         />
+    </svg> 
+}

@@ -9,3 +9,7 @@
     padding: 20px;
     border: 1px solid black;
 }
+.NatalCardDetails {
+    display: flex;
+    gap: 24px;
+}

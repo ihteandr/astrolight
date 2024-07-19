@@ -17,7 +17,6 @@ export enum EAstroSigns {
     PROSERPINA = 'Proserpina',
     CERES = 'Ceres',
     JUNO = 'Juno',
-    VERTEX = 'Vertex',
     DOWN_NODE = 'DownNode'
 }
 
@@ -53,8 +52,9 @@ export enum ECrossSign {
 }
 export interface ISign {
     isRetro: boolean,
-    name: EAstroZodiacSign,
+    name: EAstroSigns,
     zodiac: EAstroZodiacSign,
+    zodiacIndex: number,
     zodicSignDegree: number,
     zodiacZone: IZone,
     longitude: number,

@@ -31,7 +31,7 @@ export type ZodiacSymbolDataType = {
 }
 
 export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
-    aries: {
+    [EAstroZodiacSign.ARIES]: {
         sign: EAstroZodiacSign.ARIES,
         label: 'Овен',
         element: EAstroElements.FIRE,
@@ -54,7 +54,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.CARDINAL,
         order: 1
     },
-    taurus: {
+    [EAstroZodiacSign.TAURUS]: {
         sign: EAstroZodiacSign.TAURUS,
         label: 'Телец',
         element: EAstroElements.EARTH,
@@ -77,7 +77,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.FIXED,
         order: 2
     },
-    gemini: {
+    [EAstroZodiacSign.GEMINI]: {
         sign: EAstroZodiacSign.GEMINI,
         label: 'Близницы',
         element: EAstroElements.WIND,
@@ -101,7 +101,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.MUTABLE,
         order: 3
     },
-    cancer: {
+    [EAstroZodiacSign.CANCER]: {
         sign: EAstroZodiacSign.CANCER,
         label: 'Рак',
         element: EAstroElements.WATER,
@@ -124,7 +124,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.CARDINAL,
         order: 4
     },
-    leo: {
+    [EAstroZodiacSign.LEO]: {
         sign: EAstroZodiacSign.LEO,
         label: 'Лев',
         element: EAstroElements.FIRE,
@@ -147,7 +147,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.FIXED,
         order: 5
     },
-    virgo: {
+    [EAstroZodiacSign.VIRGO]: {
         sign: EAstroZodiacSign.VIRGO,
         label: 'Дева',
         element: EAstroElements.EARTH,
@@ -171,7 +171,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.MUTABLE,
         order: 6
     },
-    libra: {
+    [EAstroZodiacSign.LIBRA]: {
         sign: EAstroZodiacSign.LIBRA,
         label: 'Весы',
         element: EAstroElements.WIND,
@@ -194,7 +194,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.CARDINAL,
         order: 7
     },
-    scorpio: {
+    [EAstroZodiacSign.SCORPIO]: {
         sign: EAstroZodiacSign.SCORPIO,
         label: 'Скорпион',
         executive: [
@@ -217,7 +217,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         element: EAstroElements.WATER,
         order: 8
     },
-    sagitarius: {
+    [EAstroZodiacSign.SAGITTARIUS]: {
         sign: EAstroZodiacSign.SAGITTARIUS,
         label: 'Стрелец',
         element: EAstroElements.FIRE,
@@ -241,7 +241,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.MUTABLE,
         order: 9
     },
-    capricorn: {
+    [EAstroZodiacSign.CAPRICORN]: {
         sign: EAstroZodiacSign.CAPRICORN,
         label: 'Козерог',
         element: EAstroElements.EARTH,
@@ -264,7 +264,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.CARDINAL,
         order: 10
     },
-    aquarius: {
+    [EAstroZodiacSign.AQUARIUS]: {
         sign: EAstroZodiacSign.AQUARIUS,
         label: 'Водолей',
         element: EAstroElements.WIND,
@@ -287,7 +287,7 @@ export const ZODIAC_SYMBOL_DATA: {[k: string]: ZodiacSymbolDataType}  = {
         cross: ECrossSign.FIXED,
         order: 11
     },
-    pisces: {
+    [EAstroZodiacSign.PISCES]: {
         sign: EAstroZodiacSign.PISCES,
         label: 'Рыбы',
         element: EAstroElements.WATER,

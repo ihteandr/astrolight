@@ -11,18 +11,12 @@ export type DateTimeValue = {
     minute: number
 }
 export type DateTimeTypes = {
-    onChange: (v: DateTimeValue) => void
+    onChange: (v: DateTimeValue) => void,
+    value: DateTimeValue
 }
 
 
-export function DateTime ({ onChange }: DateTimeTypes) {
-    const [selectedDate, setSelectedDate]= useState<DateTimeValue>({
-        day: 8,
-        month: 12,
-        year: 1988,
-        hour: 16,
-        minute: 50
-    })
+export function DateTime ({ onChange, value }: DateTimeTypes) {
     const months = useMemo<{name: string, value: number}[]>(() => {
         return MONTHS.map((month, index) => {
             return {
@@ -32,12 +26,12 @@ export function DateTime ({ onChange }: DateTimeTypes) {
         })
     }, []);
     const days = useMemo<number[]>(() => {
-        let monthDays = MONTHS_DAYS[selectedDate.month - 1]
-        if (selectedDate.year % 4 === 0 && selectedDate.month === 1) {
+        let monthDays = MONTHS_DAYS[value.month - 1]
+        if (value.year % 4 === 0 && value.month === 1) {
             monthDays++
         }
         return range(1, monthDays, 1)
-    }, [selectedDate]);
+    }, [value]);
     const years = useMemo<number[]>(() => {
         return range(1903, 2025, 1)
     }, []);
@@ -49,21 +43,18 @@ export function DateTime ({ onChange }: DateTimeTypes) {
     }, []);
     const updateSelectedDate = (fieldName: string) => {
         return (e: React.ChangeEvent<HTMLSelectElement>) => {
-            const value = parseInt(e.target.value)
-            setSelectedDate({
-                ...selectedDate,
-                [fieldName]: value
+            const fieldValue = parseInt(e.target.value)
+            onChange({
+                ...value,
+                [fieldName]: fieldValue
             })
         }
     }
-    useEffect(() => {
-        onChange(selectedDate)
-    }, [selectedDate])
     return (
         <div className={styles.DateTime}>
             <div>
                 <div>День</div>
-                <select defaultValue={selectedDate.day} onChange={updateSelectedDate('day')}>
+                <select defaultValue={value.day} onChange={updateSelectedDate('day')}>
                     {days.map((day) => {
                         return <option value={day} key={day}>{day}</option>
                     })}
@@ -72,7 +63,7 @@ export function DateTime ({ onChange }: DateTimeTypes) {
 
             <div>
                 <div>Месяц</div>
-                <select defaultValue={selectedDate.month} onChange={updateSelectedDate('month')}>
+                <select defaultValue={value.month} onChange={updateSelectedDate('month')}>
                     {months.map((month) => {
                         return <option value={month.value} key={month.value}>{month.name}</option>
                     })}
@@ -81,7 +72,7 @@ export function DateTime ({ onChange }: DateTimeTypes) {
 
             <div>
                 <div>Год</div>
-                <select defaultValue={selectedDate.year} onChange={updateSelectedDate('year')}>
+                <select defaultValue={value.year} onChange={updateSelectedDate('year')}>
                     {years.map((year) => {
                         return <option value={year} key={year}>{year}</option>
                     })}
@@ -90,7 +81,7 @@ export function DateTime ({ onChange }: DateTimeTypes) {
 
             <div>
                 <div>Час</div>
-                <select defaultValue={selectedDate.hour} onChange={updateSelectedDate('hour')}>
+                <select defaultValue={value.hour} onChange={updateSelectedDate('hour')}>
                     {hours.map((hour) => {
                         return <option value={hour} key={hour}>{hour}</option>
                     })}
@@ -99,7 +90,7 @@ export function DateTime ({ onChange }: DateTimeTypes) {
 
             <div>
                 <div>Минута</div>
-                <select defaultValue={selectedDate.minute} onChange={updateSelectedDate('minute')}>
+                <select defaultValue={value.minute} onChange={updateSelectedDate('minute')}>
                     {minutes.map((minute) => {
                         return <option value={minute} key={minute}>{minute}</option>
                     })}
