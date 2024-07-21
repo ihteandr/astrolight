@@ -12,6 +12,7 @@ import { parseNatalCardData } from "../../utils/astro.utils";
 import ShouldRender from "../../atoms/functional/ShouldRender";
 import { SignsDetails } from "./components/SignsDetails/SintsDetails";
 import { HousesDetails } from "./components/HousesDetails/HousesDetails";
+import { AspectsDetails } from "./components/AspectsDetails/AspectsDetails";
 export default function NatalCard () {
     const [selectedDate, setSelectedDate] = useState<DateTimeValue>({
         day: 8,
@@ -89,6 +90,7 @@ export default function NatalCard () {
                         <NatalChart data={parsedNatalCardData} astroPlace={astroPlace} size={500} date={realDate} enabled={enabled} onClickSign={console.log}></NatalChart>
                         <SignsDetails data={parsedNatalCardData}/>
                         <HousesDetails data={parsedNatalCardData}/>
+                        <AspectsDetails data={parsedNatalCardData}/>
                     </div>
                 </ShouldRender>
             </div>

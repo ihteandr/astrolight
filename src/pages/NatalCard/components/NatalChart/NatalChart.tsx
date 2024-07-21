@@ -4,7 +4,7 @@ import { BoldPenProps, PenProps, ThinPenProps } from "../../../../utils/svg/ul-h
 import { DateTimeValue } from "../../../../components/DateTime/DateTime";
 import { useCallback, useEffect, useState } from "react";
 import data from '../../../../data/signs/SignsData.json';
-import { IAstroPlace, IHouse } from "../../../../types/astro";
+import { IAstroAspect, IAstroPlace, IHouse } from "../../../../types/astro";
 import { useNatalCardData } from "../../../../api/natal-card/natal-card.api";
 import { Storage } from "../../../../storage";
 import { SvgIcon, isSvgIconExists } from "../../../../atoms/Icon/SvgIcon";
@@ -18,6 +18,7 @@ import { House } from "./components/House/House";
 import { ZODIAC_SYMBOL_DATA } from "../../../../data/zodiac/ZodiacData";
 import { Zodiac } from "./components/Zodiac/Zodiac";
 import { Sign } from "./components/Sign/Sign";
+import { Aspect } from "./components/Aspect/Aspect";
 const SignsData: { [k: string]: { [k: string]: { [k: string]: { planets: ISign[] } } } } = data as any
 
 export type NatalChartTypes = {
@@ -34,6 +35,7 @@ export function NatalChart ({ size, data, astroPlace, date, enabled = true, onCl
     
     const [signs, setSigns] = useState<ISign[]>([])
     const [houses, setHouses] = useState<IHouse[]>([])
+    const [aspects, setAspects] = useState<IAstroAspect[]>([])
     const [selectedDate, setSelectedDate] = useState<DateTimeValue | undefined>()
     const center = {
         x: size / 2,
@@ -47,8 +49,9 @@ export function NatalChart ({ size, data, astroPlace, date, enabled = true, onCl
                 return sign.longitude
             }))
             setHouses(data.houses.positions)
+            setAspects(data.aspects)
         }
-    }, [data, setSigns, setHouses])
+    }, [data, setSigns, setHouses, setAspects])
     const outerRadius = size / 2;
     const innerRadius = outerRadius - size / 10;
     const internalSpace = {
@@ -80,12 +83,20 @@ export function NatalChart ({ size, data, astroPlace, date, enabled = true, onCl
     }, [date, setSelectedDate, enabled])
 
     const renderSign = (sign: ISign) => {
-        return <Sign size={size} sign={sign} getSignPostion={getSignPostion} signSize={signSize} />
+        return <Sign size={size} sign={sign} getSignPostion={getSignPostion} key={sign.name} signSize={signSize} />
     }
 
     const renderHouse = (house: IHouse) => {
         return <House size={size} house={house} key={house.number} />
     }
+
+    const renderAspect = (aspect: IAstroAspect) => {
+        return <Aspect
+            aspect={aspect}
+            size={size}
+            signSize={signSize}
+            key={`${aspect.sign1.name}-${aspect.sign2.name}-${aspect.type}`} />
+    }  
 
     return (
         <svg height={size} width={size} xmlns="http://www.w3.org/2000/svg">
@@ -98,10 +109,11 @@ export function NatalChart ({ size, data, astroPlace, date, enabled = true, onCl
                 <circle cx={center.x} cy={center.y} r={internalSpace.innerRadius}/>
             </g>
             {Object.values(ZODIAC_SYMBOL_DATA).map((symbolData, index) => {
-                return <Zodiac data={symbolData} size={size} />
+                return <Zodiac data={symbolData} key={index} size={size} />
             })}
             {houses.map(renderHouse)}
             {signs.map(renderSign)}
+            {aspects.map(renderAspect)}
         </svg>
     )
 }

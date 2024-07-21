@@ -1,0 +1,40 @@
+.AspectInfo {
+    display: flex;
+    padding: 5px 0;
+    align-items: center;
+}
+.AspectInfoType {
+    display: inline-flex;
+    margin: auto 8px;
+}
+.AspectInfoName {
+    display: inline-flex;
+    cursor: pointer;
+}
+.AspectInfoName:hover {
+    border-bottom: 1px solid;
+}
+.AspectTooltip {
+    display: flex;
+    flex-direction: column;
+}
+.AspectTooltipRow {
+    display: flex;
+    gap: 16px;
+    padding: 5px 0;
+}
+.AspectInfoIcon {
+    color: black;
+}
+.AspectDescriptionHeader {
+    margin: 0;
+    color: black;
+}
+.AspectDescription {
+    text-align: left;
+    color: black;
+    line-height: 24px;
+}
+.AspectDescription h3 {
+    margin: 0;
+}

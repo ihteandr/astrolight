@@ -21,14 +21,13 @@ export function HousesDetails ({ data }: HousesDetailsType) {
         }
         return []
     }, [data])
-    console.log('houses', houses, data)
     return (
         <div className={styles.HousesDetails}>
             {houses.map((house) => {
                 const zodiacSymbol = ZODIAC_SYMBOL_DATA[house.zodiac]
                 
                 return (
-                    <div className={styles.HouseRow}>
+                    <div className={styles.HouseRow} key={house.number}>
                         <div className={styles.HouseSymbol}>
                             <span className={clsx('house-label', `house${house.number}`)}>Дом {house.number}</span>
                         </div>
@@ -39,7 +38,7 @@ export function HousesDetails ({ data }: HousesDetailsType) {
                                 className={clsx('element', zodiacSymbol.element)}/>
                             <span>{house.zodiacZone.hour}°</span>
                             <span>{setZeros(house.zodiacZone.minute, 2)}’</span>
-                            <span>{setZeros(house.zodiacZone.hour, 2)}’’</span>
+                            <span>{setZeros(house.zodiacZone.second, 2)}’’</span>
                         </div>
                     </div>
                 )    

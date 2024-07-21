@@ -41,7 +41,7 @@ export function Zodiac({ size, data }: ZodiacProps) {
         Z
         `
     return <svg>
-        {angles.map((angle) => {
+        {angles.map((angle, index) => {
             let radius1 = innerRadius;
             let radius2;
             if (angle % 10 === 0) {
@@ -54,7 +54,7 @@ export function Zodiac({ size, data }: ZodiacProps) {
             let innerPoint = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, -1 * angle, radius1, signBlockAngle, Math.PI / 180);
             let outerPoint = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, -1 * angle, radius2, signBlockAngle, Math.PI / 180);
             return <>
-                <line {...ThinPenProps} x1={innerPoint.x} y1={innerPoint.y} x2={outerPoint.x} y2={outerPoint.y}  />
+                <line key={angle + 'index' + index} {...ThinPenProps} x1={innerPoint.x} y1={innerPoint.y} x2={outerPoint.x} y2={outerPoint.y}  />
             </>
         })}
         <path

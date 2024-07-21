@@ -21,7 +21,7 @@ import { ReactComponent as MarsIcon } from '../../assets/icons/sings/mars.svg';
 import { ReactComponent as MercuryIcon } from '../../assets/icons/sings/mercury.svg';
 import { ReactComponent as MoonIcon } from '../../assets/icons/sings/moon.svg';
 import { ReactComponent as NeptuneIcon } from '../../assets/icons/sings/neptune.svg';
-import { ReactComponent as NodeIcon } from '../../assets/icons/sings/node.svg';
+import { ReactComponent as NodeIcon } from '../../assets/icons/sings/up_node.svg';
 import { ReactComponent as PallasIcon } from '../../assets/icons/sings/pallas.svg';
 import { ReactComponent as PlutoIcon } from '../../assets/icons/sings/pluto.svg';
 import { ReactComponent as SaturnIcon } from '../../assets/icons/sings/saturn.svg';
@@ -32,6 +32,9 @@ import { ReactComponent as VenusIcon } from '../../assets/icons/sings/venus.svg'
 import { ReactComponent as VestaIcon } from '../../assets/icons/sings/vesta.svg';
 import { ReactComponent as ProserpinaIcon } from '../../assets/icons/sings/proserpina.svg';
 import { ReactComponent as LilithIcon } from '../../assets/icons/sings/lilith.svg';
+
+//UI 
+import { ReactComponent as InfoIcon } from '../../assets/icons/ui/info.svg'
 
 
 
@@ -59,7 +62,7 @@ const IconsMap: any = {
     Mercury: MercuryIcon,
     Moon: MoonIcon,
     Neptune: NeptuneIcon,
-    Node: NodeIcon,
+    UpNode: NodeIcon,
     Pallas: PallasIcon,
     Pluto: PlutoIcon,
     Saturn: SaturnIcon,
@@ -69,7 +72,10 @@ const IconsMap: any = {
     Venus: VenusIcon,
     Vesta: VestaIcon,
     Proserpina: ProserpinaIcon,
-    Lilith: LilithIcon
+    Lilith: LilithIcon,
+
+    //UI
+    Info: InfoIcon
 }
 
 export function isSvgIconExists (name: string) {

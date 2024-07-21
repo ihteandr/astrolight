@@ -37,3 +37,22 @@ code {
   stroke: currentColor;
   fill: currentColor
 }
+
+.aspect.depends_planets {
+  color: black;
+}
+.aspect.harmonic {
+  color: green;
+}
+.aspect.tense {
+  color: red;
+}
+.aspect.creative {
+  color: blue;
+}
+.aspect.karmic {
+  color: brown;
+}
+.disable-scroll {
+  overflow: hidden;
+}

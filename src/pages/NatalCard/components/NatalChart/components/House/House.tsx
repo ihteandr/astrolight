@@ -40,7 +40,6 @@ export function House ({ size, house }: HouseProps) {
         Z
     `
     const cuspidLinePoint = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius, house.start / 180 * Math.PI)
-    console.log('house', house, d, startLinePoint1, startLinePoint2)
     let centerDegree = house.start > house.end ? 360 + house.start + house.end : house.start + house.end ;
     const center = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, (internalSpace.innerRadius + internalSpace.outerRadius) / 2, centerDegree / 2 / 180 * Math.PI)
     return (

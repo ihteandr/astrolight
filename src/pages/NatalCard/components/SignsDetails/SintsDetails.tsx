@@ -20,16 +20,14 @@ export function SignsDetails ({ data }: SignsDetailsType) {
         }
         return []
     }, [data])
-    console.log('signs', signs, data)
     return (
         <div className={styles.SignsDetails}>
             {signs.map((sign) => {
                 const signSymbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
                 if (signSymbolData) {
-                    console.log(ZODIAC_SYMBOL_DATA, ZODIAC_ORDER, sign.zodiac, sign)
                     const zodiacSymbol = ZODIAC_SYMBOL_DATA[sign.zodiac]
                     return (
-                        <div className={styles.SingRow}>
+                        <div className={styles.SingRow} key={sign.name}>
                             <div className={styles.SingSymbol}>
                                 <SvgIcon
                                     name={sign.name}
@@ -45,7 +43,7 @@ export function SignsDetails ({ data }: SignsDetailsType) {
                                     className={clsx('element', zodiacSymbol.element)}/>
                                 <span>{sign.zodiacZone.hour}°</span>
                                 <span>{setZeros(sign.zodiacZone.minute, 2)}’</span>
-                                <span>{setZeros(sign.zodiacZone.hour, 2)}’’</span>
+                                <span>{setZeros(sign.zodiacZone.second, 2)}’’</span>
                             </div>
                         </div>
                     )    
