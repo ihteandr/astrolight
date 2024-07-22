@@ -1,0 +1,9 @@
+.InfoItem {
+    display: inline-flex;
+    align-items: center;
+}
+.InfoItemDescription {
+    max-width: 350px;
+}
+.InfoItemTooltip {
+}

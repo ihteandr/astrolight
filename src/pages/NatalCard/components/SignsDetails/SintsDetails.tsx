@@ -7,6 +7,8 @@ import clsx from "clsx";
 import { ZODIAC_ORDER, ZODIAC_SYMBOL_DATA } from "../../../../data/zodiac/ZodiacData";
 import { sortBy } from "lodash";
 import { setZeros } from "../../../../utils/format.utils";
+import { ZoneInfo } from "../ZoneInfo/ZoneInfo";
+import { SignInfo } from "../SignInfo/SignInfo";
 export type SignsDetailsType = {
     data?: any;
 }
@@ -23,32 +25,9 @@ export function SignsDetails ({ data }: SignsDetailsType) {
     return (
         <div className={styles.SignsDetails}>
             {signs.map((sign) => {
-                const signSymbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
-                if (signSymbolData) {
-                    const zodiacSymbol = ZODIAC_SYMBOL_DATA[sign.zodiac]
-                    return (
-                        <div className={styles.SingRow} key={sign.name}>
-                            <div className={styles.SingSymbol}>
-                                <SvgIcon
-                                    name={sign.name}
-                                    size={24}
-                                    className={clsx('sign', sign.name,  'element', signSymbolData.elements[0] || 'NoElement')}
-                                 />
-                                 <span className={clsx('sign-label', sign.name)}>{signSymbolData.label}</span>
-                            </div>
-                            <div className={styles.SignInfo}>
-                                <SvgIcon
-                                    name={zodiacSymbol.sign}
-                                    size={16}
-                                    className={clsx('element', zodiacSymbol.element)}/>
-                                <span>{sign.zodiacZone.hour}°</span>
-                                <span>{setZeros(sign.zodiacZone.minute, 2)}’</span>
-                                <span>{setZeros(sign.zodiacZone.second, 2)}’’</span>
-                            </div>
-                        </div>
-                    )    
-                }
-                return null                
+                return (
+                    <SignInfo key={sign.name} sign={sign} />
+                )           
             })}
         </div>
     )

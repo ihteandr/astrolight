@@ -1,0 +1,35 @@
+.SignInfo {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+.SignInfoName {
+    display: inline-flex;
+}
+.SingName {
+    display: inline-flex;
+    margin-left: 8px;
+}
+.SingSymbol {
+    width: 150px;
+    display: inline-flex;
+    align-items: center;
+}
+.SignHouseLabel {
+    display: inline-flex;
+    margin: 0 5px;
+    width: 75px;
+}
+.SignInfoAspects {
+    padding-left: 100px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.SIgnInfoAspectsButton {
+    color: blue;
+    display: inline-flex;
+    margin-left: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+}

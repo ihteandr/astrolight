@@ -19,7 +19,6 @@ export function formatOpenAiMessage (text: string) {
         if (i > 10) break;
         const index = text.indexOf('###')
         const endindex = index + text.substring(index).indexOf('<br\>');
-        console.log('text.substring(index + 3, endindex)',  text.indexOf('###'),text.substring(index), text.substring(index + 3, endindex), index, endindex)
         text = text.substring(0, index) + '<h3>' + text.substring(index + 3, endindex) + '</h3>' + text.substring(endindex, text.length)
         i++
     }

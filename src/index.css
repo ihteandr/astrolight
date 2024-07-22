@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f8f1d9 url(https://ranobehub.org/img/noise/dark.png)!important;
+  --bodyBackground: #f8f1d9 url(https://ranobehub.org/img/noise/dark.png)!important;
+  background: var(--bodyBackground);
 }
 
 :root {
@@ -52,7 +53,4 @@ code {
 }
 .aspect.karmic {
   color: brown;
-}
-.disable-scroll {
-  overflow: hidden;
 }

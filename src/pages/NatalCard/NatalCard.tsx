@@ -3,7 +3,7 @@ import { DateTime, DateTimeValue } from "../../components/DateTime/DateTime";
 import { NatalChart } from "./components/NatalChart/NatalChart";
 import styles from './NatalCard.module.css';
 import { findPlace } from "../../utils/apis/google-geocoder";
-import { IAstroPlace } from "../../types/astro";
+import { IAstroPlace, IHouse } from "../../types/astro";
 import { googleTimezoneApi } from "../../utils/apis/google-timezone";
 import { momentDateToDateTimeValue, parseDateTimeValue } from "../../utils/date.utils";
 import moment from "moment";
@@ -13,7 +13,9 @@ import ShouldRender from "../../atoms/functional/ShouldRender";
 import { SignsDetails } from "./components/SignsDetails/SintsDetails";
 import { HousesDetails } from "./components/HousesDetails/HousesDetails";
 import { AspectsDetails } from "./components/AspectsDetails/AspectsDetails";
+import { HouseDescription } from "./components/HouseDescription/HouseDescription";
 export default function NatalCard () {
+    const [selectedHouse, setSelectedHouse] = useState<IHouse>()
     const [selectedDate, setSelectedDate] = useState<DateTimeValue>({
         day: 8,
         month: 12,
@@ -87,11 +89,24 @@ export default function NatalCard () {
                 </div>
                 <ShouldRender should={!!parsedNatalCardData}>
                     <div className={styles.NatalCardDetails}>
-                        <NatalChart data={parsedNatalCardData} astroPlace={astroPlace} size={500} date={realDate} enabled={enabled} onClickSign={console.log}></NatalChart>
+                        <NatalChart
+                            data={parsedNatalCardData}
+                            astroPlace={astroPlace}
+                            size={500}
+                            date={realDate}
+                            enabled={enabled}
+                            onClickHouse={setSelectedHouse}
+                            onClickSign={console.log}></NatalChart>
                         <SignsDetails data={parsedNatalCardData}/>
                         <HousesDetails data={parsedNatalCardData}/>
                         <AspectsDetails data={parsedNatalCardData}/>
                     </div>
+                </ShouldRender>
+                <ShouldRender should={!!selectedHouse}>
+                    <HouseDescription
+                        data={parsedNatalCardData}
+                        onClose={() => setSelectedHouse(undefined)}
+                        house={selectedHouse as IHouse}/>
                 </ShouldRender>
             </div>
         </div>

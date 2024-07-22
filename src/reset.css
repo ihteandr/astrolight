@@ -1,0 +1,10 @@
+body * {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 4px 0;
+}
+p {
+    margin: 4px 0;
+}

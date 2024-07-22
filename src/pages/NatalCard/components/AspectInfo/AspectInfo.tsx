@@ -1,28 +1,36 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { SIGNS_SYMBOL_DATA } from "../../../../../../data/sings-data/SignsData"
-import { IAstroAspect } from "../../../../../../types/astro"
+import { SIGNS_SYMBOL_DATA } from "../../../../data/sings-data/SignsData"
+import { IAstroAspect } from "../../../../types/astro"
 import styles from './AspectInfo.module.css'
-import { ASPECT_ACTION_LABELS, ASPECT_CLASSIFICATION_LABELS, ASPECT_SPECIFICATION_LABELS, ASPECT_TYPE_LABELS } from "../../../../../../data/aspects/AspectsData"
+import { ASPECT_ACTION_LABELS, ASPECT_CLASSIFICATION_LABELS, ASPECT_SPECIFICATION_LABELS, ASPECT_TYPE_LABELS } from "../../../../data/aspects/AspectsData"
 import clsx from "clsx"
-import { SvgIcon } from "../../../../../../atoms/Icon/SvgIcon"
+import { SvgIcon } from "../../../../atoms/Icon/SvgIcon"
 import { Tooltip } from "react-tooltip"
-import { formatOpenAiMessage, setZeros } from "../../../../../../utils/format.utils"
-import ShouldRender from "../../../../../../atoms/functional/ShouldRender"
-import { Modal } from "../../../../../../components/Modal/Modal"
-import { useOpenaiAspectQuestion } from "../../../../../../api/openai/openai.api"
+import { formatOpenAiMessage, setZeros } from "../../../../utils/format.utils"
+import ShouldRender from "../../../../atoms/functional/ShouldRender"
+import { Modal } from "../../../../components/Modal/Modal"
+import { useOpenaiAspectQuestion } from "../../../../api/openai/openai.api"
+import { EAstroSigns } from "../../../../types/signs"
 export type AspectInfoProps = {
-    aspect: IAstroAspect
+    aspect: IAstroAspect,
+    perspective?: EAstroSigns 
 }
 
-export function AspectInfo ({ aspect }: AspectInfoProps) {
+export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
     const [shouldShowDetails, setShouldShowDetails] = useState(false);
     const { mutate: getDescription, data: descriptionData } = useOpenaiAspectQuestion()
     const [details, setDetails] = useState('');
+    const sign1 = useMemo(() => {
+        return perspective ? aspect.sign1.name === perspective ? aspect.sign1 : aspect.sign2 : aspect.sign1
+    }, [aspect, perspective])
+    const sign2 = useMemo(() => {
+        return perspective ? aspect.sign2.name !== perspective ? aspect.sign2 : aspect.sign1 : aspect.sign2
+    }, [aspect, perspective])
     const sign1SymbolData = useMemo(() => {
-        return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === aspect.sign1.name)
+        return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign1.name)
     }, [aspect])
     const sign2SymbolData = useMemo(() => {
-        return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === aspect.sign2.name)
+        return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign2.name)
     }, [aspect])
     const fastSignSymbolData = useMemo(() => {
         return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === aspect.fastSign.name)

@@ -1,0 +1,13 @@
+
+.disable-scroll {
+    overflow: hidden;
+}
+.flex {
+    display: flex;
+}
+.inline-flex {
+    display: inline-flex;
+}
+.inline-flex.gap, .flex.gap {
+    gap: 8px;
+}

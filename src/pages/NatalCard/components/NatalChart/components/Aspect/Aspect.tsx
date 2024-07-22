@@ -7,17 +7,18 @@ import styles from './Aspect.module.css'
 export type AspectProps = {
     aspect: IAstroAspect,
     size: number,
-    signSize: number
+    signSize: number,
+    rotate: number
 }
-export function Aspect({ size, signSize, aspect }: AspectProps) {
+export function Aspect({ rotate, size, signSize, aspect }: AspectProps) {
     const outerRadius = size / 2;
     const innerRadius = outerRadius - size / 10;
     const internalSpace = {
         outerRadius: size / 4,
         innerRadius: size / 4 - size / 20
     }
-    const linePoint1 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.innerRadius - signSize /4, aspect.sign1Degree / 180 * Math.PI)
-    const linePoint2 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.innerRadius - signSize /4, aspect.sign2Degree / 180 * Math.PI)
+    const linePoint1 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.innerRadius - signSize /4, aspect.sign1Degree / 180 * Math.PI - rotate)
+    const linePoint2 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.innerRadius - signSize /4, aspect.sign2Degree / 180 * Math.PI - rotate)
     return (
         <line
             {...ThinPenProps}

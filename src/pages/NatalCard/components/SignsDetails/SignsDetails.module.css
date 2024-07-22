@@ -1,19 +1,13 @@
 .SignsDetails {
     display: inline-flex;
-    width: 220px;
-    border: 1px solid black;
+    width: 240px;
     flex-direction: column;
     padding: 16px;
+    border: 1px solid #E2E2E2;
+    background: white;
+    border-radius: 16px;
 }
 .SingRow {
     display: flex;
     justify-content: space-between;
-}
-.SignInfo {
-    display: flex;
-    align-items: center;
-}
-.SingSymbol {
-    display: flex;
-    align-items: center;   
 }

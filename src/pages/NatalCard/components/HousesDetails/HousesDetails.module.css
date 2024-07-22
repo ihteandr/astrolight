@@ -1,9 +1,11 @@
 .HousesDetails {
     display: inline-flex;
     width: 220px;
-    border: 1px solid black;
     flex-direction: column;
     padding: 16px;
+    border: 1px solid #E2E2E2;
+    background: white;
+    border-radius: 16px;
 }
 .HouseRow {
     display: flex;

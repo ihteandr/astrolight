@@ -57,6 +57,21 @@ export interface IAstroSign {
     isRetro: boolean
 }
 
+export enum EHouseBelonging {
+    NIGTH = 'NIGHT',
+    DAY = 'DAY',
+    WEST = 'WEST',
+    EST = 'EST'
+}
+export enum EHouseAxie {
+    I_VII = 'I_VII',
+    II_VIII = 'II_VIII',
+    III_IX = 'III_IX',
+    IV_X = 'IV_X',
+    V_XI = 'V_XI',
+    VI_XII = 'VI_XII',
+}
+
 export interface IHouse {
     number: number,
     start: number,
@@ -65,6 +80,17 @@ export interface IHouse {
     zodiacIndex: number,
     zodicSignDegree: number,
     zodiacZone: IZone,
+    label: string,
+    dominants: Array<{ isRetro: boolean, astroSign: EAstroSigns }>,
+    oppositeHouseNumber: number,
+    isContainsSign: (sign: ISign) => boolean
+}
+
+export enum EHouseSquare {
+    FIRST = 'FIRST',
+    SECOND = 'SECOND',
+    THIRD = 'THIRD',
+    FOURTH = 'FOURTH'
 }
 
 export type IAstroAspect = {
@@ -82,5 +108,7 @@ export type IAstroAspect = {
     sign2Degree: number,
     action: EAstroAspectAction,
     distanceZone: IZone,
-    isMutual: boolean
+    isMutual: boolean,
+    isSame: (aspect: IAstroAspect) => boolean,
+    isContainsSign: (signName: EAstroSigns) => boolean
 }

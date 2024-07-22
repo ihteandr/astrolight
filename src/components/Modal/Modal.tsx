@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import styles from './Modal.module.css'
+import { createPortal } from 'react-dom'
 
 export type ModalProps = {
     onClose: () => void,
@@ -14,7 +15,7 @@ export function Modal({ onClose, children }: ModalProps) {
         }
     })
 
-    return (
+    return createPortal((
         <div className={styles.Modal}>
             <div className={styles.ModalOverlay} onClick={onClose}></div>
             <div className={styles.ModalContentWrapper} onClick={onClose}>
@@ -23,5 +24,7 @@ export function Modal({ onClose, children }: ModalProps) {
                 </div>
             </div>
         </div>
+        ),
+        document.getElementById('modal-root') as HTMLElement
     )
 }

@@ -1,6 +1,8 @@
 .AspectsDetails {
     display: inline-block;
     width: 300px;
-    border: 1px solid black;
     padding: 16px;
+    border: 1px solid #E2E2E2;
+    background: white;
+    border-radius: 16px;
 }

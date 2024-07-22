@@ -1,6 +1,9 @@
 .House {
     cursor: pointer;
 }
+.HouseOriginalHightlight {
+    fill: rgba(154, 205, 50, 0.2);
+}
 .House:hover, .HouseHightlight {
-    fill: var(--chartHoverColor);
+    fill: var(--chartHoverColor)!important;
 }

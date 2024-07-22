@@ -5,22 +5,21 @@ import { range } from "lodash";
 import { ZodiacSymbolDataType } from "../../../../../../data/zodiac/ZodiacData";
 import { ThinPenProps } from "../../../../../../utils/svg/ul-helpers";
 import { SvgIcon } from "../../../../../../atoms/Icon/SvgIcon";
+import { getPointOnChart } from "../../../../../../utils/math.utils";
 export type ZodiacProps = {
     size: number,
-    data: ZodiacSymbolDataType
+    data: ZodiacSymbolDataType,
+    rotate: number,
 }
 
-export function Zodiac({ size, data }: ZodiacProps) {
+export function Zodiac({ rotate, size, data }: ZodiacProps) {
     const [hovered, setHovered] = useState(false)
     const iconSize = size / 20;
     const outerRadius = size / 2;
     const innerRadius = outerRadius - size / 10;
     
     const getPointOnCircle = (offset: number, num: number, raduis: number, startAngle: number = 0, deltaAngle: number = Math.PI / 6) => {
-        return {
-            x: offset + raduis * Math.cos(startAngle + num * deltaAngle),
-            y: offset + raduis * Math.sin(startAngle + num * deltaAngle)
-        }
+        return getPointOnChart(offset, raduis, -1 * (startAngle + num * deltaAngle) + Math.PI  - rotate)
     }
     const num = 12 - data.order + 1
     
@@ -53,9 +52,8 @@ export function Zodiac({ size, data }: ZodiacProps) {
             }
             let innerPoint = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, -1 * angle, radius1, signBlockAngle, Math.PI / 180);
             let outerPoint = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, -1 * angle, radius2, signBlockAngle, Math.PI / 180);
-            return <>
-                <line key={angle + 'index' + index} {...ThinPenProps} x1={innerPoint.x} y1={innerPoint.y} x2={outerPoint.x} y2={outerPoint.y}  />
-            </>
+            return <line key={angle + 'index' + index} {...ThinPenProps} x1={innerPoint.x} y1={innerPoint.y} x2={outerPoint.x} y2={outerPoint.y}  />
+            
         })}
         <path
             d={d}

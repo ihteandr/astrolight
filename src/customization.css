@@ -1,0 +1,6 @@
+.info-item-tooltip {
+    max-width: 350px;
+}
+.react-tooltip {
+    z-index: 2;
+}

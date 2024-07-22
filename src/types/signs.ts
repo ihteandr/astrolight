@@ -1,3 +1,4 @@
+import { IAstroAspect, IHouse } from "./astro"
 
 export enum EAstroSigns {
     SUN = 'Sun',
@@ -63,5 +64,7 @@ export interface ISign {
     longitudeSpeed: number,
     latitudeSpeed: number,
     distanceSpeed: number,
-    rflag: number
+    rflag: number,
+    aspects: IAstroAspect[],
+    house?: IHouse
 }

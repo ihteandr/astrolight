@@ -1,0 +1,10 @@
+.HouseDescriptionGeneral {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.HouseDescriptionLeftBar {
+    display: inline-flex;
+    background: var(--bodyBackground);
+    position: sticky;
+}
