@@ -3,5 +3,6 @@
     cursor: pointer;
 }
 .Sign:hover, .SignHightlith {
-    color: var(--chartHoverColor)!important;
+    color: var(--chartSignHoverColor)!important;
+    z-index: 2;
 }

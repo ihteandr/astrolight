@@ -7,18 +7,20 @@ import { IPoint } from "../../../../../../types/svg"
 import { circleIntersect, getPointOnChart } from "../../../../../../utils/math.utils"
 import { PenProps, ThinPenProps } from "../../../../../../utils/svg/ul-helpers"
 import styles from './Sign.module.css'
-import { useState } from "react"
+import { useMemo, useState } from "react"
 
 export type SingProps = {
-    getSignPostion: (sing: ISign) => IPoint,
     sign: ISign,
     size: number,
     onClickSign?: (sign: ISign) => void,
     signSize: number,
-    rotate: number
+    rotate: number,
+    onHover?: (sign: ISign) => void,
+    onLeave?: (sign: ISign) => void,
+    point: IPoint
 }
 
-export function Sign({ rotate, getSignPostion, onClickSign, signSize, sign, size }: SingProps) {
+export function Sign({ rotate, onClickSign, point, onHover, onLeave, signSize, sign, size }: SingProps) {
     const [hovered, setHovered] = useState(false)
     const outerRadius = size / 2;
     const innerRadius = outerRadius - size / 10;
@@ -29,13 +31,20 @@ export function Sign({ rotate, getSignPostion, onClickSign, signSize, sign, size
     const symbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
     const radius = 5;
     const angle = (sign.longitude) / 180 * Math.PI - rotate
-    const point = getSignPostion(sign)
     const linePoint1 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius, angle)
     const linePoint2 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius - signSize / 2, angle)
     const innerLinePoint1 = getPointOnChart(size / 2 - PenProps.strokeWidth / 2, internalSpace.innerRadius, angle)
     const innerLinePoint2 = getPointOnChart(size / 2 - PenProps.strokeWidth / 2, internalSpace.innerRadius - signSize / 4, angle)
+    const handleHover = () => {
+        onHover?.(sign)
+        setHovered(true)
+    }
+    const handleLeave = () => {
+        onLeave?.(sign)
+        setHovered(false)
+    }
     return (
-        <g key={sign.name}>
+        <g key={sign.name} id={sign.name}>
             <line
                 {...ThinPenProps}
                 x1={linePoint1.x}
@@ -64,8 +73,8 @@ export function Sign({ rotate, getSignPostion, onClickSign, signSize, sign, size
                 x={point.x - signSize / 2}
                 y={point.y - signSize / 2}
                 size={20}
-                onMouseLeave={() => setHovered(false)}
-                onMouseOver={() => setHovered(true)}
+                onMouseLeave={handleLeave}
+                onMouseOver={handleHover}
                 className={clsx(
                     'sign', sign.name, 
                     'element', symbolData?.elements[0] || 'NoElement',

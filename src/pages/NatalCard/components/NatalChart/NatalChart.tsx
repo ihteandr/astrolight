@@ -19,6 +19,7 @@ import { ZODIAC_SYMBOL_DATA } from "../../../../data/zodiac/ZodiacData";
 import { Zodiac } from "./components/Zodiac/Zodiac";
 import { Sign } from "./components/Sign/Sign";
 import { Aspect } from "./components/Aspect/Aspect";
+import ShouldRender from "../../../../atoms/functional/ShouldRender";
 const SignsData: { [k: string]: { [k: string]: { [k: string]: { planets: ISign[] } } } } = data as any
 
 export interface INatalChartVisibilityOptions {
@@ -31,21 +32,17 @@ export interface INatalChartVisibilityOptions {
 
 export type NatalChartTypes = {
     size: number,
-    date?: DateTimeValue,
-    astroPlace?: IAstroPlace,
     onClickSign?: (sign: ISign) => void,
     onClickHouse?: (house: IHouse) => void,
-    enabled?: boolean,
     data?: any;
     visibilityOptions?: INatalChartVisibilityOptions
 }
 
-export function NatalChart ({ size, data, onClickHouse, visibilityOptions, astroPlace, date, enabled = true, onClickSign }: NatalChartTypes) {
+export function NatalChart ({ size, data, onClickHouse, visibilityOptions, onClickSign }: NatalChartTypes) {
     const signSize = 20
     const [signs, setSigns] = useState<ISign[]>([])
     const [houses, setHouses] = useState<IHouse[]>([])
     const [aspects, setAspects] = useState<IAstroAspect[]>([])
-    const [selectedDate, setSelectedDate] = useState<DateTimeValue | undefined>()
     const [rotateDegree, setRotateDegree] = useState(0);
     const center = {
         x: size / 2,
@@ -83,7 +80,7 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, astro
         let point = getPointOnChart(size / 2, innerRadius - signSize, angle)
         const checkPoint = (currentPoint: IPoint) => {
             const intesectedPoint =  ALL_POINTS.find((point) => {
-                const isIntersect = circleIntersect(point.x, point.y, signSize / 2, currentPoint.x, currentPoint.y, signSize / 2, 5)
+                const isIntersect = circleIntersect(point.x, point.y, signSize / 2, currentPoint.x, currentPoint.y, signSize / 2, 0)
                 return isIntersect
             })
             return !!intesectedPoint;
@@ -93,16 +90,17 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, astro
             i++; 
             point = getPointOnChart(size / 2 - i * 1, innerRadius - signSize - i * 5, angle)  
         }
+        ALL_POINTS.push(point)
         return point
     }
-    useEffect(() => {
-        if (enabled) {
-            setSelectedDate(date)
-        }
-    }, [date, setSelectedDate, enabled])
-
     const renderSign = (sign: ISign) => {
-        return <Sign rotate={rotateDegree} size={size} sign={sign} getSignPostion={getSignPostion} key={sign.name} signSize={signSize} />
+        return <Sign
+            rotate={rotateDegree}
+            size={size}
+            sign={sign}
+            point={getSignPostion(sign)}
+            key={sign.name} 
+            signSize={signSize} />
     }
 
     const renderHouse = (house: IHouse) => {
@@ -118,7 +116,7 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, astro
             key={`${aspect.sign1.name}-${aspect.sign2.name}-${aspect.type}`} />
     }  
     return (
-        <svg height={size} onClick={(e) => e.stopPropagation()} width={size} xmlns="http://www.w3.org/2000/svg">
+        <svg id="chart" height={size} onClick={(e) => e.stopPropagation()} width={size} xmlns="http://www.w3.org/2000/svg">
             <g {...PenProps}>
                 <circle cx={center.x} cy={center.y} r={outerRadius}/>
                 <circle cx={center.x} cy={center.y} r={innerRadius}/>

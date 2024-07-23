@@ -91,12 +91,13 @@ export type IconProps = {
     y?: number,
     onClick?: () => void,
     onMouseOver?: () => void,
-    onMouseLeave?: () => void
+    onMouseLeave?: () => void,
+    id?: string
 }
 
-export function SvgIcon ({ x, y, className, style, name, size, onClick, onMouseLeave, onMouseOver }: IconProps) {
+export function SvgIcon ({ x, y, id, className, style, name, size, onClick, onMouseLeave, onMouseOver }: IconProps) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" x={x} y={y} width={size} height={size} className={className}>
+        <svg xmlns="http://www.w3.org/2000/svg" id={id} x={x} y={y} width={size} height={size} className={className}>
             {createElement(IconsMap[name], {
                 width: size,
                 height: size,

@@ -5,6 +5,7 @@ import NatalCard from './pages/NatalCard/NatalCard';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AboutPage } from './pages/About/About';
 import { Header } from './layout/Header/Header';
+import { NatalCardForm } from './pages/NatalCardForm/NatalCardForm';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,7 +23,8 @@ function App() {
         <BrowserRouter>
           <Header/>
           <Routes>
-            <Route path="/natal-card" Component={NatalCard}></Route>
+            <Route path="/natal-card-form" Component={NatalCardForm}></Route>
+            <Route path="/natal-card/:request" Component={NatalCard}></Route>
             <Route path="/about" Component={AboutPage}></Route>
           </Routes>
         </BrowserRouter>

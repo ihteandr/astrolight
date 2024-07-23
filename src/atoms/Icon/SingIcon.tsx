@@ -11,7 +11,8 @@ export type IconProps = {
     y?: number,
     isRetro?: boolean;
     onMouseOver?: () => void,
-    onMouseLeave?: () => void
+    onMouseLeave?: () => void,
+    id?: string
 }
 
 function calcX (name: string, size: number) {
@@ -30,12 +31,13 @@ function calcX (name: string, size: number) {
     return size;
 }
 
-export function SignIcon ({ isRetro, x, y, ...props }: IconProps) {
+export function SignIcon ({ isRetro, x, y, id, ...props }: IconProps) {
     return (
         <svg xmlns="http://www.w3.org/2000/svg"
             style={{ position: 'relative', overflow: 'visible' }}
             x={x}
             y={y}
+            id={id}
             width={props.size}
             height={props.size}>
             <SvgIcon {...props} />

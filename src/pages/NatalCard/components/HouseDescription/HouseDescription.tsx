@@ -50,7 +50,7 @@ export function HouseDescription ({ onClose, data, house }: HouseDescriptionProp
         }
     }, [houseSigns, dominants, house, data])
     const leftBar = <div className={styles.HouseDescriptionLeftBar}>
-        <NatalChart data={data} enabled={true} size={500} visibilityOptions={visibilityOptions} />
+        <NatalChart data={data} size={500} visibilityOptions={visibilityOptions} />
     </div>
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>

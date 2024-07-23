@@ -2,13 +2,6 @@
     display: flex;
     flex-direction: column;
 }
-.NatalCardForm {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 20px;
-    border: 1px solid black;
-}
 .NatalCardDetails {
     display: flex;
     gap: 24px;
