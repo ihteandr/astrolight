@@ -27,8 +27,9 @@ function App() {
             <Route path="/natal-card/:request" Component={NatalCard}></Route>
             <Route path="/about" Component={AboutPage}></Route>
           </Routes>
+          <div id="info-modal"></div>
+          <div id="modal-root"></div>
         </BrowserRouter>
-        <div id="modal-root"></div>
       </QueryClientProvider>
     </div>
   );

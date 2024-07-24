@@ -47,3 +47,6 @@
     left: 0;
     min-height: 100%;
 }
+.DisableScroll {
+    overflow: hidden;
+}

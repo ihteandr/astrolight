@@ -1,6 +1,9 @@
 
-.disable-scroll {
-    overflow: hidden;
+.error-message {
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 16px;
 }
 .flex {
     display: flex;
@@ -10,4 +13,7 @@
 }
 .inline-flex.gap, .flex.gap {
     gap: 8px;
+}
+.inline-flex.flex-column, .flex.flex-column {
+    flex-direction: column;
 }

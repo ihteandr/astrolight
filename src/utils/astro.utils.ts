@@ -28,7 +28,7 @@ export function parseNatalCardData (data: any) {
         ]
         return sortBy(aspects, (aspect: IAstroAspect) => {
             const boost = aspect.majority === EAspectMajority.MAJOR ? 0 : 100000
-            return boost + actionOrder.findIndex((action) => action === aspect.action) * 100 + typeOrder.findIndex((type) => type === aspect.type)
+            return boost + actionOrder.findIndex((action) => action === aspect.action) * 100 - typeOrder.findIndex((type) => type === aspect.type)
         })
     }
     const aspects: IAstroAspect[] =  sortAspects(data.aspects.map((aspect: any) => {

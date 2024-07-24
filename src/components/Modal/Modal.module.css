@@ -34,3 +34,7 @@
     height: 100%;
     overflow: auto;
 }
+
+.DisableScroll {
+    overflow: hidden;
+}

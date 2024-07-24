@@ -4,17 +4,18 @@ import { createPortal } from 'react-dom'
 
 export type ModalProps = {
     onClose: () => void,
-    children: React.ReactNode
+    children: React.ReactNode,
+    portal?: string,
 }
 
-export function Modal({ onClose, children }: ModalProps) {
+export function Modal({ onClose, children, portal = 'modal-root' }: ModalProps) {
     useEffect(() => {
-        window.document.body.classList.add('disable-scroll')
+        window.document.body.classList.add(styles.DisableScroll)
         return () => {
-            window.document.body.classList.remove('disable-scroll')    
+            window.document.body.classList.remove(styles.DisableScroll)    
         }
     })
-
+    console.log('portal', portal)
     return createPortal((
         <div className={styles.Modal}>
             <div className={styles.ModalOverlay} onClick={onClose}></div>
@@ -25,6 +26,6 @@ export function Modal({ onClose, children }: ModalProps) {
             </div>
         </div>
         ),
-        document.getElementById('modal-root') as HTMLElement
+        document.getElementById(portal) as HTMLElement
     )
 }

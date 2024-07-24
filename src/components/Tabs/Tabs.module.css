@@ -1,0 +1,14 @@
+.Tabs {
+    display: flex;
+    gap: 5px;
+}
+.Tab {
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 4px 0;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+.TabActive {
+    background: rgb(211, 211, 211, 0.4);
+}

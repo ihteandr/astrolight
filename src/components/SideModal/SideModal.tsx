@@ -9,9 +9,9 @@ export type ModalProps = {
 
 export function SideModal({ onClose, leftBar, children }: ModalProps) {
     useEffect(() => {
-        window.document.body.classList.add('disable-scroll')
+        window.document.body.classList.add(styles.DisableScroll)
         return () => {
-            window.document.body.classList.remove('disable-scroll')    
+            window.document.body.classList.remove(styles.DisableScroll)    
         }
     })
 

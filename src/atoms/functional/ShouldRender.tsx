@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 
 type Props = {
   should: boolean | (() => boolean)
-  children: React.ReactNode | (() => React.ReactNode)
+  children: React.ReactNode | React.ReactNode[] | (() => React.ReactNode | React.ReactNode[])
 }
 
 const ShouldRender = ({ should, children }: Props) => {

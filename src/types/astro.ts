@@ -72,6 +72,12 @@ export enum EHouseAxie {
     VI_XII = 'VI_XII',
 }
 
+export enum EHouseCross {
+    CARDINAL = 'CARDINAL',
+    SUCCEDENTAL = 'SUCCEDENTAL',
+    CADETS = 'CADETS'
+}
+
 export interface IHouse {
     number: number,
     start: number,

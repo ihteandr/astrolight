@@ -81,6 +81,8 @@ export function Sign({ rotate, onClickSign, point, onHover, onLeave, signSize, s
                     styles.Sign)}/>
             :     <circle
                 onClick={ () => onClickSign?.(sign)}
+                onMouseLeave={handleLeave}
+                onMouseOver={handleHover}
                 cx={point.x}
                 cy={point.y}
                 r={radius}
