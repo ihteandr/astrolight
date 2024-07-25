@@ -14,7 +14,7 @@ export type TDictionary = {
 }
 
 export const DICTIONARY_TYPES: { [k: string]: string } = {
-    [EDictinaryType.VRONSKY]: 'Воронского С.А.'
+    [EDictinaryType.VRONSKY]: 'Версия Воронского С.А.'
 }
 
 export const DEFAULT_DICTINARY_TYPE = EDictinaryType.VRONSKY

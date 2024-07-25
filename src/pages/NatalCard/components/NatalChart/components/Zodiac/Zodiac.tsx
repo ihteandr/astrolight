@@ -27,10 +27,10 @@ export function Zodiac({ rotate, size, data }: ZodiacProps) {
     const angles = range((data.order - 1) * 30, data.order * 30);
     const coords = getPointOnCircle(size / 2 - iconSize / 2, num, (innerRadius + outerRadius) / 2 + 4, signBlockAngle - Math.PI / 12)
     
-    const startLinePoint1 = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2,  num, innerRadius, signBlockAngle)
-    const startLinePoint2 = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, num, outerRadius, signBlockAngle)
-    const endLinePoint1 = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, num - 1, outerRadius, signBlockAngle)
-    const endLinePoint2 = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, num - 1, innerRadius, signBlockAngle)
+    const startLinePoint1 = getPointOnCircle(size / 2,  num, innerRadius, signBlockAngle)
+    const startLinePoint2 = getPointOnCircle(size / 2, num, outerRadius, signBlockAngle)
+    const endLinePoint1 = getPointOnCircle(size / 2, num - 1, outerRadius, signBlockAngle)
+    const endLinePoint2 = getPointOnCircle(size / 2, num - 1, innerRadius, signBlockAngle)
     let d = `
         M${startLinePoint1.x},${startLinePoint1.y}
         L${startLinePoint2.x},${startLinePoint2.y} 
@@ -50,8 +50,8 @@ export function Zodiac({ rotate, size, data }: ZodiacProps) {
             } else {
                 radius2 = innerRadius + (outerRadius - innerRadius) / 6
             }
-            let innerPoint = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, -1 * angle, radius1, signBlockAngle, Math.PI / 180);
-            let outerPoint = getPointOnCircle(size / 2 - ThinPenProps.strokeWidth / 2, -1 * angle, radius2, signBlockAngle, Math.PI / 180);
+            let innerPoint = getPointOnCircle(size / 2, -1 * angle, radius1, signBlockAngle, Math.PI / 180);
+            let outerPoint = getPointOnCircle(size / 2, -1 * angle, radius2, signBlockAngle, Math.PI / 180);
             return <line key={angle + 'index' + index} {...ThinPenProps} x1={innerPoint.x} y1={innerPoint.y} x2={outerPoint.x} y2={outerPoint.y}  />
             
         })}

@@ -114,7 +114,36 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, onCli
             size={size}
             signSize={signSize}
             key={`${aspect.sign1.name}-${aspect.sign2.name}-${aspect.type}`} />
-    }  
+    }
+    const renderAscidental = () => {
+        const lines = []
+        const allHouses = data.houses.positions
+        for (let i = 0; i < allHouses.length; i++){
+            const house = allHouses[i]
+            if (![1, 4, 7, 10].includes(house.number)) continue;
+            const cuspidLinePoint = getPointOnChart(size / 2, innerRadius, house.start / 180 * Math.PI - rotateDegree)
+            const startLinePoint = getPointOnChart(size / 2, internalSpace.innerRadius, house.start / 180 * Math.PI - rotateDegree)    
+            const innerLinePoint1 = getPointOnChart(size / 2, internalSpace.innerRadius, house.start / 180 * Math.PI - rotateDegree)   
+            const innerLinePoint2 = getPointOnChart(size / 2, internalSpace.innerRadius - signSize / 4, house.start / 180 * Math.PI - rotateDegree)   
+            lines.push( <line
+                key={`ascidental-line-${i}`}
+                {...BoldPenProps}
+                x1={startLinePoint.x}
+                y1={startLinePoint.y}
+                x2={cuspidLinePoint.x}
+                y2={cuspidLinePoint.y}
+            />)
+            lines.push( <line
+                key={`aspect-line-${i}`}
+                {...ThinPenProps}
+                x1={innerLinePoint1.x}
+                y1={innerLinePoint1.y}
+                x2={innerLinePoint2.x}
+                y2={innerLinePoint2.y}
+            />)
+        }
+        return lines;
+    }
     return (
         <svg id="chart" height={size} onClick={(e) => e.stopPropagation()} width={size} xmlns="http://www.w3.org/2000/svg">
             <g {...PenProps}>
@@ -128,6 +157,7 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, onCli
             {Object.values(ZODIAC_SYMBOL_DATA).map((symbolData, index) => {
                 return <Zodiac rotate={rotateDegree} data={symbolData} key={index} size={size} />
             })}
+            {renderAscidental()}
             {houses.map(renderHouse)}
             {signs.map(renderSign)}
             {aspects.map(renderAspect)}

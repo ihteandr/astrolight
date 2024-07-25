@@ -32,7 +32,7 @@ export function parseNatalCardData (data: any) {
         })
     }
     const aspects: IAstroAspect[] =  sortAspects(data.aspects.map((aspect: any) => {
-        const sign1 = {...signs.find((sign) => sign.name === aspect.sign1)};
+        const sign1 = aspect.sign1 === 'Ascident' || aspect.sign1 === 'Meridian' ? { name: aspect.sign1 } : {...signs.find((sign) => sign.name === aspect.sign1)};
         const sign2 = {...signs.find((sign) => sign.name === aspect.sign2)};
         const fastSign = {...signs.find((sign) => sign.name === aspect.fastSign)};
         return {

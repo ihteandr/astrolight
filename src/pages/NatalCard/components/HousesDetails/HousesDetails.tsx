@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import styles from './HousesDetails.module.css'
 import { ISign } from "../../../../types/signs";
 import { SIGNS_SYMBOL_DATA } from "../../../../data/sings-data/SignsData";
@@ -10,9 +10,10 @@ import { setZeros } from "../../../../utils/format.utils";
 import { IHouse } from "../../../../types/astro";
 export type HousesDetailsType = {
     data?: any;
+    onClickHouse?: (house: IHouse) => void
 }
 
-export function HousesDetails ({ data }: HousesDetailsType) {
+export function HousesDetails ({ data, onClickHouse }: HousesDetailsType) {
     const houses = useMemo<IHouse[]>(() => {
         if (data) {
             return sortBy(data.houses.positions, (house) => {
@@ -27,7 +28,7 @@ export function HousesDetails ({ data }: HousesDetailsType) {
                 const zodiacSymbol = ZODIAC_SYMBOL_DATA[house.zodiac]
                 
                 return (
-                    <div className={styles.HouseRow} key={house.number}>
+                    <div className={styles.HouseRow} key={house.number} onClick={() => { onClickHouse?.(house) }}>
                         <div className={styles.HouseSymbol}>
                             <span className={clsx('house-label', `house${house.number}`)}>Дом {house.number}</span>
                         </div>

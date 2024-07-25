@@ -15,7 +15,6 @@ export function Modal({ onClose, children, portal = 'modal-root' }: ModalProps) 
             window.document.body.classList.remove(styles.DisableScroll)    
         }
     })
-    console.log('portal', portal)
     return createPortal((
         <div className={styles.Modal}>
             <div className={styles.ModalOverlay} onClick={onClose}></div>

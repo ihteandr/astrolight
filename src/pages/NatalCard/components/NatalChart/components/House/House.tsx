@@ -19,13 +19,15 @@ export function House ({ rotate, size, highlight, house, onClick }: HouseProps) 
         outerRadius: size / 4,
         innerRadius: size / 4 - size / 20
     }
-    let linePenProps = [1, 4, 7, 10].includes(house.number) ? BoldPenProps : ThinPenProps
-    const startLinePoint1 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.innerRadius, house.start / 180 * Math.PI - rotate)
-    const startLinePoint2 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.outerRadius, house.start / 180 * Math.PI - rotate)
-    const bigStartLinePoint = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius, house.start / 180 * Math.PI - rotate)
-    const bigEndLinePoint = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius, house.end / 180 * Math.PI - rotate)
-    const endLinePoint1 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.innerRadius, house.end / 180 * Math.PI - rotate)
-    const endLinePoint2 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.outerRadius, house.end / 180 * Math.PI - rotate)
+    let centerDegree = house.start > house.end ? 360 + house.start + house.end : house.start + house.end ;
+    const center = getPointOnChart(size / 2, (internalSpace.innerRadius + internalSpace.outerRadius) / 2, centerDegree / 2 / 180 * Math.PI - rotate)
+    const cuspidLinePoint = getPointOnChart(size / 2, innerRadius, house.start / 180 * Math.PI - rotate)
+    const startLinePoint1 = getPointOnChart(size / 2, internalSpace.innerRadius, house.start / 180 * Math.PI - rotate)
+    const startLinePoint2 = getPointOnChart(size / 2, internalSpace.outerRadius, house.start / 180 * Math.PI - rotate)
+    const bigStartLinePoint = getPointOnChart(size / 2, innerRadius, house.start / 180 * Math.PI - rotate)
+    const bigEndLinePoint = getPointOnChart(size / 2, innerRadius, house.end / 180 * Math.PI - rotate)
+    const endLinePoint1 = getPointOnChart(size / 2, internalSpace.innerRadius, house.end / 180 * Math.PI - rotate)
+    const endLinePoint2 = getPointOnChart(size / 2, internalSpace.outerRadius, house.end / 180 * Math.PI - rotate)
     let d = `
         M${startLinePoint1.x},${startLinePoint1.y}
         L${startLinePoint2.x},${startLinePoint2.y} 
@@ -42,13 +44,10 @@ export function House ({ rotate, size, highlight, house, onClick }: HouseProps) 
         A${internalSpace.innerRadius},${internalSpace.innerRadius} 0 0 1 ${startLinePoint1.x},${startLinePoint1.y}
         Z
     `
-    const cuspidLinePoint = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius, house.start / 180 * Math.PI - rotate)
-    let centerDegree = house.start > house.end ? 360 + house.start + house.end : house.start + house.end ;
-    const center = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, (internalSpace.innerRadius + internalSpace.outerRadius) / 2, centerDegree / 2 / 180 * Math.PI - rotate)
     return (
         <svg>
             <line
-                {...linePenProps}
+                {...ThinPenProps}
                 x1={startLinePoint1.x}
                 y1={startLinePoint1.y}
                 x2={cuspidLinePoint.x}

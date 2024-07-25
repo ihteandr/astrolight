@@ -10,6 +10,12 @@
 .HouseRow {
     display: flex;
     justify-content: space-between;
+    margin: 4px 0;
+    cursor: pointer;
+}
+
+.HouseRow:hover {
+    border-bottom: 1px solid;
 }
 .HouseInfo {
     display: flex;

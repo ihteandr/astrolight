@@ -31,8 +31,8 @@ export function Sign({ rotate, onClickSign, point, onHover, onLeave, signSize, s
     const symbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
     const radius = 5;
     const angle = (sign.longitude) / 180 * Math.PI - rotate
-    const linePoint1 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius, angle)
-    const linePoint2 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, innerRadius - signSize / 2, angle)
+    const linePoint1 = getPointOnChart(size / 2, innerRadius, angle)
+    const linePoint2 = getPointOnChart(size / 2, innerRadius - signSize / 2, angle)
     const innerLinePoint1 = getPointOnChart(size / 2 - PenProps.strokeWidth / 2, internalSpace.innerRadius, angle)
     const innerLinePoint2 = getPointOnChart(size / 2 - PenProps.strokeWidth / 2, internalSpace.innerRadius - signSize / 4, angle)
     const handleHover = () => {

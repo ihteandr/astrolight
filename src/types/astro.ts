@@ -8,12 +8,14 @@ export enum EAstroDirection {
 export enum EAstroAspectSpecification {
     APPLIQUE = 'APPLIQUE',
     SEPARATION = 'SEPARATION',
-    EXACT = 'EXACT'
+    EXACT = 'EXACT',
+    UNKOWN = 'UNKOWN'
 }
 
 export enum EAstroAspectClassification {
     COMPLETED = 'COMPLETED',
-    INCOMPLETED = 'INCOMPLITED'
+    INCOMPLETED = 'INCOMPLITED',
+    UNKOWN = 'UNKOWN'
 }
 export enum EAstroAspectType {
     CONJUNCTION = 'CONJUNCTION',
@@ -108,7 +110,7 @@ export type IAstroAspect = {
     classification: EAstroAspectClassification,
     type: EAstroAspectType,
     majority: EAspectMajority,
-    sign1: ISign,
+    sign1: ISign | { name: 'Ascident' | 'Meridian' },
     sign1Degree: number,
     sign2: ISign,
     sign2Degree: number,

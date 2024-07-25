@@ -24,10 +24,8 @@ export default function NatalCard () {
     
     const { mutate: fetchData, data } = useNatalCardData()
     useEffect(() => {
-        console.log('reqeust', request)
         if (request) {
             const requestData = JSON.parse(decode(request as string))
-            console.log('requestData', requestData)
             fetchData(requestData)
         }
     }, [request])
@@ -48,7 +46,10 @@ export default function NatalCard () {
                             onClickHouse={setSelectedHouse}
                             onClickSign={console.log}></NatalChart>
                         <SignsDetails data={parsedNatalCardData}/>
-                        <HousesDetails data={parsedNatalCardData}/>
+                        <HousesDetails
+                            onClickHouse={setSelectedHouse}
+                            data={parsedNatalCardData}
+                        />
                         <AspectsDetails data={parsedNatalCardData}/>
                     </div>
                 </ShouldRender>

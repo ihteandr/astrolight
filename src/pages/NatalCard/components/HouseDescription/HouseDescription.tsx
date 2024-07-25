@@ -71,7 +71,7 @@ export function HouseDescription ({ onClose, data, house }: HouseDescriptionProp
             ))}    
         </div>
     ) : null, [houseData, configurationsWithDIffrentHouseDominants])
-    console.log('configurationsWithDIffrentHouseDominants', configurationsWithDIffrentHouseDominants)
+    
     const houseSigns = useMemo<ISign[]>(() => {
         return data.signs.filter((sign: ISign) => {
             return house.isContainsSign(sign)

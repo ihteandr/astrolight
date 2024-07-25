@@ -26,7 +26,7 @@ export function SignsDetails ({ data }: SignsDetailsType) {
         <div className={styles.SignsDetails}>
             {signs.map((sign) => {
                 return (
-                    <SignInfo key={sign.name} sign={sign} />
+                    <SignInfo key={sign.name} sign={sign} withHouse={true} />
                 )           
             })}
         </div>

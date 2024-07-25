@@ -83,6 +83,9 @@ export const ASPECT_CLASSIFICATION_LABELS: LabelMapType = {
     [EAstroAspectClassification.INCOMPLETED]: {
         label: 'Незавершенный'
     },
+    [EAstroAspectClassification.UNKOWN]: {
+        label: 'Неизвестный'
+    },
 }
 
 export const ASPECT_SPECIFICATION_LABELS: LabelMapType = {
@@ -94,5 +97,8 @@ export const ASPECT_SPECIFICATION_LABELS: LabelMapType = {
     },
     [EAstroAspectSpecification.EXACT]: {
         label: 'Точный'
+    },
+    [EAstroAspectSpecification.UNKOWN]: {
+        label: 'Неизвестный'
     },
 }

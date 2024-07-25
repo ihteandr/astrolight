@@ -13,7 +13,7 @@ import { useOpenaiAspectQuestion } from "../../../../api/openai/openai.api"
 import { EAstroSigns } from "../../../../types/signs"
 export type AspectInfoProps = {
     aspect: IAstroAspect,
-    perspective?: EAstroSigns 
+    perspective?: EAstroSigns | 'Ascident' | 'Meridian'
 }
 
 export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
@@ -27,9 +27,21 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
         return perspective ? aspect.sign2.name !== perspective ? aspect.sign2 : aspect.sign1 : aspect.sign2
     }, [aspect, perspective])
     const sign1SymbolData = useMemo(() => {
+        if (sign1.name === 'Ascident') {
+            return { label: 'Асцидент', openAiLabel: undefined }
+        }
+        if (sign1.name === 'Meridian') {
+            return { label: 'Меридиан', openAiLabel: undefined  }
+        }
         return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign1.name)
     }, [aspect])
     const sign2SymbolData = useMemo(() => {
+        if (sign2.name === 'Ascident') {
+            return { label: 'Асцидент', openAiLabel: undefined }
+        }
+        if (sign2.name === 'Meridian') {
+            return { label: 'Меридиан', openAiLabel: undefined  }
+        }
         return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign2.name)
     }, [aspect])
     const fastSignSymbolData = useMemo(() => {

@@ -17,8 +17,8 @@ export function Aspect({ rotate, size, signSize, aspect }: AspectProps) {
         outerRadius: size / 4,
         innerRadius: size / 4 - size / 20
     }
-    const linePoint1 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.innerRadius - signSize /4, aspect.sign1Degree / 180 * Math.PI - rotate)
-    const linePoint2 = getPointOnChart(size / 2 - ThinPenProps.strokeWidth / 2, internalSpace.innerRadius - signSize /4, aspect.sign2Degree / 180 * Math.PI - rotate)
+    const linePoint1 = getPointOnChart(size / 2, internalSpace.innerRadius - signSize /4, aspect.sign1Degree / 180 * Math.PI - rotate)
+    const linePoint2 = getPointOnChart(size / 2, internalSpace.innerRadius - signSize /4, aspect.sign2Degree / 180 * Math.PI - rotate)
     return (
         <line
             {...ThinPenProps}
