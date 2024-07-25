@@ -1,0 +1,6 @@
+
+.SignDescriptionLeftBar {
+    display: inline-flex;
+    background: var(--bodyBackground);
+    position: sticky;
+}

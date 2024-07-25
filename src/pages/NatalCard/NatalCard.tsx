@@ -10,15 +10,17 @@ import moment from "moment";
 import { NatalCardDataParams, useNatalCardData } from "../../api/natal-card/natal-card.api";
 import { parseNatalCardData } from "../../utils/astro.utils";
 import ShouldRender from "../../atoms/functional/ShouldRender";
-import { SignsDetails } from "./components/SignsDetails/SintsDetails";
+import { SignsDetails } from "./components/SignsDetails/SingsDetails";
 import { HousesDetails } from "./components/HousesDetails/HousesDetails";
 import { AspectsDetails } from "./components/AspectsDetails/AspectsDetails";
 import { HouseDescription } from "./components/HouseDescription/HouseDescription";
 import { useParams } from "react-router-dom";
 import { decode, encode } from "js-base64";
+import { ISign } from "../../types/signs";
+import { SignDescription } from "./components/SignDescription/SIgnDescription";
 export default function NatalCard () {
     const [selectedHouse, setSelectedHouse] = useState<IHouse>()
-    
+    const [selectedSign, setSelectedSign] = useState<ISign>()
     const { request } = useParams()
     const [parsedNatalCardData, setParsedNatalCardData] = useState<any>()
     
@@ -44,8 +46,10 @@ export default function NatalCard () {
                             data={parsedNatalCardData}
                             size={500}
                             onClickHouse={setSelectedHouse}
-                            onClickSign={console.log}></NatalChart>
-                        <SignsDetails data={parsedNatalCardData}/>
+                            onClickSign={setSelectedSign}></NatalChart>
+                        <SignsDetails
+                            onClickSign={setSelectedSign}
+                            data={parsedNatalCardData}/>
                         <HousesDetails
                             onClickHouse={setSelectedHouse}
                             data={parsedNatalCardData}
@@ -58,6 +62,13 @@ export default function NatalCard () {
                         data={parsedNatalCardData}
                         onClose={() => setSelectedHouse(undefined)}
                         house={selectedHouse as IHouse}/>
+                </ShouldRender>
+
+                <ShouldRender should={!!selectedSign}>
+                    <SignDescription
+                        data={parsedNatalCardData}
+                        onClose={() => setSelectedSign(undefined)}
+                        sign={selectedSign as ISign}/>
                 </ShouldRender>
             </div>
         </div>

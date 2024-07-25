@@ -11,9 +11,10 @@ import { ZoneInfo } from "../ZoneInfo/ZoneInfo";
 import { SignInfo } from "../SignInfo/SignInfo";
 export type SignsDetailsType = {
     data?: any;
+    onClickSign?: (sign: ISign) => void
 }
 
-export function SignsDetails ({ data }: SignsDetailsType) {
+export function SignsDetails ({ data, onClickSign }: SignsDetailsType) {
     const signs = useMemo<ISign[]>(() => {
         if (data) {
             return sortBy(data.signs, (sign) => {
@@ -26,7 +27,7 @@ export function SignsDetails ({ data }: SignsDetailsType) {
         <div className={styles.SignsDetails}>
             {signs.map((sign) => {
                 return (
-                    <SignInfo key={sign.name} sign={sign} withHouse={true} />
+                    <SignInfo key={sign.name} onClickSign={onClickSign} sign={sign} withHouse={true} />
                 )           
             })}
         </div>

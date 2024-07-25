@@ -11,11 +11,12 @@ import { useCallback, useState } from "react"
 import { SignIcon } from "../../../../atoms/Icon/SingIcon"
 export type SignInfoProps = {
     sign: ISign,
-    withAspects?: boolean;
-    withHouse?: boolean;
+    withAspects?: boolean,
+    withHouse?: boolean,
+    onClickSign?: (sign: ISign) => void 
 }
 
-export function SignInfo ({ sign, withAspects = false, withHouse = false }: SignInfoProps) {
+export function SignInfo ({ sign, onClickSign, withAspects = false, withHouse = false }: SignInfoProps) {
     const [shouldShowAspects, setShouldShowAspect] = useState(false)
     const signSymbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
     const toggleShowAspects = useCallback(() => {
@@ -25,7 +26,7 @@ export function SignInfo ({ sign, withAspects = false, withHouse = false }: Sign
         <ShouldRender should={!!signSymbolData}>
             <div className={styles.SignInfo}>
                 <div className={styles.SignInfoName}>
-                    <div className={styles.SingSymbol}>
+                    <div className={styles.SingSymbol} onClick={() => { onClickSign?.(sign) }}>
                         <SignIcon
                             isRetro={sign.isRetro}
                             name={sign.name}

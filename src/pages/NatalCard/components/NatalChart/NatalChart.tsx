@@ -98,6 +98,7 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, onCli
             rotate={rotateDegree}
             size={size}
             sign={sign}
+            onClickSign={onClickSign}
             point={getSignPostion(sign)}
             key={sign.name} 
             signSize={signSize} />
