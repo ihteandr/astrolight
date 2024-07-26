@@ -1607,106 +1607,106 @@ export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     },
     [EAstroSigns.CERES]: {
         sign: EAstroSigns.CERES,
-        label: 'Церес',
+        label: 'Церерa',
         elements: [],
         direction: EAstroDirection.NETRAL,
         zodiacMatchDictionary: {
             [EAstroZodiacSign.ARIES]: {
-                label: 'Церес в знаке Овна',
+                label: 'Церерa в знаке Овна',
                 description: {}
             },
             [EAstroZodiacSign.TAURUS]: {
-                label: 'Церес в знаке Тельца',
+                label: 'Церерa в знаке Тельца',
                 description: {}
             },
             [EAstroZodiacSign.GEMINI]: {
-                label: 'Церес в знаке Близнацов',
+                label: 'Церерa в знаке Близнацов',
                 description: {}
             },
             [EAstroZodiacSign.CANCER]: {
-                label: 'Церес в знаке Рака',
+                label: 'Церерa в знаке Рака',
                 description: {}
             },
             [EAstroZodiacSign.LEO]: {
-                label: 'Церес в знаке Льва',
+                label: 'Церерa в знаке Льва',
                 description: {}
             },
             [EAstroZodiacSign.VIRGO]: {
-                label: 'Церес в знаке Девы',
+                label: 'Церерa в знаке Девы',
                 description: {}
             },
             [EAstroZodiacSign.LIBRA]: {
-                label: 'Церес в знаке Весов',
+                label: 'Церерa в знаке Весов',
                 description: {}
             },
             [EAstroZodiacSign.SCORPIO]: {
-                label: 'Церес в знаке Скорпеона',
+                label: 'Церерa в знаке Скорпеона',
                 description: {}
             },
             [EAstroZodiacSign.SAGITTARIUS]: {
-                label: 'Церес в знаке Стрельца',
+                label: 'Церерa в знаке Стрельца',
                 description: {}
             },
             [EAstroZodiacSign.CAPRICORN]: {
-                label: 'Церес в знаке Козерога',
+                label: 'Церерa в знаке Козерога',
                 description: {}
             },
             [EAstroZodiacSign.AQUARIUS]: {
-                label: 'Церес в знаке Водолея',
+                label: 'Церерa в знаке Водолея',
                 description: {}
             },
             [EAstroZodiacSign.PISCES]: {
-                label: 'Церес в знаке Рыб',
+                label: 'Церерa в знаке Рыб',
                 description: {}
             },
         },
         houseMatchDictionary: {
             1: {
-                label: 'Церес в I доме',
+                label: 'Церерa в I доме',
                 description: {}
             },
             2: {
-                label: 'Церес в II доме',
+                label: 'Церерa в II доме',
                 description: {}
             },
             3: {
-                label: 'Церес в III доме',
+                label: 'Церерa в III доме',
                 description: {}
             },
             4: {
-                label: 'Церес в IV доме',
+                label: 'Церерa в IV доме',
                 description: {}
             },
             5: {
-                label: 'Церес в V доме',
+                label: 'Церерa в V доме',
                 description: {}
             },
             6: {
-                label: 'Церес в VI доме',
+                label: 'Церерa в VI доме',
                 description: {}
             },
             7: {
-                label: 'Церес в VII доме',
+                label: 'Церерa в VII доме',
                 description: {}
             },
             8: {
-                label: 'Церес в VIII доме',
+                label: 'Церерa в VIII доме',
                 description: {}
             },
             9: {
-                label: 'Церес в IX доме',
+                label: 'Церерa в IX доме',
                 description: {}
             },
             10: {
-                label: 'Церес в X доме',
+                label: 'Церерa в X доме',
                 description: {}
             },
             11: {
-                label: 'Церес в XI доме',
+                label: 'Церерa в XI доме',
                 description: {}
             },
             12: {
-                label: 'Церес в XII доме',
+                label: 'Церерa в XII доме',
                 description: {}
             }
         }
