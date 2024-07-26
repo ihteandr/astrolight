@@ -18,7 +18,7 @@ export function SignsDetails ({ data, onClickSign }: SignsDetailsType) {
     const signs = useMemo<ISign[]>(() => {
         if (data) {
             return sortBy(data.signs, (sign) => {
-                return SIGNS_SYMBOL_DATA.findIndex((symbolData) => symbolData.sign === sign.name)
+                return Object.keys(SIGNS_SYMBOL_DATA).findIndex((singName) => singName === sign.name)
             })
         }
         return []

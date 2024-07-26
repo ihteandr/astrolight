@@ -29,7 +29,7 @@ export function Sign({ rotate, onClickSign, point, highlight, onHover, onLeave, 
         outerRadius: size / 4,
         innerRadius: size / 4 - size / 20
     }
-    const symbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
+    const symbolData = SIGNS_SYMBOL_DATA[sign.name]
     const radius = 5;
     const angle = (sign.longitude) / 180 * Math.PI - rotate
     const linePoint1 = getPointOnChart(size / 2, innerRadius, angle)

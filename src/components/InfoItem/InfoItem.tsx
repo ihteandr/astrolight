@@ -9,13 +9,15 @@ import ShouldRender from "../../atoms/functional/ShouldRender"
 import { Modal } from "../Modal/Modal"
 import { EModalType } from "../../utils/ui/helpers"
 import { InfoDescription } from "../InfoDescription/InfoDescription"
+import { EOpenAiType } from "../../types/openai"
 export type InfoItemProps = {
     explanation: IExplanation,
     type?: 'modal' | 'tooltip',
-    additionalDescription?: React.ReactNode
+    additionalDescription?: React.ReactNode,
+    openAiType?: EOpenAiType
 }
 
-export function InfoItem ({ explanation, type = 'tooltip', additionalDescription }: InfoItemProps) {
+export function InfoItem ({ explanation, type = 'tooltip', openAiType, additionalDescription }: InfoItemProps) {
     const [shouldShowInfo, setShouldSHowInfo] = useState(false)
     const key = useMemo(() => {
         return uuid.v4()
@@ -44,11 +46,7 @@ export function InfoItem ({ explanation, type = 'tooltip', additionalDescription
                         <ShouldRender should={shouldShowInfo}>
                             <Modal onClose={() => setShouldSHowInfo(false)} portal={EModalType.INFO_MODAL}>
                                 {additionalDescription}
-                                <ShouldRender should={!!description}>
-                                    {() => (
-                                        <InfoDescription explanation={explanation} />
-                                    )}
-                                </ShouldRender>
+                                <InfoDescription explanation={explanation} openAiType={openAiType} />
                             </Modal>
                         </ShouldRender>
                     </>

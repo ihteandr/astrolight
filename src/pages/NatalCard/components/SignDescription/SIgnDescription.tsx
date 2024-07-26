@@ -6,7 +6,10 @@ import { INatalChartVisibilityOptions, NatalChart } from "../NatalChart/NatalCha
 import { SignInfo } from "../SignInfo/SignInfo"
 import styles from './SignDescription.module.css'
 import { Aspect } from "../NatalChart/components/Aspect/Aspect"
-import { IAstroAspect } from "../../../../types/astro"
+import { IAstroAspect, IHouse } from "../../../../types/astro"
+import { InfoItem } from "../../../../components/InfoItem/InfoItem"
+import ShouldRender from "../../../../atoms/functional/ShouldRender"
+import { EOpenAiType } from "../../../../types/openai"
 
 export type SignDescriptionProps = {
     data?: any;
@@ -15,10 +18,10 @@ export type SignDescriptionProps = {
 }
 
 export function SignDescription ({ sign, data, onClose }: SignDescriptionProps) {
-    const signSymbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
+    const signSymbolData = SIGNS_SYMBOL_DATA[sign.name]
     const visibilityOptions = useMemo<INatalChartVisibilityOptions>(() => {
         return {
-            houses: [],
+            houses: sign.house ? [sign.house.number] : [],
             highlightSigns: [sign.name],
             aspects: data.aspects.filter((aspect: IAstroAspect) => {
                 return aspect.isContainsSign(sign.name)
@@ -31,7 +34,24 @@ export function SignDescription ({ sign, data, onClose }: SignDescriptionProps) 
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>
             <h2>{signSymbolData?.label}</h2>
-            <SignInfo sign={sign} withAspects={true} withHouse={true} />        
+            <SignInfo sign={sign} withAspects={true} withHouse={true} />  
+            <h5>Интерпретации</h5>
+            <div>
+                <InfoItem
+                    openAiType={EOpenAiType.INTERPRETATION}
+                    explanation={signSymbolData.zodiacMatchDictionary[sign.zodiac]}
+                    type='modal'/>
+            </div>
+            <ShouldRender should={!!sign.house}>
+                {() => (
+                    <div>
+                        <InfoItem
+                            openAiType={EOpenAiType.INTERPRETATION}
+                            explanation={signSymbolData.houseMatchDictionary[(sign.house as IHouse).number]}
+                            type='modal'/>      
+                    </div>
+                )}
+            </ShouldRender>
         </SideModal>
     )
 }

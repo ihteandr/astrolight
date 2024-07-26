@@ -11,6 +11,7 @@ import { InfoItem } from "../../../../components/InfoItem/InfoItem"
 import { INatalChartVisibilityOptions, NatalChart } from "../NatalChart/NatalChart"
 import ShouldRender from "../../../../atoms/functional/ShouldRender"
 import { AspectInfo } from "../AspectInfo/AspectInfo"
+import { EOpenAiType } from "../../../../types/openai"
 export type HouseDescriptionProps = {
     house: IHouse,
     data: any,
@@ -117,10 +118,14 @@ export function HouseDescription ({ onClose, data, house }: HouseDescriptionProp
                     <ZoneInfo zodiac={house.zodiac} zone={house.zodiacZone}/>
                     <h5 style={{ textAlign: 'left' }}>Интерпретации</h5>
                     <div className={'flex gap flex-column'}>
-                        <InfoItem explanation={houseData.zodiacMatchDictionary[house.zodiac]} type='modal' />
+                        <InfoItem
+                            openAiType={EOpenAiType.INTERPRETATION}
+                            explanation={houseData.zodiacMatchDictionary[house.zodiac]}
+                            type='modal' />
                         {dominants.map((dominant) => (
                             <ShouldRender should={!!dominant.house} key={dominant.name}>
                                 <InfoItem
+                                    openAiType={EOpenAiType.INTERPRETATION}
                                     additionalDescription={<SignInfo sign={dominant} withAspects={false} withHouse={true} />}
                                     explanation={houseData.dominantPlaceDictionary[(dominant.house as IHouse).number]}
                                     type='modal' />

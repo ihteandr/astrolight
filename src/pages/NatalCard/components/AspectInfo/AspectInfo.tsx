@@ -33,7 +33,7 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
         if (sign1.name === 'Meridian') {
             return { label: 'Меридиан', openAiLabel: undefined  }
         }
-        return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign1.name)
+        return SIGNS_SYMBOL_DATA[sign1.name]
     }, [aspect])
     const sign2SymbolData = useMemo(() => {
         if (sign2.name === 'Ascident') {
@@ -42,13 +42,13 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
         if (sign2.name === 'Meridian') {
             return { label: 'Меридиан', openAiLabel: undefined  }
         }
-        return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign2.name)
+        return SIGNS_SYMBOL_DATA[sign2.name]
     }, [aspect])
     const fastSignSymbolData = useMemo(() => {
-        return SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === aspect.fastSign.name)
+        return SIGNS_SYMBOL_DATA[aspect.fastSign.name]
     }, [aspect])
     const getAspectDescription = () => {
-        const question = `Дай детальные характеристики астрологического аспекта ${sign1SymbolData?.openAiLabel || sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${sign2SymbolData?.openAiLabel || sign2SymbolData?.label}`
+        const question = `Какие характеристики у астрологического аспекта ${sign1SymbolData?.openAiLabel || sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${sign2SymbolData?.openAiLabel || sign2SymbolData?.label}?`
         getDescription({ question })
         setShouldShowDetails(true)
     }

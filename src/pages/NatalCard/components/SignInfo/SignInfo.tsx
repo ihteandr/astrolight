@@ -19,7 +19,7 @@ export type SignInfoProps = {
 
 export function SignInfo ({ sign, onClickSign, selectable = false, withAspects = false, withHouse = false }: SignInfoProps) {
     const [shouldShowAspects, setShouldShowAspect] = useState(false)
-    const signSymbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
+    const signSymbolData = SIGNS_SYMBOL_DATA[sign.name]
     const toggleShowAspects = useCallback(() => {
         setShouldShowAspect((shouldShow) => !shouldShow)
     }, [setShouldShowAspect])

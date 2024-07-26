@@ -1,7 +1,7 @@
 import * as showdown from 'showdown'
 
 const converter = new showdown.Converter({
-    headerLevelStart: 3
+    headerLevelStart: 1
 });
 
 export function setZeros (value: number | string, length: number) {
@@ -13,7 +13,7 @@ export function setZeros (value: number | string, length: number) {
 }
 
 export function formatOpenAiMessage (text: string) {
-    text = text.replace(/\\n/ig, '<br\>').replace(/\"/g, '')
+    text = text.replace(/\\n/ig, '<br\>').replace(/\"/, '')
     let i = 0
     while(text.indexOf('###') !== -1) {
         if (i > 10) break;

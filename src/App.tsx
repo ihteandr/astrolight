@@ -10,8 +10,6 @@ import { NatalCardForm } from './pages/NatalCardForm/NatalCardForm';
 const queryClient = new QueryClient({
   defaultOptions: {
       queries: {
-          retry: false,
-          refetchOnWindowFocus: false,
       },
   },
 });
