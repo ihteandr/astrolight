@@ -1,1 +1,4 @@
 
+.DefaultCursor * {
+    cursor: default!important;
+}

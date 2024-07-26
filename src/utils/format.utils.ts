@@ -13,7 +13,8 @@ export function setZeros (value: number | string, length: number) {
 }
 
 export function formatOpenAiMessage (text: string) {
-    text = text.replace(/\\n/ig, '<br\>').replace(/\"/, '')
+    return text;
+    text = text.replace(/\\n/ig, '<br\>')
     let i = 0
     while(text.indexOf('###') !== -1) {
         if (i > 10) break;

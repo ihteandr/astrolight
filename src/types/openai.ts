@@ -1,3 +1,4 @@
 export enum EOpenAiType {
-    INTERPRETATION = 'interpretation'
+    INTERPRETATION = 'interpretation',
+    ASPECT = 'aspect'
 }

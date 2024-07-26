@@ -11,6 +11,8 @@ import ShouldRender from "../../../../atoms/functional/ShouldRender"
 import { Modal } from "../../../../components/Modal/Modal"
 import { useOpenaiAspectQuestion } from "../../../../api/openai/openai.api"
 import { EAstroSigns } from "../../../../types/signs"
+import { OpenAiAnswer } from "../../../../components/OpenAiAnswer/OpenAiAnswer"
+import { EOpenAiType } from "../../../../types/openai"
 export type AspectInfoProps = {
     aspect: IAstroAspect,
     perspective?: EAstroSigns | 'Ascident' | 'Meridian'
@@ -48,7 +50,7 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
         return SIGNS_SYMBOL_DATA[aspect.fastSign.name]
     }, [aspect])
     const getAspectDescription = () => {
-        const question = `Какие характеристики у астрологического аспекта ${sign1SymbolData?.openAiLabel || sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${sign2SymbolData?.openAiLabel || sign2SymbolData?.label}?`
+        const question = `Какие характеристики у астрологического аспекта ?`
         getDescription({ question })
         setShouldShowDetails(true)
     }
@@ -119,20 +121,22 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
                 </div>
             </Tooltip>
             <ShouldRender should={shouldShowDetails}>
-                <Modal onClose={() => setShouldShowDetails(false)}>
-                    <h2 className={styles.AspectDescriptionHeader}>
-                        <span>{sign1SymbolData?.label}</span>
-                        <span style={{margin: '0 5px'}}>{ASPECT_TYPE_LABELS?.[aspect.type]?.label}</span>
-                        <span>{sign2SymbolData?.label}</span>
-                    </h2>
-                    <div style={{color: 'black'}}>
-                        {AspectShortInfo}
-                    </div>
-                    <ShouldRender should={!details}>
-                        <p style={{ color: 'black' }}>Загрузка...</p>
-                    </ShouldRender>
-                    <p className={styles.AspectDescription} dangerouslySetInnerHTML={{ __html: formatOpenAiMessage(details) }}></p>
-                </Modal>
+                {() => (
+                    <Modal onClose={() => setShouldShowDetails(false)}>  
+                        <h2 className={styles.AspectDescriptionHeader}>
+                            <span>{sign1SymbolData?.label}</span>
+                            <span style={{margin: '0 5px'}}>{ASPECT_TYPE_LABELS?.[aspect.type]?.label}</span>
+                            <span>{sign2SymbolData?.label}</span>
+                        </h2>
+                        <div style={{color: 'black'}}>
+                            {AspectShortInfo}
+                        </div>
+                        <OpenAiAnswer
+                            question={`${sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${sign2SymbolData?.label}`}
+                            openAiType={EOpenAiType.ASPECT} />
+                    </Modal>
+                )}
+                
             </ShouldRender>
         </div>
     )

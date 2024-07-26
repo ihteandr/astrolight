@@ -79,7 +79,7 @@ export function HouseDescription ({ onClose, data, house }: HouseDescriptionProp
         })
     }, [house, data])
     const visibilityOptions = useMemo<INatalChartVisibilityOptions>(() => {
-        const signs = [...dominants.map((sign) => sign.name), ...houseSigns.map((sign) => sign.name)]
+        const signs = [...dominants, ...houseSigns].map((sign) => sign.name)
         const signsHouses: number[] = [...dominants.map((sign) => sign.house?.number || 0), ...houseSigns.map((sign) => sign.house?.number || 0)]
         return {
             houses: [house.number, house.oppositeHouseNumber, ...signsHouses.filter(Boolean)],
@@ -92,7 +92,7 @@ export function HouseDescription ({ onClose, data, house }: HouseDescriptionProp
         }
     }, [houseSigns, dominants, house, data])
     const leftBar = <div className={styles.HouseDescriptionLeftBar}>
-        <NatalChart data={data} size={500} visibilityOptions={visibilityOptions} />
+        <NatalChart data={data} hoverHightlight={false} size={500} visibilityOptions={visibilityOptions} />
     </div>
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>

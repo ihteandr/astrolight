@@ -19,9 +19,10 @@ export type SingProps = {
     onLeave?: (sign: ISign) => void,
     point: IPoint,
     highlight?: boolean,
+    hoverHightlight: boolean
 }
 
-export function Sign({ rotate, onClickSign, point, highlight, onHover, onLeave, signSize, sign, size }: SingProps) {
+export function Sign({ rotate, onClickSign, point, hoverHightlight, highlight, onHover, onLeave, signSize, sign, size }: SingProps) {
     const [hovered, setHovered] = useState(false)
     const outerRadius = size / 2;
     const innerRadius = outerRadius - size / 10;
@@ -55,7 +56,7 @@ export function Sign({ rotate, onClickSign, point, highlight, onHover, onLeave, 
                 className={clsx(
                     'sign-line-zodiac', sign.name, 
                     'element', symbolData?.elements[0] || 'NoElement',
-                    { [styles.SignHightlight]: highlight || hovered })} />
+                    { [styles.SignHightlight]: highlight || (hoverHightlight && hovered) })} />
             <line
                 {...PenProps}
                 x1={innerLinePoint1.x}
@@ -65,7 +66,7 @@ export function Sign({ rotate, onClickSign, point, highlight, onHover, onLeave, 
                 className={clsx(
                     'sign-line-zodiac', sign.name,
                      'element', symbolData?.elements[0] || 'NoElement',
-                     { [styles.SignHightlight]: highlight || hovered })} />
+                     { [styles.SignHightlight]: highlight || (hoverHightlight && hovered) })} />
             {isSvgIconExists(sign.name) ? 
                 <SignIcon
                 isRetro={sign.isRetro} 
@@ -80,7 +81,7 @@ export function Sign({ rotate, onClickSign, point, highlight, onHover, onLeave, 
                     'sign', sign.name, 
                     'element', symbolData?.elements[0] || 'NoElement',
                     styles.Sign, 
-                    {[styles.SignHightlight]: highlight})}/>
+                    {[styles.SignHightlight]: highlight || (hoverHightlight && hovered)})}/>
             :     <circle
                 onClick={ () => onClickSign?.(sign)}
                 onMouseLeave={handleLeave}

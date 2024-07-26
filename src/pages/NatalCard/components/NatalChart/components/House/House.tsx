@@ -9,9 +9,10 @@ export type HouseProps = {
     house: IHouse,
     onClick?: (house: IHouse) => void,
     rotate: number,
-    highlight?: boolean
+    highlight?: boolean,
+    hoverHightlight: boolean,
 }
-export function House ({ rotate, size, highlight, house, onClick }: HouseProps) {
+export function House ({ rotate, size, highlight, house, hoverHightlight, onClick }: HouseProps) {
     const [textHovered, setTextHouver] = useState(false)
     const outerRadius = size / 2;
     const innerRadius = outerRadius - size / 10;
@@ -59,8 +60,10 @@ export function House ({ rotate, size, highlight, house, onClick }: HouseProps) 
                 id={`house${house.number}`}
                 {...ThinPenProps}
                 fill="transparent"
+                onMouseOver={() => setTextHouver(true)}
+                onMouseLeave={() => setTextHouver(false)}
                 onClick={() => onClick?.(house) }
-                className={clsx(styles.House, { [styles.HouseOriginalHightlight]: highlight, [styles.HouseHightlight]: textHovered})} />
+                className={clsx(styles.House, { [styles.HouseOriginalHightlight]: highlight, [styles.HouseHightlight]: hoverHightlight && textHovered})} />
             <text
                 x={center.x - 6}
                 y={center.y + 5}

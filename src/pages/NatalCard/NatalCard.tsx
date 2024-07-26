@@ -16,12 +16,14 @@ import { AspectsDetails } from "./components/AspectsDetails/AspectsDetails";
 import { HouseDescription } from "./components/HouseDescription/HouseDescription";
 import { useParams } from "react-router-dom";
 import { decode, encode } from "js-base64";
-import { ISign } from "../../types/signs";
+import { EAstroZodiacSign, ISign } from "../../types/signs";
 import { SignDescription } from "./components/SignDescription/SIgnDescription";
+import { ZodiacDescription } from "./components/ZodiacDescription/ZodiacDescription";
 export default function NatalCard () {
     const [selectedHouse, setSelectedHouse] = useState<IHouse>()
     const [selectedSign, setSelectedSign] = useState<ISign>()
     const { request } = useParams()
+    const [selectedZodiac, setSelectedZodiac] = useState<EAstroZodiacSign>()
     const [parsedNatalCardData, setParsedNatalCardData] = useState<any>()
     
     const { mutate: fetchData, data } = useNatalCardData()
@@ -38,13 +40,14 @@ export default function NatalCard () {
     }, [data, setParsedNatalCardData])
     return (
         <div>
-            <h1>Natal Card</h1>
+            <h1>Натальная карта</h1>
             <div className={styles.NatalCardContent}>    
                  <ShouldRender should={!!parsedNatalCardData}>
                     <div className={styles.NatalCardDetails}>
                         <NatalChart
                             data={parsedNatalCardData}
                             size={500}
+                            onClickZodiac={setSelectedZodiac}
                             onClickHouse={setSelectedHouse}
                             onClickSign={setSelectedSign}></NatalChart>
                         <SignsDetails
@@ -69,6 +72,12 @@ export default function NatalCard () {
                         data={parsedNatalCardData}
                         onClose={() => setSelectedSign(undefined)}
                         sign={selectedSign as ISign}/>
+                </ShouldRender>
+                <ShouldRender should={!!selectedZodiac}>
+                    <ZodiacDescription
+                        data={parsedNatalCardData}
+                        onClose={() => setSelectedZodiac(undefined)}
+                        zodiac={selectedZodiac as EAstroZodiacSign}/>
                 </ShouldRender>
             </div>
         </div>

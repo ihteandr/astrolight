@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { EAstroSigns, ISign } from "../../../../types/signs"
+import { EAstroSigns, EAstroZodiacSign, ISign } from "../../../../types/signs"
 import { BoldPenProps, PenProps, ThinPenProps } from "../../../../utils/svg/ul-helpers";
 import { DateTimeValue } from "../../../../components/DateTime/DateTime";
 import { useCallback, useEffect, useState } from "react";
@@ -28,6 +28,7 @@ export interface INatalChartVisibilityOptions {
     aspects?: IAstroAspect[],
     highlightHouses?: number[],
     highlightSigns?: EAstroSigns[],
+    highlightZodiac?: EAstroZodiacSign[]
 }
 
 
@@ -35,11 +36,21 @@ export type NatalChartTypes = {
     size: number,
     onClickSign?: (sign: ISign) => void,
     onClickHouse?: (house: IHouse) => void,
+    onClickZodiac?: (zodiac: EAstroZodiacSign) => void 
     data?: any;
-    visibilityOptions?: INatalChartVisibilityOptions
+    visibilityOptions?: INatalChartVisibilityOptions,
+    hoverHightlight?: boolean
 }
 
-export function NatalChart ({ size, data, onClickHouse, visibilityOptions, onClickSign }: NatalChartTypes) {
+export function NatalChart ({
+    size,
+    data,
+    onClickZodiac,
+    onClickHouse,
+    visibilityOptions,
+    onClickSign,
+    hoverHightlight = true
+}: NatalChartTypes) {
     const signSize = 20
     const [signs, setSigns] = useState<ISign[]>([])
     const [houses, setHouses] = useState<IHouse[]>([])
@@ -102,12 +113,20 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, onCli
             onClickSign={onClickSign}
             point={getSignPostion(sign)}
             key={sign.name} 
+            hoverHightlight={hoverHightlight}
             highlight={visibilityOptions?.highlightSigns?.includes(sign.name)}
             signSize={signSize} />
     }
 
     const renderHouse = (house: IHouse) => {
-        return <House rotate={rotateDegree} highlight={visibilityOptions?.highlightHouses?.includes(house.number)} size={size} house={house} key={house.number} onClick={onClickHouse} />
+        return <House
+            rotate={rotateDegree}
+            highlight={visibilityOptions?.highlightHouses?.includes(house.number)}
+            size={size}
+            house={house}
+            hoverHightlight={hoverHightlight}
+            key={house.number}
+            onClick={onClickHouse} />
     }
 
     const renderAspect = (aspect: IAstroAspect) => {
@@ -148,7 +167,7 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, onCli
         return lines;
     }
     return (
-        <svg id="chart" height={size} onClick={(e) => e.stopPropagation()} width={size} xmlns="http://www.w3.org/2000/svg">
+        <svg id="chart" height={size} className={clsx({ [styles.DefaultCursor]: !hoverHightlight })} onClick={(e) => e.stopPropagation()} width={size} xmlns="http://www.w3.org/2000/svg">
             <g {...PenProps}>
                 <circle cx={center.x} cy={center.y} r={outerRadius}/>
                 <circle cx={center.x} cy={center.y} r={innerRadius}/>
@@ -158,7 +177,14 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, onCli
                 <circle cx={center.x} cy={center.y} r={internalSpace.innerRadius}/>
             </g>
             {Object.values(ZODIAC_SYMBOL_DATA).map((symbolData, index) => {
-                return <Zodiac rotate={rotateDegree} data={symbolData} key={index} size={size} />
+                return <Zodiac
+                    onClickZodiac={onClickZodiac}
+                    rotate={rotateDegree}
+                    data={symbolData}
+                    key={index}
+                    hoverHightlight={hoverHightlight}
+                    highlight={visibilityOptions?.highlightZodiac?.includes(symbolData.sign)}
+                    size={size} />
             })}
             {renderAscidental()}
             {houses.map(renderHouse)}

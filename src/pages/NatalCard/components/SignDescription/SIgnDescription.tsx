@@ -29,7 +29,7 @@ export function SignDescription ({ sign, data, onClose }: SignDescriptionProps) 
         }
     }, [sign, data])
     const leftBar = <div className={styles.SignDescriptionLeftBar}>
-        <NatalChart data={data} size={500} visibilityOptions={visibilityOptions} />
+        <NatalChart data={data} hoverHightlight={false} size={500} visibilityOptions={visibilityOptions} />
     </div>
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>

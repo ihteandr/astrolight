@@ -6,13 +6,17 @@ import { ZodiacSymbolDataType } from "../../../../../../data/zodiac/ZodiacData";
 import { ThinPenProps } from "../../../../../../utils/svg/ul-helpers";
 import { SvgIcon } from "../../../../../../atoms/Icon/SvgIcon";
 import { getPointOnChart } from "../../../../../../utils/math.utils";
+import { EAstroZodiacSign } from "../../../../../../types/signs";
 export type ZodiacProps = {
     size: number,
     data: ZodiacSymbolDataType,
     rotate: number,
+    hoverHightlight: boolean,
+    onClickZodiac?: (zodiac: EAstroZodiacSign) => void,
+    highlight?: boolean
 }
 
-export function Zodiac({ rotate, size, data }: ZodiacProps) {
+export function Zodiac({ onClickZodiac, hoverHightlight, highlight, rotate, size, data }: ZodiacProps) {
     const [hovered, setHovered] = useState(false)
     const iconSize = size / 20;
     const outerRadius = size / 2;
@@ -39,7 +43,7 @@ export function Zodiac({ rotate, size, data }: ZodiacProps) {
         A${innerRadius},${innerRadius} 0 0 1 ${startLinePoint1.x},${startLinePoint1.y}
         Z
         `
-    return <svg>
+    return <svg onClick={() => { onClickZodiac?.(data.sign) }}>
         {angles.map((angle, index) => {
             let radius1 = innerRadius;
             let radius2;
@@ -60,7 +64,9 @@ export function Zodiac({ rotate, size, data }: ZodiacProps) {
             id={`zodiac-${data.sign}`}
             {...ThinPenProps}
             fill="transparent"
-            className={clsx(styles.Zodiac, { [styles.ZodiacHightlight]: hovered})} />
+            onMouseLeave={() => setHovered(false)}
+            onMouseOver={() => setHovered(true)}
+            className={clsx(styles.Zodiac, { [styles.ZodiacOriginalHightlight]: highlight, [styles.ZodiacHightlight]: hoverHightlight && hovered})} />
         <SvgIcon
             size={iconSize}
             name={data.sign}
