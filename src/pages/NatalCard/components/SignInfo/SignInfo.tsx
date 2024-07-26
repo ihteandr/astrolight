@@ -13,10 +13,11 @@ export type SignInfoProps = {
     sign: ISign,
     withAspects?: boolean,
     withHouse?: boolean,
-    onClickSign?: (sign: ISign) => void 
+    onClickSign?: (sign: ISign) => void,
+    selectable?: boolean
 }
 
-export function SignInfo ({ sign, onClickSign, withAspects = false, withHouse = false }: SignInfoProps) {
+export function SignInfo ({ sign, onClickSign, selectable = false, withAspects = false, withHouse = false }: SignInfoProps) {
     const [shouldShowAspects, setShouldShowAspect] = useState(false)
     const signSymbolData = SIGNS_SYMBOL_DATA.find((symbolData) => symbolData.sign === sign.name)
     const toggleShowAspects = useCallback(() => {
@@ -26,7 +27,7 @@ export function SignInfo ({ sign, onClickSign, withAspects = false, withHouse = 
         <ShouldRender should={!!signSymbolData}>
             <div className={styles.SignInfo}>
                 <div className={styles.SignInfoName}>
-                    <div className={styles.SingSymbol} onClick={() => { onClickSign?.(sign) }}>
+                    <div className={clsx(styles.SingSymbol, { [styles.SignSelectable]: selectable })} onClick={() => { onClickSign?.(sign) }}>
                         <SignIcon
                             isRetro={sign.isRetro}
                             name={sign.name}

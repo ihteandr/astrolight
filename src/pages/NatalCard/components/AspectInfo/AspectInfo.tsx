@@ -95,7 +95,7 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
             
             <div className={styles.AspectTooltipRow}>
                 <span>Быстрая Символ: </span>
-                <span>{fastSignSymbolData?.label}</span>,
+                <span>{fastSignSymbolData?.label}</span>
             </div>
         </div>
     )

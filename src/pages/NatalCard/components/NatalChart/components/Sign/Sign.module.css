@@ -2,7 +2,7 @@
 .Sign {
     cursor: pointer;
 }
-.Sign:hover, .SignHightlith {
+.Sign:hover, .SignHightlight {
     color: var(--chartSignHoverColor)!important;
     z-index: 2;
 }

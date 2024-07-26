@@ -10,6 +10,13 @@
     display: inline-flex;
     margin-left: 8px;
 }
+.SignSelectable {
+    cursor: pointer;
+}
+
+.SignSelectable:hover {
+    color: var(--chartHoverColor);
+}
 .SingSymbol {
     width: 150px;
     display: inline-flex;

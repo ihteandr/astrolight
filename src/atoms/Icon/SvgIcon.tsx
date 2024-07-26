@@ -32,6 +32,7 @@ import { ReactComponent as VenusIcon } from '../../assets/icons/sings/venus.svg'
 import { ReactComponent as VestaIcon } from '../../assets/icons/sings/vesta.svg';
 import { ReactComponent as ProserpinaIcon } from '../../assets/icons/sings/proserpina.svg';
 import { ReactComponent as LilithIcon } from '../../assets/icons/sings/lilith.svg';
+import { ReactComponent as FortureIcon } from '../../assets/icons/sings/fortune.svg';
 
 //UI 
 import { ReactComponent as InfoIcon } from '../../assets/icons/ui/info.svg'
@@ -73,6 +74,7 @@ const IconsMap: any = {
     Vesta: VestaIcon,
     Proserpina: ProserpinaIcon,
     Lilith: LilithIcon,
+    ParsFortune: FortureIcon,
 
     //UI
     Info: InfoIcon

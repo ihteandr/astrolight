@@ -38,24 +38,18 @@ export function NatalCardForm () {
     }, [place, setAstroPlace, setRealPlace])
     const submitRequest = useCallback(() => {
         if (astroPlace && selectedDate) {
-            const pdate = parseDateTimeValue(selectedDate as DateTimeValue)
-            console.log('pdate', pdate, astroPlace)
+            const pdate = parseDateTimeValue(selectedDate as DateTimeValue) 
             googleTimezoneApi.data(
                 astroPlace?.latitude,
                 astroPlace?.longitude,
                 pdate.valueOf() / 1000,
                  (err: any, res:any) => {
-                    console.log('res', res)
-                    console.log('valueOf', pdate.valueOf(), res.raw_response, res.raw_response.rawOffset)
-                    const utcDate = moment(pdate.valueOf()- res.raw_response.rawOffset * 1000)
-                    console.log('utcDate', utcDate)
-                    const dateTimeValue = momentDateToDateTimeValue(utcDate)
-                    console.log('dateTimevLue', dateTimeValue)
-                    setRealDate(dateTimeValue)
                     const request = encode(JSON.stringify({
-                        ...dateTimeValue,
-                        ...astroPlace
-                    }))    
+                        ...selectedDate,
+                        ...astroPlace,
+                        timezone: res.raw_response.rawOffset
+                    }))
+                        
                     navigate(`/natal-card/${request}`)
                 })    
         }

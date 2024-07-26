@@ -87,7 +87,7 @@ export function HouseDescription ({ onClose, data, house }: HouseDescriptionProp
                     return aspect.isContainsSign(signName) && aspect.majority === EAspectMajority.MAJOR
                 })
             }),
-            hightlightHouses: [house.number]
+            highlightHouses: [house.number]
         }
     }, [houseSigns, dominants, house, data])
     const leftBar = <div className={styles.HouseDescriptionLeftBar}>

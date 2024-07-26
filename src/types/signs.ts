@@ -18,7 +18,8 @@ export enum EAstroSigns {
     PROSERPINA = 'Proserpina',
     CERES = 'Ceres',
     JUNO = 'Juno',
-    DOWN_NODE = 'DownNode'
+    DOWN_NODE = 'DownNode',
+    PARS_FORTUNE = 'ParsFortune'
 }
 
 export enum EAstroZodiacSign {
@@ -51,6 +52,12 @@ export enum ECrossSign {
     MUTABLE = 'mutable',
     FIXED = 'fixed'
 }
+
+export enum ESingType {
+    GENERAL = 'GENERAL',
+    PARS = 'PARS'
+}
+
 export interface ISign {
     isRetro: boolean,
     name: EAstroSigns,
@@ -66,5 +73,8 @@ export interface ISign {
     distanceSpeed: number,
     rflag: number,
     aspects: IAstroAspect[],
-    house?: IHouse
+    house?: IHouse,
+    type: ESingType
 }
+
+

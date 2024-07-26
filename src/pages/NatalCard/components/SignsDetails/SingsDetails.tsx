@@ -27,7 +27,7 @@ export function SignsDetails ({ data, onClickSign }: SignsDetailsType) {
         <div className={styles.SignsDetails}>
             {signs.map((sign) => {
                 return (
-                    <SignInfo key={sign.name} onClickSign={onClickSign} sign={sign} withHouse={true} />
+                    <SignInfo key={sign.name} selectable={true} onClickSign={onClickSign} sign={sign} withHouse={true} />
                 )           
             })}
         </div>

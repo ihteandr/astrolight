@@ -26,7 +26,8 @@ export interface INatalChartVisibilityOptions {
     signs?: EAstroSigns[],
     houses?: number[],
     aspects?: IAstroAspect[],
-    hightlightHouses?: number[]
+    highlightHouses?: number[],
+    highlightSigns?: EAstroSigns[],
 }
 
 
@@ -101,11 +102,12 @@ export function NatalChart ({ size, data, onClickHouse, visibilityOptions, onCli
             onClickSign={onClickSign}
             point={getSignPostion(sign)}
             key={sign.name} 
+            highlight={visibilityOptions?.highlightSigns?.includes(sign.name)}
             signSize={signSize} />
     }
 
     const renderHouse = (house: IHouse) => {
-        return <House rotate={rotateDegree} highlight={visibilityOptions?.hightlightHouses?.includes(house.number)} size={size} house={house} key={house.number} onClick={onClickHouse} />
+        return <House rotate={rotateDegree} highlight={visibilityOptions?.highlightHouses?.includes(house.number)} size={size} house={house} key={house.number} onClick={onClickHouse} />
     }
 
     const renderAspect = (aspect: IAstroAspect) => {

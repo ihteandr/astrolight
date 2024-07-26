@@ -113,5 +113,11 @@ export const SIGNS_SYMBOL_DATA:SignSymbolDataType[] = [
         label: 'Юнона',
         elements: [],
         direction: EAstroDirection.NETRAL
+    },
+    {
+        sign: EAstroSigns.PARS_FORTUNE,
+        label: 'Фортуна',
+        elements: [],
+        direction: EAstroDirection.NETRAL
     }
 ]

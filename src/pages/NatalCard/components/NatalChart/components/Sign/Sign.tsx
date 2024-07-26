@@ -17,10 +17,11 @@ export type SingProps = {
     rotate: number,
     onHover?: (sign: ISign) => void,
     onLeave?: (sign: ISign) => void,
-    point: IPoint
+    point: IPoint,
+    highlight?: boolean,
 }
 
-export function Sign({ rotate, onClickSign, point, onHover, onLeave, signSize, sign, size }: SingProps) {
+export function Sign({ rotate, onClickSign, point, highlight, onHover, onLeave, signSize, sign, size }: SingProps) {
     const [hovered, setHovered] = useState(false)
     const outerRadius = size / 2;
     const innerRadius = outerRadius - size / 10;
@@ -54,7 +55,7 @@ export function Sign({ rotate, onClickSign, point, onHover, onLeave, signSize, s
                 className={clsx(
                     'sign-line-zodiac', sign.name, 
                     'element', symbolData?.elements[0] || 'NoElement',
-                    { [styles.SignHightlith]: hovered })} />
+                    { [styles.SignHightlight]: highlight || hovered })} />
             <line
                 {...PenProps}
                 x1={innerLinePoint1.x}
@@ -64,7 +65,7 @@ export function Sign({ rotate, onClickSign, point, onHover, onLeave, signSize, s
                 className={clsx(
                     'sign-line-zodiac', sign.name,
                      'element', symbolData?.elements[0] || 'NoElement',
-                     { [styles.SignHightlith]: hovered })} />
+                     { [styles.SignHightlight]: highlight || hovered })} />
             {isSvgIconExists(sign.name) ? 
                 <SignIcon
                 isRetro={sign.isRetro} 
@@ -78,7 +79,8 @@ export function Sign({ rotate, onClickSign, point, onHover, onLeave, signSize, s
                 className={clsx(
                     'sign', sign.name, 
                     'element', symbolData?.elements[0] || 'NoElement',
-                    styles.Sign)}/>
+                    styles.Sign, 
+                    {[styles.SignHightlight]: highlight})}/>
             :     <circle
                 onClick={ () => onClickSign?.(sign)}
                 onMouseLeave={handleLeave}
