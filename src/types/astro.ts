@@ -52,7 +52,8 @@ export enum EAspectMajority {
 }
 export interface IAstroPlace {
     latitude: number,
-    longitude: number
+    longitude: number,
+    place: string
 }
 export interface IAstroSign {
     astroSign: EAstroSigns,

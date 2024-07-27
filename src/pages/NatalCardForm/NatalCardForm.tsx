@@ -31,7 +31,8 @@ export function NatalCardForm () {
             const pos = placeData[0].location
             setAstroPlace({
                 latitude: pos.lat,
-                longitude: pos.lng
+                longitude: pos.lng,
+                place: placeData[0].formatted_address
             })
             setRealPlace(placeData[0].formatted_address)
         }
