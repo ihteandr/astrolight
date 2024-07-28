@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { SideModal } from "../../../../components/SideModal/SideModal"
 import { SIGNS_SYMBOL_DATA } from "../../../../data/sings-data/SignsData"
-import { ISign } from "../../../../types/signs"
+import { EAstroZodiacSign, ISign } from "../../../../types/signs"
 import { INatalChartVisibilityOptions, NatalChart } from "../NatalChart/NatalChart"
 import { SignInfo } from "../SignInfo/SignInfo"
 import styles from './SignDescription.module.css'
@@ -14,14 +14,17 @@ import { EOpenAiType } from "../../../../types/openai"
 export type SignDescriptionProps = {
     data?: any;
     sign: ISign,
-    onClose: () => void
+    onClose: () => void,
+    onClickZodiac?: (zodiac: EAstroZodiacSign) => void,
+    onClickHouse?: (house: IHouse) => void,
+    onClickSign?: (sign: ISign) => void,
 }
 
-export function SignDescription ({ sign, data, onClose }: SignDescriptionProps) {
+export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onClickSign, onClose }: SignDescriptionProps) {
     const signSymbolData = SIGNS_SYMBOL_DATA[sign.name]
     const visibilityOptions = useMemo<INatalChartVisibilityOptions>(() => {
         return {
-            houses: sign.house ? [sign.house.number] : [],
+            // houses: sign.house ? [sign.house.number] : [],
             highlightSigns: [sign.name],
             aspects: data.aspects.filter((aspect: IAstroAspect) => {
                 return aspect.isContainsSign(sign.name)
@@ -29,7 +32,13 @@ export function SignDescription ({ sign, data, onClose }: SignDescriptionProps) 
         }
     }, [sign, data])
     const leftBar = <div className={styles.SignDescriptionLeftBar}>
-        <NatalChart data={data} hoverHightlight={false} size={500} visibilityOptions={visibilityOptions} />
+        <NatalChart
+            data={data}
+            size={500}
+            onClickHouse={onClickHouse}
+            onClickSign={onClickSign}
+            onClickZodiac={onClickZodiac}
+            visibilityOptions={visibilityOptions} />
     </div>
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>

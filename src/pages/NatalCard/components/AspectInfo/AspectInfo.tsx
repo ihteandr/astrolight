@@ -20,8 +20,6 @@ export type AspectInfoProps = {
 
 export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
     const [shouldShowDetails, setShouldShowDetails] = useState(false);
-    const { mutate: getDescription, data: descriptionData } = useOpenaiAspectQuestion()
-    const [details, setDetails] = useState('');
     const sign1 = useMemo(() => {
         return perspective ? aspect.sign1.name === perspective ? aspect.sign1 : aspect.sign2 : aspect.sign1
     }, [aspect, perspective])
@@ -50,8 +48,6 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
         return SIGNS_SYMBOL_DATA[aspect.fastSign.name]
     }, [aspect])
     const getAspectDescription = () => {
-        const question = `Какие характеристики у астрологического аспекта ?`
-        getDescription({ question })
         setShouldShowDetails(true)
     }
     
@@ -101,11 +97,6 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
             </div>
         </div>
     )
-    useEffect(() => {
-        if (shouldShowDetails && descriptionData) {
-            setDetails(JSON.stringify(descriptionData))
-        }
-    }, [descriptionData, setDetails, shouldShowDetails])
     return (
         <div className={clsx(styles.AspectInfo, 'aspect', aspect.action.toLocaleLowerCase())} >
             <span onClick={getAspectDescription} className={styles.AspectInfoName}>
@@ -113,7 +104,7 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
                 <span className={styles.AspectInfoType}>{ASPECT_TYPE_LABELS?.[aspect.type]?.label}</span>
                 <span className={styles.AspectInfoSign}>{sign2SymbolData?.label}</span>
             </span>
-            <SvgIcon name="Info" size={16} className={clsx(styles.AspectInfoIcon, `AspectInfoIcon${key}`)}/>
+            <SvgIcon name="Question" size={16} className={clsx(styles.AspectInfoIcon, `AspectInfoIcon${key}`)}/>
             
             <Tooltip anchorSelect={`.AspectInfoIcon${key}`}> 
                 <div style={{color: 'white'}}>

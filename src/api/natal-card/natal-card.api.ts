@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { API_URL } from "../urls";
 
@@ -9,14 +9,15 @@ export type NatalCardDataParams = {
     hour?: number,
     minute?: number,
     longitude: number,
-    latitude: number
+    latitude: number,
+    place: string
 }
 
-export function useNatalCardData () {
-    return useMutation({
-        mutationKey: ['natal-card-data'],
-        mutationFn: (data: NatalCardDataParams) => {
-            return axios.post(`${API_URL}/western/data`, data).then(res => res.data)
+export function useNatalCardData (query: NatalCardDataParams) {
+    return useQuery({
+        queryKey: ['natal-card-data'],
+        queryFn: () => {
+            return axios.post(`${API_URL}/western/data`, query).then(res => res.data)
         }
     })
 }

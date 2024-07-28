@@ -36,6 +36,7 @@ import { ReactComponent as FortureIcon } from '../../assets/icons/sings/fortune.
 
 //UI 
 import { ReactComponent as InfoIcon } from '../../assets/icons/ui/info.svg'
+import { ReactComponent as QuestionIcon } from '../../assets/icons/ui/question.svg'
 
 
 
@@ -77,7 +78,8 @@ const IconsMap: any = {
     ParsFortune: FortureIcon,
 
     //UI
-    Info: InfoIcon
+    Info: InfoIcon,
+    Question: QuestionIcon
 }
 
 export function isSvgIconExists (name: string) {
@@ -97,7 +99,7 @@ export type IconProps = {
     id?: string
 }
 
-export function SvgIcon ({ x, y, id, className, style, name, size, onClick, onMouseLeave, onMouseOver }: IconProps) {
+export function SvgIcon ({ x, y, id, className, style, name = 'none', size, onClick, onMouseLeave, onMouseOver }: IconProps) {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" id={id} x={x} y={y} width={size} height={size} className={className}>
             {createElement(IconsMap[name], {

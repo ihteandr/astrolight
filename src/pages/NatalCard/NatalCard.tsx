@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { DateTime, DateTimeValue } from "../../components/DateTime/DateTime";
 import { NatalChart } from "./components/NatalChart/NatalChart";
 import styles from './NatalCard.module.css';
@@ -19,37 +19,54 @@ import { decode, encode } from "js-base64";
 import { EAstroZodiacSign, ISign } from "../../types/signs";
 import { SignDescription } from "./components/SignDescription/SIgnDescription";
 import { ZodiacDescription } from "./components/ZodiacDescription/ZodiacDescription";
+import { PersonDetails } from "./components/PersonDetails/PersonDetails";
 export default function NatalCard () {
     const [selectedHouse, setSelectedHouse] = useState<IHouse>()
     const [selectedSign, setSelectedSign] = useState<ISign>()
     const { request } = useParams()
     const [selectedZodiac, setSelectedZodiac] = useState<EAstroZodiacSign>()
     const [parsedNatalCardData, setParsedNatalCardData] = useState<any>()
+    const { data } = useNatalCardData(JSON.parse(decode(request as string)))
     
-    const { mutate: fetchData, data } = useNatalCardData()
-    useEffect(() => {
-        if (request) {
-            const requestData = JSON.parse(decode(request as string))
-            fetchData(requestData)
-        }
-    }, [request])
     useEffect(() => {
         if (data) {
             setParsedNatalCardData(parseNatalCardData(data))
         }
     }, [data, setParsedNatalCardData])
+    const resetSelected = useCallback(() => {
+        setSelectedHouse(undefined);
+        setSelectedSign(undefined);
+        setSelectedZodiac(undefined);
+    }, [setSelectedHouse, setSelectedSign, setSelectedZodiac])
+    const selectZodiac = useCallback((zodiac: EAstroZodiacSign) => {
+        resetSelected()
+        setSelectedZodiac(zodiac)
+    }, [resetSelected, setSelectedZodiac])
+
+    const selectSign = useCallback((sign: ISign) => {
+        resetSelected()
+        setSelectedSign(sign)
+    }, [resetSelected, setSelectedSign])
+
+    const selectHouse = useCallback((house: IHouse) => {
+        resetSelected()
+        setSelectedHouse(house)
+    }, [resetSelected, setSelectedHouse])
     return (
         <div>
             <h1>Натальная карта</h1>
             <div className={styles.NatalCardContent}>    
                  <ShouldRender should={!!parsedNatalCardData}>
                     <div className={styles.NatalCardDetails}>
-                        <NatalChart
-                            data={parsedNatalCardData}
-                            size={500}
-                            onClickZodiac={setSelectedZodiac}
-                            onClickHouse={setSelectedHouse}
-                            onClickSign={setSelectedSign}></NatalChart>
+                        <div>
+                            <PersonDetails data={parsedNatalCardData} />
+                            <NatalChart
+                                data={parsedNatalCardData}
+                                size={500}
+                                onClickZodiac={selectZodiac}
+                                onClickHouse={selectHouse}
+                                onClickSign={selectSign}></NatalChart>
+                        </div>
                         <SignsDetails
                             onClickSign={setSelectedSign}
                             data={parsedNatalCardData}/>
@@ -62,19 +79,31 @@ export default function NatalCard () {
                 </ShouldRender>
                 <ShouldRender should={!!selectedHouse}>
                     <HouseDescription
+                        key={selectedHouse?.number}
                         data={parsedNatalCardData}
+                        onClickZodiac={selectZodiac}
+                        onClickHouse={selectHouse}
+                        onClickSign={selectSign}
                         onClose={() => setSelectedHouse(undefined)}
                         house={selectedHouse as IHouse}/>
                 </ShouldRender>
 
                 <ShouldRender should={!!selectedSign}>
                     <SignDescription
+                        key={selectedSign?.name}
+                        onClickZodiac={selectZodiac}
+                        onClickHouse={selectHouse}
+                        onClickSign={selectSign}
                         data={parsedNatalCardData}
                         onClose={() => setSelectedSign(undefined)}
                         sign={selectedSign as ISign}/>
                 </ShouldRender>
                 <ShouldRender should={!!selectedZodiac}>
                     <ZodiacDescription
+                        key={selectedZodiac}
+                        onClickZodiac={selectZodiac}
+                        onClickHouse={selectHouse}
+                        onClickSign={selectSign}
                         data={parsedNatalCardData}
                         onClose={() => setSelectedZodiac(undefined)}
                         zodiac={selectedZodiac as EAstroZodiacSign}/>

@@ -22,7 +22,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+.element {
+  color: black;
+}
 .element.fire {
   color: var(--fireColor);
 }

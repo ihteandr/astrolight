@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { DateTime, DateTimeValue } from '../../components/DateTime/DateTime'
 import { googleTimezoneApi } from '../../utils/apis/google-timezone'
 import styles from './NatalCardForm.module.css'
@@ -18,6 +18,16 @@ export function NatalCardForm () {
         minute: 50
     })
     const navigate = useNavigate()
+    const [system, setSystem] = useState('K')
+    const avaialbelSystems = useMemo(() => {
+        return [{
+            label: 'Кох',
+            value: 'K'
+        }, {
+            label: 'Плацедус',
+            value: 'P'
+        }]
+    }, [])
     const [realDate, setRealDate] = useState<DateTimeValue>()
     const [place, setPlace] = useState('')
     const [astroPlace, setAstroPlace] = useState<IAstroPlace>()
@@ -26,7 +36,6 @@ export function NatalCardForm () {
     const checkPlace = useCallback(async () => {
         setRealPlace('')
         const placeData: any[] = await findPlace(place)
-        console.log('placeData', placeData)
         if (placeData && placeData[0]) {
             const pos = placeData[0].location
             setAstroPlace({
@@ -48,13 +57,14 @@ export function NatalCardForm () {
                     const request = encode(JSON.stringify({
                         ...selectedDate,
                         ...astroPlace,
-                        timezone: res.raw_response.rawOffset
+                        timezone: res.raw_response.rawOffset,
+                        system
                     }))
                         
                     navigate(`/natal-card/${request}`)
                 })    
         }
-    }, [selectedDate, astroPlace, navigate, setRealDate])
+    }, [selectedDate, astroPlace, navigate, setRealDate, system])
 
     return (
         <div className={styles.NatalCardForm}>
@@ -64,6 +74,13 @@ export function NatalCardForm () {
                     <input onInput={(e) => setPlace(e.currentTarget.value)}/>
                     <button onClick={checkPlace}>Check</button>
                     <span>{realPlace}</span>
+                </div>
+                <div>
+                    <select defaultValue={system} onChange={(e) => setSystem(e.target.value)}>
+                        {avaialbelSystems.map((item) => (
+                            <option value={item.value} key={item.value}>{item.label}</option>
+                        ))}
+                    </select>
                 </div>
                 <button onClick={submitRequest}>Посчитать</button>
             </div>

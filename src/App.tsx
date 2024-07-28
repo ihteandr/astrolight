@@ -21,9 +21,10 @@ function App() {
         <BrowserRouter>
           <Header/>
           <Routes>
+            <Route path="/" Component={NatalCardForm}></Route>
             <Route path="/natal-card-form" Component={NatalCardForm}></Route>
             <Route path="/natal-card/:request" Component={NatalCard}></Route>
-            <Route path="/about" Component={AboutPage}></Route>
+            <Route path="/about" Component={AboutPage}></Route>  
           </Routes>
           <div id="info-modal"></div>
           <div id="modal-root"></div>

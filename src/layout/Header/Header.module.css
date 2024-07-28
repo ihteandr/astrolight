@@ -1,11 +1,18 @@
 .Header {
     display: flex;
     padding: 12px 24px;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
     width: 100%;
     border: 1px solid black;
     
+}
+.HeaderLeftBar {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: flex-start;
 }
 .HeaderRightBar {
     display: flex;

@@ -1,0 +1,11 @@
+.PersonDetails {
+
+}
+.PersonDetailsRow {
+    display: flex;
+    align-items: center;
+}
+.RowLabel {
+    width: 250px;
+    display: flex;
+}

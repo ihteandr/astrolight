@@ -5,15 +5,18 @@ import styles from './ZodiacDescription.module.css'
 import { ZODIAC_SYMBOL_DATA } from '../../../../data/zodiac/ZodiacData';
 import { SignInfo } from '../SignInfo/SignInfo';
 import { INatalChartVisibilityOptions, NatalChart } from '../NatalChart/NatalChart';
-import { EAspectMajority, IAstroAspect } from '../../../../types/astro';
+import { EAspectMajority, IAstroAspect, IHouse } from '../../../../types/astro';
 
 export type ZodiacDescriptionProps = {
     zodiac: EAstroZodiacSign,
     onClose: () => void,
     data: any;
+    onClickZodiac?: (zodiac: EAstroZodiacSign) => void,
+    onClickHouse?: (house: IHouse) => void,
+    onClickSign?: (sign: ISign) => void,
 }
 
-export function ZodiacDescription ({ zodiac, data, onClose }: ZodiacDescriptionProps) {
+export function ZodiacDescription ({ zodiac, data, onClickZodiac, onClickHouse, onClickSign, onClose }: ZodiacDescriptionProps) {
     const zodiacSigns = useMemo<ISign[]>(() => {
         return data.signs.filter((sign: ISign) => {
             return sign.zodiac === zodiac
@@ -81,7 +84,7 @@ export function ZodiacDescription ({ zodiac, data, onClose }: ZodiacDescriptionP
     const visibilityOptions = useMemo<INatalChartVisibilityOptions>(() => {
         const signs = [...executives, ...exaltations, ...exils, ...phalluses].map((sign) => sign.name)
         return {
-            houses: [],
+            // houses: [],
             aspects: data.aspects.filter((aspect: IAstroAspect) => {
                 return signs.find((signName: EAstroSigns) => {
                     return aspect.isContainsSign(signName) && aspect.majority === EAspectMajority.MAJOR
@@ -92,7 +95,13 @@ export function ZodiacDescription ({ zodiac, data, onClose }: ZodiacDescriptionP
         }
     }, [executives, exaltations, exils, phalluses, data])
     const leftBar = <div className={styles.ZodiacDescriptionLeftBar}>
-        <NatalChart data={data} hoverHightlight={false} size={500} visibilityOptions={visibilityOptions} />
+        <NatalChart
+            onClickHouse={onClickHouse}
+            onClickSign={onClickSign}
+            onClickZodiac={onClickZodiac}
+            data={data}
+            size={500}
+            visibilityOptions={visibilityOptions} />
     </div>
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>

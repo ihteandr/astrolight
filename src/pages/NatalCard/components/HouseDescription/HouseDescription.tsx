@@ -3,7 +3,7 @@ import { SideModal } from "../../../../components/SideModal/SideModal"
 import { EAspectMajority, EAstroAspectType, IAstroAspect, IAstroSign, IHouse } from "../../../../types/astro"
 import { SignInfo } from "../SignInfo/SignInfo"
 import styles from './HouseDescription.module.css'
-import { EAstroSigns, ISign } from "../../../../types/signs"
+import { EAstroSigns, EAstroZodiacSign, ISign } from "../../../../types/signs"
 import { ZODIAC_SYMBOL_DATA } from "../../../../data/zodiac/ZodiacData"
 import { ZoneInfo } from "../ZoneInfo/ZoneInfo"
 import { HOUSES_BELONGS_DICTIONARY, HOUSES_DATA, HOUSES_AXIE_DICTIONARY, HOUSES_CROSS_DICTIONARY, HOUSE_SQUARE_DICTIONARY, HUOSES_ELEMENT_DICTIONARY } from "../../../../data/houses/HousesData"
@@ -15,10 +15,13 @@ import { EOpenAiType } from "../../../../types/openai"
 export type HouseDescriptionProps = {
     house: IHouse,
     data: any,
-    onClose: () => void
+    onClose: () => void,
+    onClickZodiac?: (zodiac: EAstroZodiacSign) => void,
+    onClickHouse?: (house: IHouse) => void,
+    onClickSign?: (sign: ISign) => void,
 }
 
-export function HouseDescription ({ onClose, data, house }: HouseDescriptionProps) {
+export function HouseDescription ({ onClickZodiac, onClickHouse, onClickSign, onClose, data, house }: HouseDescriptionProps) {
     const dominants = useMemo<ISign[]>(() => {
         const houseDominantsInfo = house.dominants;
         return houseDominantsInfo.map((dominantInfo) => {
@@ -82,7 +85,7 @@ export function HouseDescription ({ onClose, data, house }: HouseDescriptionProp
         const signs = [...dominants, ...houseSigns].map((sign) => sign.name)
         const signsHouses: number[] = [...dominants.map((sign) => sign.house?.number || 0), ...houseSigns.map((sign) => sign.house?.number || 0)]
         return {
-            houses: [house.number, house.oppositeHouseNumber, ...signsHouses.filter(Boolean)],
+            // houses: [house.number, house.oppositeHouseNumber, ...signsHouses.filter(Boolean)],
             aspects: data.aspects.filter((aspect: IAstroAspect) => {
                 return signs.find((signName: EAstroSigns) => {
                     return aspect.isContainsSign(signName) && aspect.majority === EAspectMajority.MAJOR
@@ -92,8 +95,15 @@ export function HouseDescription ({ onClose, data, house }: HouseDescriptionProp
         }
     }, [houseSigns, dominants, house, data])
     const leftBar = <div className={styles.HouseDescriptionLeftBar}>
-        <NatalChart data={data} hoverHightlight={false} size={500} visibilityOptions={visibilityOptions} />
+        <NatalChart
+            onClickHouse={onClickHouse}
+            onClickSign={onClickSign}
+            onClickZodiac={onClickZodiac}
+            data={data}
+            size={500}
+            visibilityOptions={visibilityOptions} />
     </div>
+    
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>
             <div className={styles.HouseDescription}>

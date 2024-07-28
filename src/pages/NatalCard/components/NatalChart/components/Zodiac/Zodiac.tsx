@@ -73,7 +73,6 @@ export function Zodiac({ onClickZodiac, hoverHightlight, highlight, rotate, size
             x={coords.x}
             y={coords.y}
             style={{ cursor: 'pointer' }}
-            onClick={() => console.log(data)}
             onMouseLeave={() => setHovered(false)}
             onMouseOver={() => setHovered(true)}
             className={clsx('element', data.element)} 

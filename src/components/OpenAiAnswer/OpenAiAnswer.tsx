@@ -46,6 +46,7 @@ export function OpenAiAnswer ({ question, openAiType }: OpenAiAnswerProps) {
                     break;
                 case EOpenAiType.ASPECT:
                     getAspectAnswer({ question: fullQuestion }).then(setMessage)
+                    break;
             }
         }
     }, [fullQuestion, setMessage])

@@ -62,7 +62,6 @@ export function NatalChart ({
     }
     useEffect(() => {
         if (data) {
-            console.log('data', data)
             Storage.add('natal-card-data', data, 'local')
             setSigns(sortBy(data.signs.filter((sign: ISign) => {
                 return visibilityOptions && visibilityOptions.signs ? visibilityOptions.signs.includes(sign.name) : true

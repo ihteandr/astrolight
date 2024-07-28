@@ -38,7 +38,7 @@ export function InfoItem ({ explanation, type = 'tooltip', openAiType, additiona
                             <SvgIcon name="Info" onClick={() => setShouldSHowInfo(true)} size={16} className={clsx(styles.InfoItemIcon, styles.InfoItemModalIcon)}/>
                         </ShouldRender>
                         <ShouldRender should={type === 'tooltip'}>
-                            <SvgIcon name="Info" size={16} className={clsx(styles.InfoItemIcon, `InfoItemTooltipIcon${key}`)}/>
+                            <SvgIcon name="Question" size={16} className={clsx(styles.InfoItemIcon, `InfoItemTooltipIcon${key}`)}/>
                             <Tooltip className={styles.InfoItemTooltip} anchorSelect={`.InfoItemTooltipIcon${key}`}>
                                 <p className={styles.InfoItemDescription} dangerouslySetInnerHTML={{ __html: description }} />
                             </Tooltip>
