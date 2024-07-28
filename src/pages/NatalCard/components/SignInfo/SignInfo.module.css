@@ -3,6 +3,14 @@
     flex-direction: column;
     margin: 5px 0;
 }
+.SignInfoInline {
+    display: inline-flex!important;
+}
+.SignInfoInline .SingSymbol {
+    white-space: nowrap;
+    margin-right: 5px;
+    width: auto;
+}
 .SignInfoName {
     display: inline-flex;
 }

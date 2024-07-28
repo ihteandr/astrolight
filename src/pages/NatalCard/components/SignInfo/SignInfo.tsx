@@ -14,10 +14,12 @@ export type SignInfoProps = {
     withAspects?: boolean,
     withHouse?: boolean,
     onClickSign?: (sign: ISign) => void,
-    selectable?: boolean
+    selectable?: boolean,
+    type?: 'line' | 'inline',
+    withZone?: boolean,
 }
 
-export function SignInfo ({ sign, onClickSign, selectable = false, withAspects = false, withHouse = false }: SignInfoProps) {
+export function SignInfo ({ type = 'line', sign, onClickSign, selectable = false, withZone=true, withAspects = false, withHouse = false }: SignInfoProps) {
     const [shouldShowAspects, setShouldShowAspect] = useState(false)
     const signSymbolData = SIGNS_SYMBOL_DATA[sign.name]
     const toggleShowAspects = useCallback(() => {
@@ -25,7 +27,7 @@ export function SignInfo ({ sign, onClickSign, selectable = false, withAspects =
     }, [setShouldShowAspect])
     return (
         <ShouldRender should={!!signSymbolData}>
-            <div className={styles.SignInfo}>
+            <div className={clsx(styles.SignInfo, { [styles.SignInfoInline]: type === 'inline' })}>
                 <div className={styles.SignInfoName}>
                     <div className={clsx(styles.SingSymbol, { [styles.SignSelectable]: selectable })} onClick={() => { onClickSign?.(sign) }}>
                         <SignIcon
@@ -36,7 +38,9 @@ export function SignInfo ({ sign, onClickSign, selectable = false, withAspects =
                             />
                             <span className={clsx(styles.SingName, 'sign-label', sign.name)}>{signSymbolData?.label}</span>
                     </div>
-                    <ZoneInfo zone={sign.zodiacZone} zodiac={sign.zodiac}/>
+                    <ShouldRender should={withZone}>
+                        <ZoneInfo zone={sign.zodiacZone} zodiac={sign.zodiac}/>
+                    </ShouldRender>
                     <ShouldRender should={withHouse && !!sign.house}>
                         <span className={styles.SignHouseLabel}>Дом {sign.house?.label}</span>
                     </ShouldRender>

@@ -22,6 +22,23 @@ export type SignDescriptionProps = {
 
 export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onClickSign, onClose }: SignDescriptionProps) {
     const signSymbolData = SIGNS_SYMBOL_DATA[sign.name]
+    const dimicilInHouses = useMemo<{ sign: ISign, house: IHouse }[]>(() => {
+        return data.houses.positions.filter((house: IHouse) => {
+            return !!house.dominants.find((dominant) => {
+                return dominant.astroSign === sign.name
+            })
+        }).map((house: IHouse) => {
+            return {
+                house,
+                sign: {
+                    ...sign,
+                    isRetro: house.dominants.find((dominant) => {
+                        return dominant.astroSign === sign.name
+                    })?.isRetro
+                }
+            }
+        })
+    }, [sign, data])
     const visibilityOptions = useMemo<INatalChartVisibilityOptions>(() => {
         return {
             // houses: sign.house ? [sign.house.number] : [],
@@ -43,7 +60,20 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>
             <h2>{signSymbolData?.label}</h2>
-            <SignInfo sign={sign} withAspects={true} withHouse={true} />  
+            <SignInfo sign={sign} withAspects={true} withHouse={true} /> 
+            <ShouldRender should={dimicilInHouses.length > 0}>
+                {() => (
+                    <>
+                        <h5>Доминант в Домах</h5>
+                        {dimicilInHouses.map((item) => (
+                            <p style={{ display: 'flex', alignItems: 'center' }}>
+                                <SignInfo type="inline" sign={item.sign} withZone={false} withHouse={false} withAspects={false} />
+                                доминант в доме {item.house.label}
+                            </p> 
+                        ))}
+                    </>
+                )}
+            </ShouldRender>
             <h5>Интерпретации</h5>
             <div>
                 <InfoItem
