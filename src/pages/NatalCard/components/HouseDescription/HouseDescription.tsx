@@ -129,7 +129,6 @@ export function HouseDescription ({ onClickZodiac, onClickHouse, onClickSign, on
                     <h5 style={{ textAlign: 'left' }}>Интерпретации</h5>
                     <div className={'flex gap flex-column'}>
                         <InfoItem
-                            withElaboration={true}
                             openAiType={EOpenAiType.INTERPRETATION}
                             explanation={houseData.zodiacMatchDictionary[house.zodiac]}
                             type='modal' />
