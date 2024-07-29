@@ -10,3 +10,10 @@
 .InfoItemModalIcon {
     cursor: pointer;
 }
+.InfoItemSuggestion {
+    display: inline-block;
+    margin: 0 5px;
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}

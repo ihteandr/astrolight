@@ -10,15 +10,18 @@ import { Modal } from "../Modal/Modal"
 import { EModalType } from "../../utils/ui/helpers"
 import { InfoDescription } from "../InfoDescription/InfoDescription"
 import { EOpenAiType } from "../../types/openai"
+import { ElaborationDescription } from "../ElaborationDescription/ElaborationDescription"
 export type InfoItemProps = {
     explanation: IExplanation,
     type?: 'modal' | 'tooltip',
     additionalDescription?: React.ReactNode,
-    openAiType?: EOpenAiType
+    openAiType?: EOpenAiType,
+    withElaboration?: boolean,
 }
 
-export function InfoItem ({ explanation, type = 'tooltip', openAiType, additionalDescription }: InfoItemProps) {
+export function InfoItem ({ explanation, type = 'tooltip', withElaboration = false, openAiType, additionalDescription }: InfoItemProps) {
     const [shouldShowInfo, setShouldSHowInfo] = useState(false)
+    const [shouldShowElaboration, setShouldShowElaboration] = useState(false)
     const key = useMemo(() => {
         return uuid.v4()
     }, [])
@@ -28,6 +31,7 @@ export function InfoItem ({ explanation, type = 'tooltip', openAiType, additiona
     const description = useMemo(() => {
         return explanation?.description?.[dictinaryType]
     }, [explanation, dictinaryType])
+
     return (
         <div className={styles.InfoItem}>
             <ShouldRender should={!!explanation}>
@@ -43,11 +47,28 @@ export function InfoItem ({ explanation, type = 'tooltip', openAiType, additiona
                                 <p className={styles.InfoItemDescription} dangerouslySetInnerHTML={{ __html: description }} />
                             </Tooltip>
                         </ShouldRender>
+                        <ShouldRender should={withElaboration}>
+                            <span
+                                className={styles.InfoItemSuggestion}
+                                onClick={() => setShouldShowElaboration(true)}>
+                                    Совет по проработке
+                            </span>
+                        </ShouldRender>
                         <ShouldRender should={shouldShowInfo}>
-                            <Modal onClose={() => setShouldSHowInfo(false)} portal={EModalType.INFO_MODAL}>
-                                {additionalDescription}
-                                <InfoDescription explanation={explanation} openAiType={openAiType} />
-                            </Modal>
+                            {() => (
+                                <Modal onClose={() => setShouldSHowInfo(false)} portal={EModalType.INFO_MODAL}>
+                                    {additionalDescription}
+                                    <InfoDescription explanation={explanation} openAiType={openAiType} />
+                                </Modal>
+                            )}
+                        </ShouldRender>
+                        <ShouldRender should={shouldShowElaboration}>
+                            {() => (
+                                <Modal onClose={() => setShouldShowElaboration(false)} portal={EModalType.INFO_MODAL}>
+                                    <h3>Проработка {explanation.label}</h3>
+                                    <ElaborationDescription question={explanation.label} openAiType={openAiType} />
+                                </Modal>
+                            )}    
                         </ShouldRender>
                     </>
                 )}

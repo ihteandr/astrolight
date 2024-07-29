@@ -26,3 +26,14 @@ export function useOpenaiInterpretationQuestion () {
         }
     })
 }
+
+
+export function useOpenaiElaborationQuestion () {
+    return useMutation({
+        mutationKey: ['openai-elaboration-question'],
+        mutationFn: (data: OpenaiDataParams) => {
+            return axios.post(`${API_URL}/openai/elaboration/description`, data)
+                .then(res => res.data)
+        }
+    })
+}

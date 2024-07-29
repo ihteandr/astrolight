@@ -18,7 +18,7 @@ export function NatalCardForm () {
         minute: 50
     })
     const navigate = useNavigate()
-    const [system, setSystem] = useState('K')
+    const [system, setSystem] = useState('P')
     const avaialbelSystems = useMemo(() => {
         return [{
             label: 'Кох',
@@ -70,12 +70,14 @@ export function NatalCardForm () {
         <div className={styles.NatalCardForm}>
             <div className={styles.NatalCardFormContent}>
                 <DateTime onChange={setSelectedDate} value={selectedDate}/>
+                <p>Место</p>
                 <div className={styles.NatalCardFormPlace}>
                     <input onInput={(e) => setPlace(e.currentTarget.value)}/>
                     <button onClick={checkPlace}>Check</button>
                     <span>{realPlace}</span>
                 </div>
                 <div>
+                    <div>Система Домов</div>
                     <select defaultValue={system} onChange={(e) => setSystem(e.target.value)}>
                         {avaialbelSystems.map((item) => (
                             <option value={item.value} key={item.value}>{item.label}</option>

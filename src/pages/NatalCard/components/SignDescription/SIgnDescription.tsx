@@ -67,7 +67,12 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
                         <h5>Доминант в Домах</h5>
                         {dimicilInHouses.map((item) => (
                             <p style={{ display: 'flex', alignItems: 'center' }}>
-                                <SignInfo type="inline" sign={item.sign} withZone={false} withHouse={false} withAspects={false} />
+                                <SignInfo
+                                    type="inline"
+                                    sign={item.sign}
+                                    withZone={false}
+                                    withHouse={false}
+                                    withAspects={false} />
                                 доминант в доме {item.house.label}
                             </p> 
                         ))}
@@ -77,6 +82,7 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
             <h5>Интерпретации</h5>
             <div>
                 <InfoItem
+                    withElaboration={true}
                     openAiType={EOpenAiType.INTERPRETATION}
                     explanation={signSymbolData.zodiacMatchDictionary[sign.zodiac]}
                     type='modal'/>
@@ -85,6 +91,7 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
                 {() => (
                     <div>
                         <InfoItem
+                            withElaboration={true}
                             openAiType={EOpenAiType.INTERPRETATION}
                             explanation={signSymbolData.houseMatchDictionary[(sign.house as IHouse).number]}
                             type='modal'/>      
