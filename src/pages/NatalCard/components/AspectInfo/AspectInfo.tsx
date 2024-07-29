@@ -13,13 +13,16 @@ import { useOpenaiAspectQuestion } from "../../../../api/openai/openai.api"
 import { EAstroSigns } from "../../../../types/signs"
 import { OpenAiAnswer } from "../../../../components/OpenAiAnswer/OpenAiAnswer"
 import { EOpenAiType } from "../../../../types/openai"
+import { ElaborationDescription } from "../../../../components/ElaborationDescription/ElaborationDescription"
 export type AspectInfoProps = {
     aspect: IAstroAspect,
-    perspective?: EAstroSigns | 'Ascident' | 'Meridian'
+    perspective?: EAstroSigns | 'Ascident' | 'Meridian',
+    withElaboration?: boolean
 }
 
-export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
+export function AspectInfo ({ aspect, withElaboration = false, perspective }: AspectInfoProps) {
     const [shouldShowDetails, setShouldShowDetails] = useState(false);
+    const [shouldShowElaboration, setShouldShowElaboration] = useState(false)
     const sign1 = useMemo(() => {
         return perspective ? aspect.sign1.name === perspective ? aspect.sign1 : aspect.sign2 : aspect.sign1
     }, [aspect, perspective])
@@ -97,6 +100,7 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
             </div>
         </div>
     )
+    const elaborationQuestion = `${sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${sign2SymbolData?.label}`
     return (
         <div className={clsx(styles.AspectInfo, 'aspect', aspect.action.toLocaleLowerCase())} >
             <span onClick={getAspectDescription} className={styles.AspectInfoName}>
@@ -105,7 +109,11 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
                 <span className={styles.AspectInfoSign}>{sign2SymbolData?.label}</span>
             </span>
             <SvgIcon name="Question" size={16} className={clsx(styles.AspectInfoIcon, `AspectInfoIcon${key}`)}/>
-            
+            <ShouldRender should={withElaboration}>
+                <span onClick={() => setShouldShowElaboration(true)} className={styles.AspectInforElaboration}>
+                    Совет по проработке
+                </span>
+            </ShouldRender>
             <Tooltip anchorSelect={`.AspectInfoIcon${key}`}> 
                 <div style={{color: 'white'}}>
                     {AspectShortInfo}
@@ -125,6 +133,15 @@ export function AspectInfo ({ aspect, perspective }: AspectInfoProps) {
                         <OpenAiAnswer
                             question={`${sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${sign2SymbolData?.label}`}
                             openAiType={EOpenAiType.ASPECT} />
+                    </Modal>
+                )}
+                
+            </ShouldRender>
+
+            <ShouldRender should={shouldShowElaboration}>
+                {() => (
+                    <Modal onClose={() => setShouldShowElaboration(false)}>  
+                        <ElaborationDescription question={elaborationQuestion} openAiType={EOpenAiType.ASPECT} />
                     </Modal>
                 )}
                 

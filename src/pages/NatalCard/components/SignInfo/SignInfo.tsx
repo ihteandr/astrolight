@@ -17,9 +17,10 @@ export type SignInfoProps = {
     selectable?: boolean,
     type?: 'line' | 'inline',
     withZone?: boolean,
+    withAspectElaboration?: boolean
 }
 
-export function SignInfo ({ type = 'line', sign, onClickSign, selectable = false, withZone=true, withAspects = false, withHouse = false }: SignInfoProps) {
+export function SignInfo ({ type = 'line', sign, onClickSign, selectable = false, withAspectElaboration = false, withZone=true, withAspects = false, withHouse = false }: SignInfoProps) {
     const [shouldShowAspects, setShouldShowAspect] = useState(false)
     const signSymbolData = SIGNS_SYMBOL_DATA[sign.name]
     const toggleShowAspects = useCallback(() => {
@@ -53,7 +54,7 @@ export function SignInfo ({ type = 'line', sign, onClickSign, selectable = false
                 <ShouldRender should={shouldShowAspects}>
                     <div className={styles.SignInfoAspects}>
                         {sign.aspects.map((aspect, index) => (
-                            <AspectInfo aspect={aspect} key={index} perspective={sign.name}/>
+                            <AspectInfo aspect={aspect} withElaboration={withAspectElaboration} key={index} perspective={sign.name}/>
                         ))}
                     </div>
                 </ShouldRender>

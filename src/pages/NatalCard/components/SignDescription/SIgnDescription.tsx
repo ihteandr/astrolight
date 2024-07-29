@@ -60,7 +60,7 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>
             <h2>{signSymbolData?.label}</h2>
-            <SignInfo sign={sign} withAspects={true} withHouse={true} /> 
+            <SignInfo sign={sign} withAspects={true} withAspectElaboration={true} withHouse={true} /> 
             <ShouldRender should={dimicilInHouses.length > 0}>
                 {() => (
                     <>

@@ -11,6 +11,12 @@
     display: inline-flex;
     cursor: pointer;
 }
+.AspectInforElaboration {
+    display: inline-flex;
+    color: blue;
+    margin: 0 10px;
+    text-decoration: underline;
+}
 .AspectInfoName:hover {
     border-bottom: 1px solid;
 }

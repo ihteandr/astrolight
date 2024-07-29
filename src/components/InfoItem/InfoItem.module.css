@@ -12,7 +12,7 @@
 }
 .InfoItemSuggestion {
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 5px 0 15px;
     text-decoration: underline;
     color: blue;
     cursor: pointer;
