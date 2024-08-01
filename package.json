@@ -20,6 +20,7 @@
     "@types/uuid": "^10.0.0",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
     "dexie": "^4.0.8",
     "google-geocoder": "^0.2.1",
     "js-base64": "^3.7.7",
@@ -46,11 +47,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",

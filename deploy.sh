@@ -1,0 +1,1 @@
+scp -r ./build root@38.60.197.219:~/astrolight/web

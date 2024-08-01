@@ -14,14 +14,4 @@ export function setZeros (value: number | string, length: number) {
 
 export function formatOpenAiMessage (text: string) {
     return text;
-    text = text.replace(/\\n/ig, '<br\>')
-    let i = 0
-    while(text.indexOf('###') !== -1) {
-        if (i > 10) break;
-        const index = text.indexOf('###')
-        const endindex = index + text.substring(index).indexOf('<br\>');
-        text = text.substring(0, index) + '<h3>' + text.substring(index + 3, endindex) + '</h3>' + text.substring(endindex, text.length)
-        i++
-    }
-    return converter.makeHtml(text)
 }

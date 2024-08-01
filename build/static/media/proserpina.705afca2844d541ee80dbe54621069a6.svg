@@ -1,0 +1,9 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640">
+<title>41 Proserpina</title>
+<g data-name="41 Proserpina">
+    <path fill="currentColor" d="M152.6,492.41H43a30,30,0,0,1,0-60h79.6V79.59H43a30,30,0,0,1,0-60H152.6a30,30,0,0,1,30,30V462.41A30,30,0,0,1,152.6,492.41Z"/>
+    <path fill="currentColor" d="M469,492.41H359.4a30,30,0,0,1-30-30V49.59a30,30,0,0,1,30-30H469a30,30,0,0,1,0,60H389.4V432.41H469a30,30,0,0,1,0,60Z"/>
+    <circle cx="256" cy="256" fill="currentColor" r="39.32"/>
+    </g>
+</svg>
