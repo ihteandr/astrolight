@@ -2,8 +2,7 @@ import clsx from "clsx";
 import { EAstroSigns, EAstroZodiacSign, ISign } from "../../../../types/signs"
 import { BoldPenProps, PenProps, ThinPenProps } from "../../../../utils/svg/ul-helpers";
 import { DateTimeValue } from "../../../../components/DateTime/DateTime";
-import { useCallback, useEffect, useState } from "react";
-import data from '../../../../data/signs/SignsData.json';
+import { useCallback, useEffect, useState } from "react"; 
 import { IAstroAspect, IAstroPlace, IHouse } from "../../../../types/astro";
 import { useNatalCardData } from "../../../../api/natal-card/natal-card.api";
 import { Storage } from "../../../../storage";
@@ -20,7 +19,6 @@ import { Zodiac } from "./components/Zodiac/Zodiac";
 import { Sign } from "./components/Sign/Sign";
 import { Aspect } from "./components/Aspect/Aspect";
 import ShouldRender from "../../../../atoms/functional/ShouldRender";
-const SignsData: { [k: string]: { [k: string]: { [k: string]: { planets: ISign[] } } } } = data as any
 
 export interface INatalChartVisibilityOptions {
     signs?: EAstroSigns[],
