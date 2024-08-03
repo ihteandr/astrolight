@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { SideModal } from "../../../../components/SideModal/SideModal"
 import { SIGNS_SYMBOL_DATA } from "../../../../data/sings-data/SignsData"
-import { EAstroZodiacSign, ISign } from "../../../../types/signs"
+import { EAstroSigns, EAstroZodiacSign, ISign } from "../../../../types/signs"
 import { INatalChartVisibilityOptions, NatalChart } from "../NatalChart/NatalChart"
 import { SignInfo } from "../SignInfo/SignInfo"
 import styles from './SignDescription.module.css'
@@ -10,6 +10,7 @@ import { IAstroAspect, IHouse } from "../../../../types/astro"
 import { InfoItem } from "../../../../components/InfoItem/InfoItem"
 import ShouldRender from "../../../../atoms/functional/ShouldRender"
 import { EOpenAiType } from "../../../../types/openai"
+import { SunDescription } from "./SubDescriptions/SunDescription/SunDescription"
 
 export type SignDescriptionProps = {
     data?: any;
@@ -96,6 +97,11 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
                             explanation={signSymbolData.houseMatchDictionary[(sign.house as IHouse).number]}
                             type='modal'/>      
                     </div>
+                )}
+            </ShouldRender>
+            <ShouldRender should={sign.name === EAstroSigns.SUN}>
+                {() => (
+                    <SunDescription data={data} />
                 )}
             </ShouldRender>
         </SideModal>
