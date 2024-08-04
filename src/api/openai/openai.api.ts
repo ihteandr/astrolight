@@ -10,7 +10,6 @@ export function useOpenaiAspectQuestion () {
     return useMutation({
         mutationKey: ['openai-aspect-question'],
         mutationFn: (data: OpenaiDataParams) => {
-            console.error('request for asnwer');
             return axios.post(`${API_URL}/openai/aspect/description`, data)
                 .then(res => res.data)
         }
