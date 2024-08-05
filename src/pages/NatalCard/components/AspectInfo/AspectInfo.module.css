@@ -16,6 +16,7 @@
     color: blue;
     margin: 0 10px;
     text-decoration: underline;
+    cursor: pointer;
 }
 .AspectInfoName:hover {
     border-bottom: 1px solid;
