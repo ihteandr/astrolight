@@ -37,7 +37,7 @@ export function SignInfo ({ type = 'line', sign, onClickSign, selectable = false
                             size={24}
                             className={clsx('sign', sign.name,  'element', signSymbolData?.elements[0] || 'NoElement')}
                             />
-                            <span className={clsx(styles.SingName, 'sign-label', sign.name)}>{signSymbolData?.label}</span>
+                        <span className={clsx(styles.SingName, 'sign-label', sign.name)}>{signSymbolData?.label}</span>
                     </div>
                     <ShouldRender should={withZone}>
                         <ZoneInfo zone={sign.zodiacZone} zodiac={sign.zodiac}/>

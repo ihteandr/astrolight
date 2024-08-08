@@ -66,8 +66,8 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
                 {() => (
                     <>
                         <h5>Доминант в Домах</h5>
-                        {dimicilInHouses.map((item) => (
-                            <p style={{ display: 'flex', alignItems: 'center' }}>
+                        {dimicilInHouses.map((item, index) => (
+                            <p key={index} style={{ display: 'flex', alignItems: 'center' }}>
                                 <SignInfo
                                     type="inline"
                                     sign={item.sign}
