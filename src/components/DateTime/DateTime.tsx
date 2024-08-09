@@ -44,9 +44,7 @@ export function DateTime ({ onChange, value }: DateTimeTypes) {
     }, []);
     const updateSelectedDate = (fieldName: string) => {
         return (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-            
-            const fieldValue = parseFloat(e.target.value)
-            if (isNaN(fieldValue)) return
+            const fieldValue = fieldName === 'timezone'? e.target.value : parseFloat(e.target.value)
             onChange({
                 ...value,
                 [fieldName]: fieldValue
