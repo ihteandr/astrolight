@@ -8,7 +8,8 @@ export type DateTimeValue = {
     month: number,
     year: number,
     hour: number,
-    minute: number
+    minute: number,
+    timezone: string
 }
 export type DateTimeTypes = {
     onChange: (v: DateTimeValue) => void,
@@ -42,8 +43,10 @@ export function DateTime ({ onChange, value }: DateTimeTypes) {
         return range(1, 59, 1)
     }, []);
     const updateSelectedDate = (fieldName: string) => {
-        return (e: React.ChangeEvent<HTMLSelectElement>) => {
-            const fieldValue = parseInt(e.target.value)
+        return (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+            
+            const fieldValue = parseFloat(e.target.value)
+            if (isNaN(fieldValue)) return
             onChange({
                 ...value,
                 [fieldName]: fieldValue
@@ -95,6 +98,11 @@ export function DateTime ({ onChange, value }: DateTimeTypes) {
                         return <option value={minute} key={minute}>{minute}</option>
                     })}
                 </select>
+            </div>
+
+            <div>
+                <div>Часавой пояс</div>
+                <input value={value.timezone} style={{ width: 35 }} onChange={updateSelectedDate('timezone')} />
             </div>
         </div>
     )

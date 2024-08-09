@@ -15,7 +15,8 @@ export function NatalCardForm () {
         month: 12,
         year: 1988,
         hour: 16,
-        minute: 50
+        minute: 50,
+        timezone: '4'
     })
     const navigate = useNavigate()
     const [system, setSystem] = useState('P')
@@ -48,21 +49,28 @@ export function NatalCardForm () {
     }, [place, setAstroPlace, setRealPlace])
     const submitRequest = useCallback(() => {
         if (astroPlace && selectedDate) {
+            const request = encode(JSON.stringify({
+                ...selectedDate,
+                ...astroPlace,
+                timezone: parseFloat(selectedDate.timezone.toString()) * 60 * 60,
+                system
+            }))
+            navigate(`/natal-card/${request}`)
             const pdate = parseDateTimeValue(selectedDate as DateTimeValue) 
-            googleTimezoneApi.data(
-                astroPlace?.latitude,
-                astroPlace?.longitude,
-                pdate.valueOf() / 1000,
-                 (err: any, res:any) => {
-                    const request = encode(JSON.stringify({
-                        ...selectedDate,
-                        ...astroPlace,
-                        timezone: res.raw_response.rawOffset,
-                        system
-                    }))
+            // googleTimezoneApi.data(
+            //     astroPlace?.latitude,
+            //     astroPlace?.longitude,
+            //     pdate.valueOf() / 1000,
+            //      (err: any, res:any) => {
+            //         const request = encode(JSON.stringify({
+            //             ...selectedDate,
+            //             ...astroPlace,
+            //             timezone: res.raw_response.rawOffset,
+            //             system
+            //         }))
                         
-                    navigate(`/natal-card/${request}`)
-                })    
+            //         navigate(`/natal-card/${request}`)
+            //     })    
         }
     }, [selectedDate, astroPlace, navigate, setRealDate, system])
 
