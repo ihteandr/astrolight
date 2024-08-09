@@ -75,9 +75,6 @@ export function NatalChart ({
                 }) : true
             }))
             let degree = data.houses.house[0] / 180 * Math.PI;
-            if (degree > Math.PI) {
-                degree -= Math.PI;
-            }
             setRotateDegree(degree)
         }
     }, [data, setSigns, setHouses, setAspects, setRotateDegree, visibilityOptions])
