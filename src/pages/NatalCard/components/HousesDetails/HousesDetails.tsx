@@ -8,6 +8,7 @@ import { ZODIAC_ORDER, ZODIAC_SYMBOL_DATA } from "../../../../data/zodiac/Zodiac
 import { sortBy } from "lodash";
 import { setZeros } from "../../../../utils/format.utils";
 import { IHouse } from "../../../../types/astro";
+import { ZoneInfo } from "../ZoneInfo/ZoneInfo";
 export type HousesDetailsType = {
     data?: any;
     onClickHouse?: (house: IHouse) => void
@@ -25,21 +26,13 @@ export function HousesDetails ({ data, onClickHouse }: HousesDetailsType) {
     return (
         <div className={styles.HousesDetails}>
             {houses.map((house) => {
-                const zodiacSymbol = ZODIAC_SYMBOL_DATA[house.zodiac]
-                
                 return (
                     <div className={styles.HouseRow} key={house.number} onClick={() => { onClickHouse?.(house) }}>
                         <div className={styles.HouseSymbol}>
                             <span className={clsx('house-label', `house${house.number}`)}>Дом {house.number}</span>
                         </div>
                         <div className={styles.HouseInfo}>
-                            <SvgIcon
-                                name={zodiacSymbol.sign}
-                                size={16}
-                                className={clsx('element', zodiacSymbol.element)}/>
-                            <span>{house.zodiacZone.hour}°</span>
-                            <span>{setZeros(house.zodiacZone.minute, 2)}’</span>
-                            <span>{setZeros(house.zodiacZone.second, 2)}’’</span>
+                            <ZoneInfo zone={house.zodiacZone} zodiac={house.zodiac}/>
                         </div>
                     </div>
                 )    
