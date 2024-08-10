@@ -3904,7 +3904,7 @@ export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     },
     [EAstroSigns.UP_NODE]: {
         sign: EAstroSigns.UP_NODE,
-        label: 'Узел',
+        label: 'Восходящий Узел',
         openAiLabel: 'Восходящий Узел',
         elements: [],
         direction: EAstroDirection.NETRAL,
@@ -4005,6 +4005,113 @@ export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
             },
             12: {
                 label: 'Восходящий Узел в XII доме',
+                description: {}
+            }
+        }
+    },
+    [EAstroSigns.DOWN_NODE]: {
+        sign: EAstroSigns.DOWN_NODE,
+        label: 'Южный Узел',
+        openAiLabel: 'Южный Узел',
+        elements: [],
+        direction: EAstroDirection.NETRAL,
+        zodiacMatchDictionary: {
+            [EAstroZodiacSign.ARIES]: {
+                label: 'Южный Узел в знаке Овна',
+                description: {}
+            },
+            [EAstroZodiacSign.TAURUS]: {
+                label: 'Южный Узел в знаке Тельца',
+                description: {}
+            },
+            [EAstroZodiacSign.GEMINI]: {
+                label: 'Южный Узел в знаке Близнацов',
+                description: {}
+            },
+            [EAstroZodiacSign.CANCER]: {
+                label: 'Южный Узел в знаке Рака',
+                description: {}
+            },
+            [EAstroZodiacSign.LEO]: {
+                label: 'Южный Узел в знаке Льва',
+                description: {}
+            },
+            [EAstroZodiacSign.VIRGO]: {
+                label: 'Южный Узел в знаке Девы',
+                description: {}
+            },
+            [EAstroZodiacSign.LIBRA]: {
+                label: 'Южный Узел в знаке Весов',
+                description: {}
+            },
+            [EAstroZodiacSign.SCORPIO]: {
+                label: 'Южный Узел в знаке Скорпеона',
+                description: {}
+            },
+            [EAstroZodiacSign.SAGITTARIUS]: {
+                label: 'Южный Узел в знаке Стрельца',
+                description: {}
+            },
+            [EAstroZodiacSign.CAPRICORN]: {
+                label: 'Южный Узел в знаке Козерога',
+                description: {}
+            },
+            [EAstroZodiacSign.AQUARIUS]: {
+                label: 'Южный Узел в знаке Водолея',
+                description: {}
+            },
+            [EAstroZodiacSign.PISCES]: {
+                label: 'Южный Узел в знаке Рыб',
+                description: {}
+            },
+        },
+        houseMatchDictionary: {
+            1: {
+                label: 'Южный Узел в I доме',
+                description: {}
+            },
+            2: {
+                label: 'Южный Узел в II доме',
+                description: {}
+            },
+            3: {
+                label: 'Южный Узел в III доме',
+                description: {}
+            },
+            4: {
+                label: 'Южный Узел в IV доме',
+                description: {}
+            },
+            5: {
+                label: 'Южный Узел в V доме',
+                description: {}
+            },
+            6: {
+                label: 'Южный Узел в VI доме',
+                description: {}
+            },
+            7: {
+                label: 'Южный Узел в VII доме',
+                description: {}
+            },
+            8: {
+                label: 'Южный Узел в VIII доме',
+                description: {}
+            },
+            9: {
+                label: 'Южный Узел в IX доме',
+                description: {}
+            },
+            10: {
+                label: 'Южный Узел в X доме',
+                description: {}
+            },
+            11: {
+                label: 'Южный Узел в XI доме',
+                description: {}
+            },
+            12: {
+                label: 'Южный Узел в XII доме',
                 description: {}
             }
         }

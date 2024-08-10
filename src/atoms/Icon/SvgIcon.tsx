@@ -21,7 +21,8 @@ import { ReactComponent as MarsIcon } from '../../assets/icons/sings/mars.svg';
 import { ReactComponent as MercuryIcon } from '../../assets/icons/sings/mercury.svg';
 import { ReactComponent as MoonIcon } from '../../assets/icons/sings/moon.svg';
 import { ReactComponent as NeptuneIcon } from '../../assets/icons/sings/neptune.svg';
-import { ReactComponent as NodeIcon } from '../../assets/icons/sings/up_node.svg';
+import { ReactComponent as UpNodeIcon } from '../../assets/icons/sings/up_node.svg';
+import { ReactComponent as DownNodeIcon } from '../../assets/icons/sings/down_node.svg';
 import { ReactComponent as PallasIcon } from '../../assets/icons/sings/pallas.svg';
 import { ReactComponent as PlutoIcon } from '../../assets/icons/sings/pluto.svg';
 import { ReactComponent as SaturnIcon } from '../../assets/icons/sings/saturn.svg';
@@ -64,7 +65,8 @@ const IconsMap: any = {
     Mercury: MercuryIcon,
     Moon: MoonIcon,
     Neptune: NeptuneIcon,
-    UpNode: NodeIcon,
+    UpNode: UpNodeIcon,
+    DownNode: DownNodeIcon,
     Pallas: PallasIcon,
     Pluto: PlutoIcon,
     Saturn: SaturnIcon,
