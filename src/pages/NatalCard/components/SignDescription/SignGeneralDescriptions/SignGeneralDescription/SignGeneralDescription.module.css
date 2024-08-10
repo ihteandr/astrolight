@@ -1,0 +1,7 @@
+.SignGeneralDescription {
+    margin-top: 24px;
+}
+.SignGeneralDescriptionItems {
+    display: flex;
+    flex-direction: column;
+}

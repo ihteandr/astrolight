@@ -10,7 +10,7 @@ import { IAstroAspect, IHouse } from "../../../../types/astro"
 import { InfoItem } from "../../../../components/InfoItem/InfoItem"
 import ShouldRender from "../../../../atoms/functional/ShouldRender"
 import { EOpenAiType } from "../../../../types/openai"
-import { SunDescription } from "./SubDescriptions/SunDescription/SunDescription"
+import { SignGeneralDescription } from "./SignGeneralDescriptions/SignGeneralDescription/SignGeneralDescription"
 
 export type SignDescriptionProps = {
     data?: any;
@@ -99,9 +99,9 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
                     </div>
                 )}
             </ShouldRender>
-            <ShouldRender should={sign.name === EAstroSigns.SUN}>
+            <ShouldRender should={[EAstroSigns.SUN, EAstroSigns.MOON].includes(sign.name)}>
                 {() => (
-                    <SunDescription data={data} />
+                    <SignGeneralDescription data={data} sign={sign} />
                 )}
             </ShouldRender>
         </SideModal>
