@@ -24,7 +24,7 @@ export function SignGeneralDescription ({ data, sign }: SunDescriptionProps) {
     const positiveAspectDictionary = SIGNS_SYMBOL_DATA[generalSing.name].houseMatchAndAspectMatch?.[(generalSing.house as IHouse).number]?.find((matchItem) => {
         return matchItem.aspects.includes(EAstroAspectType.TRINE) || matchItem.aspects.includes(EAstroAspectType.SEXTILE)
     })?.dictionary
-    
+
     const negativeAspectDictionary = SIGNS_SYMBOL_DATA[generalSing.name].houseMatchAndAspectMatch?.[(generalSing.house as IHouse).number]?.find((matchItem) => {
         return matchItem.aspects.includes(EAstroAspectType.QUADRATURE) || matchItem.aspects.includes(EAstroAspectType.OPPOSITION)
     })?.dictionary
@@ -32,10 +32,13 @@ export function SignGeneralDescription ({ data, sign }: SunDescriptionProps) {
     const conjunctionAspectsMatchDictionary = useMemo<IExplanation[]>(() => {
         if (conjunctionAspectDictionary) {
             const aspects = generalSing.aspects.filter((aspect) => {
+                if (generalSing.name === EAstroSigns.MOON) {
+                    return false
+                }
                 return aspect.type === EAstroAspectType.CONJUNCTION
             })
             return aspects.map((aspect) => {
-                const secondSign = aspect.sign1.name === EAstroSigns.SUN ? aspect.sign2 : aspect.sign1;
+                const secondSign = aspect.sign1.name === generalSing.name ? aspect.sign2 : aspect.sign1;
                 return conjunctionAspectDictionary?.[secondSign.name]
             }).filter(Boolean) as IExplanation[]
         } else {
@@ -47,10 +50,13 @@ export function SignGeneralDescription ({ data, sign }: SunDescriptionProps) {
     const positiveAspectsMatchDictionary = useMemo<IExplanation[]>(() => {
         if (positiveAspectDictionary) {
             const aspects = generalSing.aspects.filter((aspect) => {
+                if (generalSing.name === EAstroSigns.MOON) {
+                    return aspect.type === EAstroAspectType.TRINE || aspect.type === EAstroAspectType.SEXTILE || aspect.type === EAstroAspectType.CONJUNCTION
+                }
                 return aspect.type === EAstroAspectType.TRINE || aspect.type === EAstroAspectType.SEXTILE
             })
             return aspects.map((aspect) => {
-                const secondSign = aspect.sign1.name === EAstroSigns.SUN ? aspect.sign2 : aspect.sign1;
+                const secondSign = aspect.sign1.name === generalSing.name ? aspect.sign2 : aspect.sign1;
                 return positiveAspectDictionary?.[secondSign.name]
             }).filter(Boolean) as IExplanation[]
         } else {
@@ -65,7 +71,7 @@ export function SignGeneralDescription ({ data, sign }: SunDescriptionProps) {
                 return aspect.type === EAstroAspectType.OPPOSITION || aspect.type === EAstroAspectType.QUADRATURE
             })
             return aspects.map((aspect) => {
-                const secondSign = aspect.sign1.name === EAstroSigns.SUN ? aspect.sign2 : aspect.sign1;
+                const secondSign = aspect.sign1.name === generalSing.name ? aspect.sign2 : aspect.sign1;
                 return negativeAspectDictionary?.[secondSign.name]
             }).filter(Boolean) as IExplanation[]
         } else {
@@ -77,22 +83,17 @@ export function SignGeneralDescription ({ data, sign }: SunDescriptionProps) {
     const signElementDictionary = generalSignData.elementMatchDictionary?.[zodiacData.element]
     
     const descriptions = [signCrossDictionary, signElementDictionary].filter(Boolean)
+    const aspectDescriptions: IExplanation[] = [conjunctionAspectsMatchDictionary, positiveAspectsMatchDictionary, negativeAspectsMatchDictionary].flat().filter(Boolean)
     return (
         <div className={styles.SignGeneralDescription}>
             <h4>Особености для {generalSignData?.label} </h4>
             <h5>Интерпретации</h5>
             <div className={styles.SignGeneralDescriptionItems}>
-                {conjunctionAspectsMatchDictionary.map((dictionary, index) => (
-                    <InfoItem type='modal' explanation={dictionary} key={index} openAiType={EOpenAiType.INTERPRETATION} />
+                {aspectDescriptions.map((dictionary, index) => (
+                    <InfoItem type='modal' explanation={dictionary as IExplanation} key={index} openAiType={EOpenAiType.INTERPRETATION} />
                 ))}
-                {positiveAspectsMatchDictionary.map((dictionary, index) => (
-                    <InfoItem type='modal' explanation={dictionary} key={index} openAiType={EOpenAiType.INTERPRETATION} />
-                ))}
-                {negativeAspectsMatchDictionary.map((dictionary, index) => (
-                    <InfoItem type='modal' explanation={dictionary} key={index} openAiType={EOpenAiType.INTERPRETATION} />
-                ))}
-                {descriptions.map((description) => (
-                    <InfoItem type='modal' explanation={description as IExplanation} openAiType={EOpenAiType.INTERPRETATION}/>
+                {descriptions.map((description, index) => (
+                    <InfoItem type='modal' explanation={description as IExplanation} key={index} openAiType={EOpenAiType.INTERPRETATION}/>
                 ))}
             </div>
         </div>

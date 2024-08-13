@@ -25,7 +25,7 @@ export function NatalCardForm () {
             label: 'Кох',
             value: 'K'
         }, {
-            label: 'Плацедус',
+            label: 'Плацидус',
             value: 'P'
         }]
     }, [])
