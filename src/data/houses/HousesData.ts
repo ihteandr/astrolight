@@ -348,7 +348,6 @@ const HOUSE1:HouseDataType = {
         }
     },
     dominantPlaceDictionary: {
-        
         1: {
             label: 'Доминант I дома в I доме',
             description: {
