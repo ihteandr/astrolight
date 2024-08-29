@@ -16,9 +16,9 @@ export function parseNatalCardData (data: any) {
 
     const sortAspects = (aspects: IAstroAspect[]) => {
         const actionOrder: EAstroAspectAction[] = [
+            EAstroAspectAction.DEPENDS_PLANETS,
             EAstroAspectAction.TENSE,
             EAstroAspectAction.HARMONIC,
-            EAstroAspectAction.DEPENDS_PLANETS,
             EAstroAspectAction.KARMIC,
             EAstroAspectAction.CREATIVE
         ]
