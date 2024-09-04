@@ -2,6 +2,7 @@ import { EAstroAspectType, EAstroDirection } from "../../types/astro";
 import { EDictinaryType, TDictionary } from "../../types/dicrionary";
 import { EAstroSigns, EAstroZodiacSign, ECrossSign } from "../../types/signs";
 import { EAstroElements } from "../elements/ElementsData";
+import MERCURY from "./signs/Mercury";
 import MOON from "./signs/Moon";
 import SUN from "./signs/Sun";
 
@@ -21,112 +22,7 @@ export type SignSymbolDataType = {
 export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     [EAstroSigns.SUN]: SUN, 
     [EAstroSigns.MOON]: MOON,
-    [EAstroSigns.MERCURY]: {
-        sign: EAstroSigns.MERCURY,
-        label: 'Меркурий',
-        elements: [EAstroElements.WIND, EAstroElements.EARTH],
-        direction: EAstroDirection.POSITIVE,
-        zodiacMatchDictionary: {
-            [EAstroZodiacSign.ARIES]: {
-                label: 'Меркурий в знаке Овна',
-                description: {}
-            },
-            [EAstroZodiacSign.TAURUS]: {
-                label: 'Меркурий в знаке Тельца',
-                description: {}
-            },
-            [EAstroZodiacSign.GEMINI]: {
-                label: 'Меркурий в знаке Близнацов',
-                description: {}
-            },
-            [EAstroZodiacSign.CANCER]: {
-                label: 'Меркурий в знаке Рака',
-                description: {}
-            },
-            [EAstroZodiacSign.LEO]: {
-                label: 'Меркурий в знаке Льва',
-                description: {}
-            },
-            [EAstroZodiacSign.VIRGO]: {
-                label: 'Меркурий в знаке Девы',
-                description: {}
-            },
-            [EAstroZodiacSign.LIBRA]: {
-                label: 'Меркурий в знаке Весов',
-                description: {}
-            },
-            [EAstroZodiacSign.SCORPIO]: {
-                label: 'Меркурий в знаке Скорпеона',
-                description: {}
-            },
-            [EAstroZodiacSign.SAGITTARIUS]: {
-                label: 'Меркурий в знаке Стрельца',
-                description: {}
-            },
-            [EAstroZodiacSign.CAPRICORN]: {
-                label: 'Меркурий в знаке Козерога',
-                description: {}
-            },
-            [EAstroZodiacSign.AQUARIUS]: {
-                label: 'Меркурий в знаке Водолея',
-                description: {}
-            },
-            [EAstroZodiacSign.PISCES]: {
-                label: 'Меркурий в знаке Рыб',
-                description: {}
-            },
-        },
-        houseMatchDictionary: {
-            1: {
-                label: 'Меркурий в I доме',
-                description: {}
-            },
-            2: {
-                label: 'Меркурий в II доме',
-                description: {}
-            },
-            3: {
-                label: 'Меркурий в III доме',
-                description: {}
-            },
-            4: {
-                label: 'Меркурий в IV доме',
-                description: {}
-            },
-            5: {
-                label: 'Меркурий в V доме',
-                description: {}
-            },
-            6: {
-                label: 'Меркурий в VI доме',
-                description: {}
-            },
-            7: {
-                label: 'Меркурий в VII доме',
-                description: {}
-            },
-            8: {
-                label: 'Меркурий в VIII доме',
-                description: {}
-            },
-            9: {
-                label: 'Меркурий в IX доме',
-                description: {}
-            },
-            10: {
-                label: 'Меркурий в X доме',
-                description: {}
-            },
-            11: {
-                label: 'Меркурий в XI доме',
-                description: {}
-            },
-            12: {
-                label: 'Меркурий в XII доме',
-                description: {}
-            }
-        }
-    },
+    [EAstroSigns.MERCURY]: MERCURY,
     [EAstroSigns.VENUS]: {
         sign: EAstroSigns.VENUS,
         label: 'Венера',

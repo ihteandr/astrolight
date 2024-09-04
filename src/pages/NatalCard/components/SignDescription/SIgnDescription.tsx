@@ -99,7 +99,11 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
                     </div>
                 )}
             </ShouldRender>
-            <ShouldRender should={[EAstroSigns.SUN, EAstroSigns.MOON].includes(sign.name)}>
+            <ShouldRender should={[
+                EAstroSigns.SUN,
+                EAstroSigns.MOON,
+                EAstroSigns.MERCURY
+            ].includes(sign.name)}>
                 {() => (
                     <SignGeneralDescription data={data} sign={sign} />
                 )}
