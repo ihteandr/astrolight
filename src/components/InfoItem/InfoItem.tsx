@@ -12,7 +12,7 @@ import { InfoDescription } from "../InfoDescription/InfoDescription"
 import { EOpenAiType } from "../../types/openai"
 import { ElaborationDescription } from "../ElaborationDescription/ElaborationDescription"
 export type InfoItemProps = {
-    explanation: IExplanation,
+    explanation?: IExplanation,
     type?: 'modal' | 'tooltip',
     additionalDescription?: React.ReactNode,
     openAiType?: EOpenAiType,
@@ -20,6 +20,7 @@ export type InfoItemProps = {
 }
 
 export function InfoItem ({ explanation, type = 'tooltip', withElaboration = false, openAiType, additionalDescription }: InfoItemProps) {
+    if (!explanation) return null
     const [shouldShowInfo, setShouldSHowInfo] = useState(false)
     const [shouldShowElaboration, setShouldShowElaboration] = useState(false)
     const key = useMemo(() => {

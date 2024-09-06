@@ -1,134 +1,37 @@
 import { EAstroAspectType, EAstroDirection } from "../../types/astro";
 import { EDictinaryType, TDictionary } from "../../types/dicrionary";
-import { EAstroSigns, EAstroZodiacSign, ECrossSign } from "../../types/signs";
+import { EAstroSigns, EAstroZodiacSign, ECrossSign, ESexSign } from "../../types/signs";
 import { EAstroElements } from "../elements/ElementsData";
 import MERCURY from "./signs/Mercury";
 import MOON from "./signs/Moon";
 import SUN from "./signs/Sun";
+import VENUS from "./signs/Venus";
 
 export type SignSymbolDataType = {
     sign: EAstroSigns,
     label: string,
+    sex?: ESexSign,
     openAiLabel?: string,
     elements: EAstroElements[],
     direction: EAstroDirection;
     houseMatchAndAspectMatch?: { [k: string]: { aspects: EAstroAspectType[], dictionary: TDictionary }[] };
+    zodiacSexMatchDictionary?: TDictionary;
     crossMatchDictinonary?: TDictionary;
     elementMatchDictionary?: TDictionary;
     zodiacMatchDictionary: TDictionary;
     houseMatchDictionary: TDictionary;
+
+    retro?: {
+        zodiacMatchDictionary: TDictionary;
+        houseMatchDictionary: TDictionary;
+    }
 }
 
 export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     [EAstroSigns.SUN]: SUN, 
     [EAstroSigns.MOON]: MOON,
     [EAstroSigns.MERCURY]: MERCURY,
-    [EAstroSigns.VENUS]: {
-        sign: EAstroSigns.VENUS,
-        label: 'Венера',
-        elements: [EAstroElements.WIND, EAstroElements.EARTH],
-        direction: EAstroDirection.POSITIVE,
-        zodiacMatchDictionary: {
-            [EAstroZodiacSign.ARIES]: {
-                label: 'Венера в знаке Овна',
-                description: {}
-            },
-            [EAstroZodiacSign.TAURUS]: {
-                label: 'Венера в знаке Тельца',
-                description: {}
-            },
-            [EAstroZodiacSign.GEMINI]: {
-                label: 'Венера в знаке Близнацов',
-                description: {}
-            },
-            [EAstroZodiacSign.CANCER]: {
-                label: 'Венера в знаке Рака',
-                description: {}
-            },
-            [EAstroZodiacSign.LEO]: {
-                label: 'Венера в знаке Льва',
-                description: {}
-            },
-            [EAstroZodiacSign.VIRGO]: {
-                label: 'Венера в знаке Девы',
-                description: {}
-            },
-            [EAstroZodiacSign.LIBRA]: {
-                label: 'Венера в знаке Весов',
-                description: {}
-            },
-            [EAstroZodiacSign.SCORPIO]: {
-                label: 'Венера в знаке Скорпеона',
-                description: {}
-            },
-            [EAstroZodiacSign.SAGITTARIUS]: {
-                label: 'Венера в знаке Стрельца',
-                description: {}
-            },
-            [EAstroZodiacSign.CAPRICORN]: {
-                label: 'Венера в знаке Козерога',
-                description: {}
-            },
-            [EAstroZodiacSign.AQUARIUS]: {
-                label: 'Венера в знаке Водолея',
-                description: {}
-            },
-            [EAstroZodiacSign.PISCES]: {
-                label: 'Венера в знаке Рыб',
-                description: {}
-            },
-        },
-        houseMatchDictionary: {
-            1: {
-                label: 'Венера в I доме',
-                description: {}
-            },
-            2: {
-                label: 'Венера в II доме',
-                description: {}
-            },
-            3: {
-                label: 'Венера в III доме',
-                description: {}
-            },
-            4: {
-                label: 'Венера в IV доме',
-                description: {}
-            },
-            5: {
-                label: 'Венера в V доме',
-                description: {}
-            },
-            6: {
-                label: 'Венера в VI доме',
-                description: {}
-            },
-            7: {
-                label: 'Венера в VII доме',
-                description: {}
-            },
-            8: {
-                label: 'Венера в VIII доме',
-                description: {}
-            },
-            9: {
-                label: 'Венера в IX доме',
-                description: {}
-            },
-            10: {
-                label: 'Венера в X доме',
-                description: {}
-            },
-            11: {
-                label: 'Венера в XI доме',
-                description: {}
-            },
-            12: {
-                label: 'Венера в XII доме',
-                description: {}
-            }
-        }
-    },
+    [EAstroSigns.VENUS]: VENUS,
     [EAstroSigns.MARS]: {
         sign: EAstroSigns.MARS,
         label: 'Марс',

@@ -1,6 +1,6 @@
 import { EAstroAspectType, EAstroDirection } from "../../../types/astro";
 import { EDictinaryType } from "../../../types/dicrionary";
-import { EAstroSigns, EAstroZodiacSign, ECrossSign } from "../../../types/signs";
+import { EAstroSigns, EAstroZodiacSign, ECrossSign, ESexSign } from "../../../types/signs";
 import { EAstroElements } from "../../elements/ElementsData";
 import { SignSymbolDataType } from "../SignsData";
 
@@ -9,6 +9,7 @@ const MOON: SignSymbolDataType = {
     label: 'Луна',
     elements: [EAstroElements.WATER],
     direction: EAstroDirection.POSITIVE,
+    sex: ESexSign.FEMALE,
     zodiacMatchDictionary: {
         [EAstroZodiacSign.ARIES]: {
             label: 'Луна в знаке Овна',

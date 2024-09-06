@@ -81,33 +81,7 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
                 )}
             </ShouldRender>
             <h5>Интерпретации</h5>
-            <div>
-                <InfoItem
-                    withElaboration={true}
-                    openAiType={EOpenAiType.INTERPRETATION}
-                    explanation={signSymbolData.zodiacMatchDictionary[sign.zodiac]}
-                    type='modal'/>
-            </div>
-            <ShouldRender should={!!sign.house}>
-                {() => (
-                    <div>
-                        <InfoItem
-                            withElaboration={true}
-                            openAiType={EOpenAiType.INTERPRETATION}
-                            explanation={signSymbolData.houseMatchDictionary[(sign.house as IHouse).number]}
-                            type='modal'/>      
-                    </div>
-                )}
-            </ShouldRender>
-            <ShouldRender should={[
-                EAstroSigns.SUN,
-                EAstroSigns.MOON,
-                EAstroSigns.MERCURY
-            ].includes(sign.name)}>
-                {() => (
-                    <SignGeneralDescription data={data} sign={sign} />
-                )}
-            </ShouldRender>
+            <SignGeneralDescription data={data} sign={sign} />
         </SideModal>
     )
 }

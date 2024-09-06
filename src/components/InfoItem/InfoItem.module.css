@@ -1,6 +1,7 @@
 .InfoItem {
     display: inline-flex;
     align-items: center;
+    margin: 2px 0;
 }
 .InfoItemDescription {
     max-width: 350px;

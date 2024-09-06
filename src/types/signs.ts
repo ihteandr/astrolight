@@ -45,7 +45,8 @@ export interface IZone {
 
 export enum ESexSign {
     MALE = 'male',
-    FEMALE = 'female'   
+    FEMALE = 'female',
+    UNISEX = 'unisex' 
 }
 export enum ECrossSign {
     CARDINAL = 'cardinal',

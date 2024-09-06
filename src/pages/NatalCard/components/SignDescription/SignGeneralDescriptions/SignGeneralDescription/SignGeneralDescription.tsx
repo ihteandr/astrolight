@@ -81,21 +81,39 @@ export function SignGeneralDescription ({ data, sign }: SunDescriptionProps) {
 
     const signCrossDictionary = generalSignData.crossMatchDictinonary?.[zodiacData.cross];
     const signElementDictionary = generalSignData.elementMatchDictionary?.[zodiacData.element]
-    
-    const descriptions = [signCrossDictionary, signElementDictionary].filter(Boolean)
+    const signSexDictionary = generalSignData.zodiacSexMatchDictionary?.[zodiacData.sex];
+    const descriptions = [signCrossDictionary, signElementDictionary, signSexDictionary].filter(Boolean)
     const aspectDescriptions: IExplanation[] = [conjunctionAspectsMatchDictionary, positiveAspectsMatchDictionary, negativeAspectsMatchDictionary].flat().filter(Boolean)
     return (
-        <div className={styles.SignGeneralDescription}>
-            <h4>Особености для {generalSignData?.label} </h4>
-            <h5>Интерпретации</h5>
-            <div className={styles.SignGeneralDescriptionItems}>
-                {aspectDescriptions.map((dictionary, index) => (
-                    <InfoItem type='modal' explanation={dictionary as IExplanation} key={index} openAiType={EOpenAiType.INTERPRETATION} />
-                ))}
-                {descriptions.map((description, index) => (
-                    <InfoItem type='modal' explanation={description as IExplanation} key={index} openAiType={EOpenAiType.INTERPRETATION}/>
-                ))}
+        <ShouldRender should={aspectDescriptions.length > 0 || descriptions.length > 0}>
+            <div className={styles.SignGeneralDescription}>
+                <div className={styles.SignGeneralDescriptionItems}>
+                <div>
+                    <InfoItem
+                        withElaboration={true}
+                        openAiType={EOpenAiType.INTERPRETATION}
+                        explanation={sign.isRetro ? generalSignData.retro?.zodiacMatchDictionary[sign.zodiac] : generalSignData.zodiacMatchDictionary[sign.zodiac]}
+                        type='modal'/>
+                </div>
+                <ShouldRender should={!!sign.house}>
+                    {() => (
+                        <div>
+                            <InfoItem
+                                withElaboration={true}
+                                openAiType={EOpenAiType.INTERPRETATION}
+                                explanation={sign.isRetro ?  generalSignData.retro?.houseMatchDictionary[(sign.house as IHouse).number] : generalSignData.houseMatchDictionary[(sign.house as IHouse).number]}
+                                type='modal'/>      
+                        </div>
+                    )}
+                </ShouldRender>
+                    {aspectDescriptions.map((dictionary, index) => (
+                        <InfoItem type='modal' explanation={dictionary as IExplanation} key={index} openAiType={EOpenAiType.INTERPRETATION} />
+                    ))}
+                    {descriptions.map((description, index) => (
+                        <InfoItem type='modal' explanation={description as IExplanation} key={index} openAiType={EOpenAiType.INTERPRETATION}/>
+                    ))}
+                </div>
             </div>
-        </div>
+        </ShouldRender>
     )
 }
