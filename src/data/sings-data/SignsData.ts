@@ -2,6 +2,7 @@ import { EAstroAspectType, EAstroDirection } from "../../types/astro";
 import { EDictinaryType, TDictionary } from "../../types/dicrionary";
 import { EAstroSigns, EAstroZodiacSign, ECrossSign, ESexSign } from "../../types/signs";
 import { EAstroElements } from "../elements/ElementsData";
+import MARS from "./signs/Mars";
 import MERCURY from "./signs/Mercury";
 import MOON from "./signs/Moon";
 import SUN from "./signs/Sun";
@@ -20,7 +21,6 @@ export type SignSymbolDataType = {
     elementMatchDictionary?: TDictionary;
     zodiacMatchDictionary: TDictionary;
     houseMatchDictionary: TDictionary;
-
     retro?: {
         zodiacMatchDictionary: TDictionary;
         houseMatchDictionary: TDictionary;
@@ -32,112 +32,7 @@ export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     [EAstroSigns.MOON]: MOON,
     [EAstroSigns.MERCURY]: MERCURY,
     [EAstroSigns.VENUS]: VENUS,
-    [EAstroSigns.MARS]: {
-        sign: EAstroSigns.MARS,
-        label: 'Марс',
-        elements: [EAstroElements.FIRE],
-        direction: EAstroDirection.NEGATIVE,
-        zodiacMatchDictionary: {
-            [EAstroZodiacSign.ARIES]: {
-                label: 'Марс в знаке Овна',
-                description: {}
-            },
-            [EAstroZodiacSign.TAURUS]: {
-                label: 'Марс в знаке Тельца',
-                description: {}
-            },
-            [EAstroZodiacSign.GEMINI]: {
-                label: 'Марс в знаке Близнацов',
-                description: {}
-            },
-            [EAstroZodiacSign.CANCER]: {
-                label: 'Марс в знаке Рака',
-                description: {}
-            },
-            [EAstroZodiacSign.LEO]: {
-                label: 'Марс в знаке Льва',
-                description: {}
-            },
-            [EAstroZodiacSign.VIRGO]: {
-                label: 'Марс в знаке Девы',
-                description: {}
-            },
-            [EAstroZodiacSign.LIBRA]: {
-                label: 'Марс в знаке Весов',
-                description: {}
-            },
-            [EAstroZodiacSign.SCORPIO]: {
-                label: 'Марс в знаке Скорпеона',
-                description: {}
-            },
-            [EAstroZodiacSign.SAGITTARIUS]: {
-                label: 'Марс в знаке Стрельца',
-                description: {}
-            },
-            [EAstroZodiacSign.CAPRICORN]: {
-                label: 'Марс в знаке Козерога',
-                description: {}
-            },
-            [EAstroZodiacSign.AQUARIUS]: {
-                label: 'Марс в знаке Водолея',
-                description: {}
-            },
-            [EAstroZodiacSign.PISCES]: {
-                label: 'Марс в знаке Рыб',
-                description: {}
-            },
-        },
-        houseMatchDictionary: {
-            1: {
-                label: 'Марс в I доме',
-                description: {}
-            },
-            2: {
-                label: 'Марс в II доме',
-                description: {}
-            },
-            3: {
-                label: 'Марс в III доме',
-                description: {}
-            },
-            4: {
-                label: 'Марс в IV доме',
-                description: {}
-            },
-            5: {
-                label: 'Марс в V доме',
-                description: {}
-            },
-            6: {
-                label: 'Марс в VI доме',
-                description: {}
-            },
-            7: {
-                label: 'Марс в VII доме',
-                description: {}
-            },
-            8: {
-                label: 'Марс в VIII доме',
-                description: {}
-            },
-            9: {
-                label: 'Марс в IX доме',
-                description: {}
-            },
-            10: {
-                label: 'Марс в X доме',
-                description: {}
-            },
-            11: {
-                label: 'Марс в XI доме',
-                description: {}
-            },
-            12: {
-                label: 'Марс в XII доме',
-                description: {}
-            }
-        }
-    },
+    [EAstroSigns.MARS]: MARS,
     [EAstroSigns.JUPITER]: {
         sign: EAstroSigns.JUPITER,
         label: 'Юпитер',
