@@ -10,7 +10,7 @@ import { formatOpenAiMessage, setZeros } from "../../../../utils/format.utils"
 import ShouldRender from "../../../../atoms/functional/ShouldRender"
 import { Modal } from "../../../../components/Modal/Modal"
 import { useOpenaiAspectQuestion } from "../../../../api/openai/openai.api"
-import { EAstroSigns } from "../../../../types/signs"
+import { EAstroSigns, ISign } from "../../../../types/signs"
 import { OpenAiAnswer } from "../../../../components/OpenAiAnswer/OpenAiAnswer"
 import { EOpenAiType } from "../../../../types/openai"
 import { ElaborationDescription } from "../../../../components/ElaborationDescription/ElaborationDescription"
@@ -100,13 +100,13 @@ export function AspectInfo ({ aspect, withElaboration = false, perspective }: As
             </div>
         </div>
     )
-    const elaborationQuestion = `${sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${sign2SymbolData?.label}`
+    const elaborationQuestion = `${(sign1 as ISign).isRetro ? 'Ретроградный ':  ''}${sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${(sign2 as ISign).isRetro ? 'Ретроградный ':  ''}${sign2SymbolData?.label}`
     return (
         <div className={clsx(styles.AspectInfo, 'aspect', aspect.action.toLocaleLowerCase())} >
             <span onClick={getAspectDescription} className={styles.AspectInfoName}>
-                <span className={styles.AspectInfoSign}>{sign1SymbolData?.label}</span>
+                <span className={styles.AspectInfoSign}>{(sign1 as ISign).isRetro ? 'Ретроградный ':  ''}{sign1SymbolData?.label}</span>
                 <span className={styles.AspectInfoType}>{ASPECT_TYPE_LABELS?.[aspect.type]?.label}</span>
-                <span className={styles.AspectInfoSign}>{sign2SymbolData?.label}</span>
+                <span className={styles.AspectInfoSign}>{(sign2 as ISign).isRetro ? 'Ретроградный ':  ''}{sign2SymbolData?.label}</span>
             </span>
             <SvgIcon name="Question" size={16} className={clsx(styles.AspectInfoIcon, `AspectInfoIcon${key}`)}/>
             <ShouldRender should={withElaboration}>
@@ -123,15 +123,15 @@ export function AspectInfo ({ aspect, withElaboration = false, perspective }: As
                 {() => (
                     <Modal onClose={() => setShouldShowDetails(false)}>  
                         <h2 className={styles.AspectDescriptionHeader}>
-                            <span>{sign1SymbolData?.label}</span>
+                            <span>{(sign1 as ISign).isRetro ? 'Ретроградный ':  ''}{sign1SymbolData?.label}</span>
                             <span style={{margin: '0 5px'}}>{ASPECT_TYPE_LABELS?.[aspect.type]?.label}</span>
-                            <span>{sign2SymbolData?.label}</span>
+                            <span>{(sign2 as ISign).isRetro ? 'Ретроградный ':  ''}{sign2SymbolData?.label}</span>
                         </h2>
                         <div style={{color: 'black'}}>
                             {AspectShortInfo}
                         </div>
                         <OpenAiAnswer
-                            question={`${sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${sign2SymbolData?.label}`}
+                            question={`${(sign1 as ISign).isRetro ? 'Ретроградный ':  ''}${sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${(sign2 as ISign).isRetro ? 'Ретроградный ':  ''}${sign2SymbolData?.label}`}
                             openAiType={EOpenAiType.ASPECT} />
                     </Modal>
                 )}

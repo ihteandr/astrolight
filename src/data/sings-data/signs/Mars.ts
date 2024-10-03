@@ -716,7 +716,6 @@ export const MARS: SignSymbolDataType = {
             }
         },
     },
-
     houseMatchAndAspectMatch: {
         1: [
             {

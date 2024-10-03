@@ -2,6 +2,7 @@ import { EAstroAspectType, EAstroDirection } from "../../types/astro";
 import { EDictinaryType, TDictionary } from "../../types/dicrionary";
 import { EAstroSigns, EAstroZodiacSign, ECrossSign, ESexSign } from "../../types/signs";
 import { EAstroElements } from "../elements/ElementsData";
+import JUPITER from "./signs/Jupiter";
 import MARS from "./signs/Mars";
 import MERCURY from "./signs/Mercury";
 import MOON from "./signs/Moon";
@@ -33,112 +34,7 @@ export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     [EAstroSigns.MERCURY]: MERCURY,
     [EAstroSigns.VENUS]: VENUS,
     [EAstroSigns.MARS]: MARS,
-    [EAstroSigns.JUPITER]: {
-        sign: EAstroSigns.JUPITER,
-        label: 'Юпитер',
-        elements: [EAstroElements.FIRE],
-        direction: EAstroDirection.POSITIVE,
-        zodiacMatchDictionary: {
-            [EAstroZodiacSign.ARIES]: {
-                label: 'Юпитер в знаке Овна',
-                description: {}
-            },
-            [EAstroZodiacSign.TAURUS]: {
-                label: 'Юпитер в знаке Тельца',
-                description: {}
-            },
-            [EAstroZodiacSign.GEMINI]: {
-                label: 'Юпитер в знаке Близнацов',
-                description: {}
-            },
-            [EAstroZodiacSign.CANCER]: {
-                label: 'Юпитер в знаке Рака',
-                description: {}
-            },
-            [EAstroZodiacSign.LEO]: {
-                label: 'Юпитер в знаке Льва',
-                description: {}
-            },
-            [EAstroZodiacSign.VIRGO]: {
-                label: 'Юпитер в знаке Девы',
-                description: {}
-            },
-            [EAstroZodiacSign.LIBRA]: {
-                label: 'Юпитер в знаке Весов',
-                description: {}
-            },
-            [EAstroZodiacSign.SCORPIO]: {
-                label: 'Юпитер в знаке Скорпеона',
-                description: {}
-            },
-            [EAstroZodiacSign.SAGITTARIUS]: {
-                label: 'Юпитер в знаке Стрельца',
-                description: {}
-            },
-            [EAstroZodiacSign.CAPRICORN]: {
-                label: 'Юпитер в знаке Козерога',
-                description: {}
-            },
-            [EAstroZodiacSign.AQUARIUS]: {
-                label: 'Юпитер в знаке Водолея',
-                description: {}
-            },
-            [EAstroZodiacSign.PISCES]: {
-                label: 'Юпитер в знаке Рыб',
-                description: {}
-            },
-        },
-        houseMatchDictionary: {
-            1: {
-                label: 'Юпитер в I доме',
-                description: {}
-            },
-            2: {
-                label: 'Юпитер в II доме',
-                description: {}
-            },
-            3: {
-                label: 'Юпитер в III доме',
-                description: {}
-            },
-            4: {
-                label: 'Юпитер в IV доме',
-                description: {}
-            },
-            5: {
-                label: 'Юпитер в V доме',
-                description: {}
-            },
-            6: {
-                label: 'Юпитер в VI доме',
-                description: {}
-            },
-            7: {
-                label: 'Юпитер в VII доме',
-                description: {}
-            },
-            8: {
-                label: 'Юпитер в VIII доме',
-                description: {}
-            },
-            9: {
-                label: 'Юпитер в IX доме',
-                description: {}
-            },
-            10: {
-                label: 'Юпитер в X доме',
-                description: {}
-            },
-            11: {
-                label: 'Юпитер в XI доме',
-                description: {}
-            },
-            12: {
-                label: 'Юпитер в XII доме',
-                description: {}
-            }
-        }
-    },
+    [EAstroSigns.JUPITER]: JUPITER,
     [EAstroSigns.SATURN]: {
         sign: EAstroSigns.SATURN,
         label: 'Сатурн',
