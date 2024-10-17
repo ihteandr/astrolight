@@ -6,6 +6,7 @@ import JUPITER from "./signs/Jupiter";
 import MARS from "./signs/Mars";
 import MERCURY from "./signs/Mercury";
 import MOON from "./signs/Moon";
+import SATURN from "./signs/Saturn";
 import SUN from "./signs/Sun";
 import VENUS from "./signs/Venus";
 
@@ -35,112 +36,7 @@ export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     [EAstroSigns.VENUS]: VENUS,
     [EAstroSigns.MARS]: MARS,
     [EAstroSigns.JUPITER]: JUPITER,
-    [EAstroSigns.SATURN]: {
-        sign: EAstroSigns.SATURN,
-        label: 'Сатурн',
-        elements: [EAstroElements.EARTH],
-        direction: EAstroDirection.NEGATIVE,
-        zodiacMatchDictionary: {
-            [EAstroZodiacSign.ARIES]: {
-                label: 'Сатурн в знаке Овна',
-                description: {}
-            },
-            [EAstroZodiacSign.TAURUS]: {
-                label: 'Сатурн в знаке Тельца',
-                description: {}
-            },
-            [EAstroZodiacSign.GEMINI]: {
-                label: 'Сатурн в знаке Близнацов',
-                description: {}
-            },
-            [EAstroZodiacSign.CANCER]: {
-                label: 'Сатурн в знаке Рака',
-                description: {}
-            },
-            [EAstroZodiacSign.LEO]: {
-                label: 'Сатурн в знаке Льва',
-                description: {}
-            },
-            [EAstroZodiacSign.VIRGO]: {
-                label: 'Сатурн в знаке Девы',
-                description: {}
-            },
-            [EAstroZodiacSign.LIBRA]: {
-                label: 'Сатурн в знаке Весов',
-                description: {}
-            },
-            [EAstroZodiacSign.SCORPIO]: {
-                label: 'Сатурн в знаке Скорпеона',
-                description: {}
-            },
-            [EAstroZodiacSign.SAGITTARIUS]: {
-                label: 'Сатурн в знаке Стрельца',
-                description: {}
-            },
-            [EAstroZodiacSign.CAPRICORN]: {
-                label: 'Сатурн в знаке Козерога',
-                description: {}
-            },
-            [EAstroZodiacSign.AQUARIUS]: {
-                label: 'Сатурн в знаке Водолея',
-                description: {}
-            },
-            [EAstroZodiacSign.PISCES]: {
-                label: 'Сатурн в знаке Рыб',
-                description: {}
-            },
-        },
-        houseMatchDictionary: {
-            1: {
-                label: 'Сатурн в I доме',
-                description: {}
-            },
-            2: {
-                label: 'Сатурн в II доме',
-                description: {}
-            },
-            3: {
-                label: 'Сатурн в III доме',
-                description: {}
-            },
-            4: {
-                label: 'Сатурн в IV доме',
-                description: {}
-            },
-            5: {
-                label: 'Сатурн в V доме',
-                description: {}
-            },
-            6: {
-                label: 'Сатурн в VI доме',
-                description: {}
-            },
-            7: {
-                label: 'Сатурн в VII доме',
-                description: {}
-            },
-            8: {
-                label: 'Сатурн в VIII доме',
-                description: {}
-            },
-            9: {
-                label: 'Сатурн в IX доме',
-                description: {}
-            },
-            10: {
-                label: 'Сатурн в X доме',
-                description: {}
-            },
-            11: {
-                label: 'Сатурн в XI доме',
-                description: {}
-            },
-            12: {
-                label: 'Сатурн в XII доме',
-                description: {}
-            }
-        }
-    },
+    [EAstroSigns.SATURN]: SATURN,
     [EAstroSigns.URANUS]: {
         sign: EAstroSigns.URANUS,
         label: 'Уран',
