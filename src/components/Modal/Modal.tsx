@@ -19,8 +19,11 @@ export function Modal({ onClose, children, portal = 'modal-root' }: ModalProps) 
         <div className={styles.Modal}>
             <div className={styles.ModalOverlay} onClick={onClose}></div>
             <div className={styles.ModalContentWrapper} onClick={onClose}>
-                <div className={styles.ModalContent} onClick={(e) => e.stopPropagation()}>
-                    {children}
+                <div className={styles.ModalContentContainer}>
+                    <div className={styles.ModalContent} onClick={(e) => e.stopPropagation()}>
+                        {children}
+                    </div>
+            
                 </div>
             </div>
         </div>

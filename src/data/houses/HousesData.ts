@@ -224,7 +224,7 @@ const HOUSE1:HouseDataType = {
     element: EAstroElements.FIRE,
     cross: EHouseCross.CARDINAL,
     symbolicExecutive: EAstroZodiacSign.ARIES,
-    description: `Внешний облик, конституция, манеры, тем-перамент, характер, тип самовыражения, восприятие себя`,
+    description: `Внешний облик, конституция, манеры, темперамент, характер, тип самовыражения, восприятие себя`,
     zodiacMatchDictionary: {
         [EAstroZodiacSign.ARIES]: {
             label: 'Куспид I дома в знаке Овна',
@@ -534,7 +534,7 @@ const HOUSE2: HouseDataType = {
     element: EAstroElements.EARTH,
     cross: EHouseCross.SUCCEDENTAL,
     symbolicExecutive: EAstroZodiacSign.TAURUS,
-    description: `Ресурсы, имущество, доход, бюджет, бла-госостояние, наличные деныи, источники доходов и виды трат`,
+    description: `Ресурсы, имущество, доход, бюджет, благосостояние, наличные деныи, источники доходов и виды трат`,
     zodiacMatchDictionary: {
         [EAstroZodiacSign.ARIES]: {
             label: 'Куспид II дома в знаке Овна',

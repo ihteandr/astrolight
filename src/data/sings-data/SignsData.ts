@@ -8,6 +8,7 @@ import MERCURY from "./signs/Mercury";
 import MOON from "./signs/Moon";
 import SATURN from "./signs/Saturn";
 import SUN from "./signs/Sun";
+import URANUS from "./signs/Uranus";
 import VENUS from "./signs/Venus";
 
 export type SignSymbolDataType = {
@@ -37,112 +38,7 @@ export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     [EAstroSigns.MARS]: MARS,
     [EAstroSigns.JUPITER]: JUPITER,
     [EAstroSigns.SATURN]: SATURN,
-    [EAstroSigns.URANUS]: {
-        sign: EAstroSigns.URANUS,
-        label: 'Уран',
-        elements: [EAstroElements.WIND],
-        direction: EAstroDirection.NEGATIVE,
-        zodiacMatchDictionary: {
-            [EAstroZodiacSign.ARIES]: {
-                label: 'Уран в знаке Овна',
-                description: {}
-            },
-            [EAstroZodiacSign.TAURUS]: {
-                label: 'Уран в знаке Тельца',
-                description: {}
-            },
-            [EAstroZodiacSign.GEMINI]: {
-                label: 'Уран в знаке Близнацов',
-                description: {}
-            },
-            [EAstroZodiacSign.CANCER]: {
-                label: 'Уран в знаке Рака',
-                description: {}
-            },
-            [EAstroZodiacSign.LEO]: {
-                label: 'Уран в знаке Льва',
-                description: {}
-            },
-            [EAstroZodiacSign.VIRGO]: {
-                label: 'Уран в знаке Девы',
-                description: {}
-            },
-            [EAstroZodiacSign.LIBRA]: {
-                label: 'Уран в знаке Весов',
-                description: {}
-            },
-            [EAstroZodiacSign.SCORPIO]: {
-                label: 'Уран в знаке Скорпеона',
-                description: {}
-            },
-            [EAstroZodiacSign.SAGITTARIUS]: {
-                label: 'Уран в знаке Стрельца',
-                description: {}
-            },
-            [EAstroZodiacSign.CAPRICORN]: {
-                label: 'Уран в знаке Козерога',
-                description: {}
-            },
-            [EAstroZodiacSign.AQUARIUS]: {
-                label: 'Уран в знаке Водолея',
-                description: {}
-            },
-            [EAstroZodiacSign.PISCES]: {
-                label: 'Уран в знаке Рыб',
-                description: {}
-            },
-        },
-        houseMatchDictionary: {
-            1: {
-                label: 'Уран в I доме',
-                description: {}
-            },
-            2: {
-                label: 'Уран в II доме',
-                description: {}
-            },
-            3: {
-                label: 'Уран в III доме',
-                description: {}
-            },
-            4: {
-                label: 'Уран в IV доме',
-                description: {}
-            },
-            5: {
-                label: 'Уран в V доме',
-                description: {}
-            },
-            6: {
-                label: 'Уран в VI доме',
-                description: {}
-            },
-            7: {
-                label: 'Уран в VII доме',
-                description: {}
-            },
-            8: {
-                label: 'Уран в VIII доме',
-                description: {}
-            },
-            9: {
-                label: 'Уран в IX доме',
-                description: {}
-            },
-            10: {
-                label: 'Уран в X доме',
-                description: {}
-            },
-            11: {
-                label: 'Уран в XI доме',
-                description: {}
-            },
-            12: {
-                label: 'Уран в XII доме',
-                description: {}
-            }
-        }
-    },
+    [EAstroSigns.URANUS]: URANUS,
     [EAstroSigns.NEPTUNE]: {
         sign: EAstroSigns.NEPTUNE,
         label: 'Нептун',
