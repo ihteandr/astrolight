@@ -6,6 +6,7 @@ import JUPITER from "./signs/Jupiter";
 import MARS from "./signs/Mars";
 import MERCURY from "./signs/Mercury";
 import MOON from "./signs/Moon";
+import NEPTUNE from "./signs/Neptune";
 import SATURN from "./signs/Saturn";
 import SUN from "./signs/Sun";
 import URANUS from "./signs/Uranus";
@@ -39,112 +40,7 @@ export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     [EAstroSigns.JUPITER]: JUPITER,
     [EAstroSigns.SATURN]: SATURN,
     [EAstroSigns.URANUS]: URANUS,
-    [EAstroSigns.NEPTUNE]: {
-        sign: EAstroSigns.NEPTUNE,
-        label: 'Нептун',
-        elements: [EAstroElements.WATER],
-        direction: EAstroDirection.NEGATIVE,
-        zodiacMatchDictionary: {
-            [EAstroZodiacSign.ARIES]: {
-                label: 'Нептун в знаке Овна',
-                description: {}
-            },
-            [EAstroZodiacSign.TAURUS]: {
-                label: 'Нептун в знаке Тельца',
-                description: {}
-            },
-            [EAstroZodiacSign.GEMINI]: {
-                label: 'Нептун в знаке Близнацов',
-                description: {}
-            },
-            [EAstroZodiacSign.CANCER]: {
-                label: 'Нептун в знаке Рака',
-                description: {}
-            },
-            [EAstroZodiacSign.LEO]: {
-                label: 'Нептун в знаке Льва',
-                description: {}
-            },
-            [EAstroZodiacSign.VIRGO]: {
-                label: 'Нептун в знаке Девы',
-                description: {}
-            },
-            [EAstroZodiacSign.LIBRA]: {
-                label: 'Нептун в знаке Весов',
-                description: {}
-            },
-            [EAstroZodiacSign.SCORPIO]: {
-                label: 'Нептун в знаке Скорпеона',
-                description: {}
-            },
-            [EAstroZodiacSign.SAGITTARIUS]: {
-                label: 'Нептун в знаке Стрельца',
-                description: {}
-            },
-            [EAstroZodiacSign.CAPRICORN]: {
-                label: 'Нептун в знаке Козерога',
-                description: {}
-            },
-            [EAstroZodiacSign.AQUARIUS]: {
-                label: 'Нептун в знаке Водолея',
-                description: {}
-            },
-            [EAstroZodiacSign.PISCES]: {
-                label: 'Нептун в знаке Рыб',
-                description: {}
-            },
-        },
-        houseMatchDictionary: {
-            1: {
-                label: 'Нептун в I доме',
-                description: {}
-            },
-            2: {
-                label: 'Нептун в II доме',
-                description: {}
-            },
-            3: {
-                label: 'Нептун в III доме',
-                description: {}
-            },
-            4: {
-                label: 'Нептун в IV доме',
-                description: {}
-            },
-            5: {
-                label: 'Нептун в V доме',
-                description: {}
-            },
-            6: {
-                label: 'Нептун в VI доме',
-                description: {}
-            },
-            7: {
-                label: 'Нептун в VII доме',
-                description: {}
-            },
-            8: {
-                label: 'Нептун в VIII доме',
-                description: {}
-            },
-            9: {
-                label: 'Нептун в IX доме',
-                description: {}
-            },
-            10: {
-                label: 'Нептун в X доме',
-                description: {}
-            },
-            11: {
-                label: 'Нептун в XI доме',
-                description: {}
-            },
-            12: {
-                label: 'Нептун в XII доме',
-                description: {}
-            }
-        }
-    },
+    [EAstroSigns.NEPTUNE]: NEPTUNE,
     [EAstroSigns.PLUTO]: {
         sign: EAstroSigns.PLUTO,
         label: 'Плутон',
