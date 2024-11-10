@@ -28,6 +28,12 @@ export function OpenAiAnswer ({ question, isElaboration = false, openAiType }: O
                 } else {
                     return `Какие характеристики у астрологического аспекта "${question}"? ${formatingText}`
                 }
+            case EOpenAiType.PLANET:     
+                if (isElaboration) {
+                    return `Как проработать планету "${question}" в астрологии? ${formatingText}`
+                } else {
+                    return `Что олицетворяет у астрологическая планета "${question}"? ${formatingText}`
+                }
             default:
                 return null
         }

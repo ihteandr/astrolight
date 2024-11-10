@@ -1,4 +1,5 @@
 export enum EOpenAiType {
     INTERPRETATION = 'interpretation',
-    ASPECT = 'aspect'
+    ASPECT = 'aspect',
+    PLANET = 'planet'
 }

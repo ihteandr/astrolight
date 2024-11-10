@@ -11,6 +11,7 @@ import { EModalType } from "../../utils/ui/helpers"
 import { InfoDescription } from "../InfoDescription/InfoDescription"
 import { EOpenAiType } from "../../types/openai"
 import { ElaborationDescription } from "../ElaborationDescription/ElaborationDescription"
+import { ElaborationInfo } from "../ElaborationInfo/ElaborationInfo"
 export type InfoItemProps = {
     explanation?: IExplanation,
     type?: 'modal' | 'tooltip',
@@ -22,7 +23,6 @@ export type InfoItemProps = {
 export function InfoItem ({ explanation, type = 'tooltip', withElaboration = false, openAiType, additionalDescription }: InfoItemProps) {
     if (!explanation) return null
     const [shouldShowInfo, setShouldSHowInfo] = useState(false)
-    const [shouldShowElaboration, setShouldShowElaboration] = useState(false)
     const key = useMemo(() => {
         return uuid.v4()
     }, [])
@@ -49,11 +49,7 @@ export function InfoItem ({ explanation, type = 'tooltip', withElaboration = fal
                             </Tooltip>
                         </ShouldRender>
                         <ShouldRender should={withElaboration}>
-                            <span
-                                className={styles.InfoItemSuggestion}
-                                onClick={() => setShouldShowElaboration(true)}>
-                                    Совет по проработке
-                            </span>
+                            <ElaborationInfo question={explanation.label} />
                         </ShouldRender>
                         <ShouldRender should={shouldShowInfo}>
                             {() => (
@@ -62,14 +58,6 @@ export function InfoItem ({ explanation, type = 'tooltip', withElaboration = fal
                                     <InfoDescription explanation={explanation} openAiType={openAiType} />
                                 </Modal>
                             )}
-                        </ShouldRender>
-                        <ShouldRender should={shouldShowElaboration}>
-                            {() => (
-                                <Modal onClose={() => setShouldShowElaboration(false)} portal={EModalType.INFO_MODAL}>
-                                    <h3>Проработка {explanation.label}</h3>
-                                    <ElaborationDescription question={explanation.label} openAiType={openAiType} />
-                                </Modal>
-                            )}    
                         </ShouldRender>
                     </>
                 )}

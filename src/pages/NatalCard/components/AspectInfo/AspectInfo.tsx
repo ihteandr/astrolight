@@ -14,6 +14,7 @@ import { EAstroSigns, ISign } from "../../../../types/signs"
 import { OpenAiAnswer } from "../../../../components/OpenAiAnswer/OpenAiAnswer"
 import { EOpenAiType } from "../../../../types/openai"
 import { ElaborationDescription } from "../../../../components/ElaborationDescription/ElaborationDescription"
+import { ElaborationInfo } from "../../../../components/ElaborationInfo/ElaborationInfo"
 export type AspectInfoProps = {
     aspect: IAstroAspect,
     perspective?: EAstroSigns | 'Ascident' | 'Meridian',
@@ -22,7 +23,6 @@ export type AspectInfoProps = {
 
 export function AspectInfo ({ aspect, withElaboration = false, perspective }: AspectInfoProps) {
     const [shouldShowDetails, setShouldShowDetails] = useState(false);
-    const [shouldShowElaboration, setShouldShowElaboration] = useState(false)
     const sign1 = useMemo(() => {
         return perspective ? aspect.sign1.name === perspective ? aspect.sign1 : aspect.sign2 : aspect.sign1
     }, [aspect, perspective])
@@ -100,7 +100,20 @@ export function AspectInfo ({ aspect, withElaboration = false, perspective }: As
             </div>
         </div>
     )
-    const elaborationQuestion = `${(sign1 as ISign).isRetro ? 'Ретроградный ':  ''}${sign1SymbolData?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${(sign2 as ISign).isRetro ? 'Ретроградный ':  ''}${sign2SymbolData?.label}`
+    const elaborationSings = sign1.name > sign2.name ? [{
+        sign: sign1,
+        data: sign1SymbolData
+    }, {
+        sign: sign2,
+        data: sign2SymbolData
+    }] : [{
+        sign: sign2,
+        data: sign2SymbolData
+    }, {
+        sign: sign1,
+        data: sign1SymbolData
+    }];
+    const elaborationQuestion = `${(elaborationSings[0].sign as ISign).isRetro ? 'Ретроградный ':  ''}${elaborationSings[0].data?.label} ${ASPECT_TYPE_LABELS?.[aspect.type]?.label} ${(elaborationSings[1].sign as ISign).isRetro ? 'Ретроградный ':  ''}${elaborationSings[1].data?.label}`
     return (
         <div className={clsx(styles.AspectInfo, 'aspect', aspect.action.toLocaleLowerCase())} >
             <span onClick={getAspectDescription} className={styles.AspectInfoName}>
@@ -110,9 +123,7 @@ export function AspectInfo ({ aspect, withElaboration = false, perspective }: As
             </span>
             <SvgIcon name="Question" size={16} className={clsx(styles.AspectInfoIcon, `AspectInfoIcon${key}`)}/>
             <ShouldRender should={withElaboration}>
-                <span onClick={() => setShouldShowElaboration(true)} className={styles.AspectInforElaboration}>
-                    Совет по проработке
-                </span>
+                <ElaborationInfo question={elaborationQuestion} openAiType={EOpenAiType.ASPECT} />
             </ShouldRender>
             <Tooltip anchorSelect={`.AspectInfoIcon${key}`}> 
                 <div style={{color: 'white'}}>
@@ -135,16 +146,6 @@ export function AspectInfo ({ aspect, withElaboration = false, perspective }: As
                             openAiType={EOpenAiType.ASPECT} />
                     </Modal>
                 )}
-                
-            </ShouldRender>
-
-            <ShouldRender should={shouldShowElaboration}>
-                {() => (
-                    <Modal onClose={() => setShouldShowElaboration(false)}>  
-                        <ElaborationDescription question={elaborationQuestion} openAiType={EOpenAiType.ASPECT} />
-                    </Modal>
-                )}
-                
             </ShouldRender>
         </div>
     )

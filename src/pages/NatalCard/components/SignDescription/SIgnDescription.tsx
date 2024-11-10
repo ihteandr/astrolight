@@ -11,6 +11,7 @@ import { InfoItem } from "../../../../components/InfoItem/InfoItem"
 import ShouldRender from "../../../../atoms/functional/ShouldRender"
 import { EOpenAiType } from "../../../../types/openai"
 import { SignGeneralDescription } from "./SignGeneralDescriptions/SignGeneralDescription/SignGeneralDescription"
+import { ElaborationInfo } from "../../../../components/ElaborationInfo/ElaborationInfo"
 
 export type SignDescriptionProps = {
     data?: any;
@@ -60,7 +61,7 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
     </div>
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>
-            <h2>{signSymbolData?.label}</h2>
+            <h2>{signSymbolData?.label} <ElaborationInfo question={signSymbolData?.label} openAiType={EOpenAiType.PLANET} /></h2>
             <SignInfo sign={sign} withAspects={true} withAspectElaboration={true} withHouse={true} /> 
             <ShouldRender should={dimicilInHouses.length > 0}>
                 {() => (
