@@ -66,7 +66,7 @@ export function SignDescription ({ sign, data, onClickZodiac, onClickHouse, onCl
             <ShouldRender should={dimicilInHouses.length > 0}>
                 {() => (
                     <>
-                        <h5>Доминант в Домах</h5>
+                        <h5>Управители в Домах</h5>
                         {dimicilInHouses.map((item, index) => (
                             <p key={index} style={{ display: 'flex', alignItems: 'center' }}>
                                 <SignInfo

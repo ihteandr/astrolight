@@ -106,7 +106,7 @@ export function ZodiacDescription ({ zodiac, data, onClickZodiac, onClickHouse, 
     return (
         <SideModal onClose={onClose} leftBar={leftBar}>
             <h2>Задиак {zodiacData.label}</h2>
-            <h5>Доминанты Знака</h5>
+            <h5>Управители Знака</h5>
             {executives.map((sign) => (
                 <SignInfo sign={sign} withAspects={true} withHouse={true} key={sign.name}/>
             ))}

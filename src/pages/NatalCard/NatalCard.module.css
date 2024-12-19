@@ -6,3 +6,6 @@
     display: flex;
     gap: 24px;
 }
+.NatalCardContent {
+    padding: 0 0 0 12px;
+}

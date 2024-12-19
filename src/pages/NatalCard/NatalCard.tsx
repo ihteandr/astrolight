@@ -58,7 +58,7 @@ export default function NatalCard () {
             <div className={styles.NatalCardContent}>    
                  <ShouldRender should={!!parsedNatalCardData}>
                     <div className={styles.NatalCardDetails}>
-                        <div>
+                        <div className={styles.NatalCardContent}>
                             <PersonDetails data={parsedNatalCardData} />
                             <NatalChart
                                 data={parsedNatalCardData}

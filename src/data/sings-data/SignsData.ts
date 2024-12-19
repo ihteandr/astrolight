@@ -7,6 +7,7 @@ import MARS from "./signs/Mars";
 import MERCURY from "./signs/Mercury";
 import MOON from "./signs/Moon";
 import NEPTUNE from "./signs/Neptune";
+import PLUTO from "./signs/Pluto";
 import SATURN from "./signs/Saturn";
 import SUN from "./signs/Sun";
 import URANUS from "./signs/Uranus";
@@ -41,112 +42,7 @@ export const SIGNS_SYMBOL_DATA: { [k: string]: SignSymbolDataType } = {
     [EAstroSigns.SATURN]: SATURN,
     [EAstroSigns.URANUS]: URANUS,
     [EAstroSigns.NEPTUNE]: NEPTUNE,
-    [EAstroSigns.PLUTO]: {
-        sign: EAstroSigns.PLUTO,
-        label: 'Плутон',
-        elements: [EAstroElements.WATER],
-        direction: EAstroDirection.NETRAL,
-        zodiacMatchDictionary: {
-            [EAstroZodiacSign.ARIES]: {
-                label: 'Плутон в знаке Овна',
-                description: {}
-            },
-            [EAstroZodiacSign.TAURUS]: {
-                label: 'Плутон в знаке Тельца',
-                description: {}
-            },
-            [EAstroZodiacSign.GEMINI]: {
-                label: 'Плутон в знаке Близнацов',
-                description: {}
-            },
-            [EAstroZodiacSign.CANCER]: {
-                label: 'Плутон в знаке Рака',
-                description: {}
-            },
-            [EAstroZodiacSign.LEO]: {
-                label: 'Плутон в знаке Льва',
-                description: {}
-            },
-            [EAstroZodiacSign.VIRGO]: {
-                label: 'Плутон в знаке Девы',
-                description: {}
-            },
-            [EAstroZodiacSign.LIBRA]: {
-                label: 'Плутон в знаке Весов',
-                description: {}
-            },
-            [EAstroZodiacSign.SCORPIO]: {
-                label: 'Плутон в знаке Скорпеона',
-                description: {}
-            },
-            [EAstroZodiacSign.SAGITTARIUS]: {
-                label: 'Плутон в знаке Стрельца',
-                description: {}
-            },
-            [EAstroZodiacSign.CAPRICORN]: {
-                label: 'Плутон в знаке Козерога',
-                description: {}
-            },
-            [EAstroZodiacSign.AQUARIUS]: {
-                label: 'Плутон в знаке Водолея',
-                description: {}
-            },
-            [EAstroZodiacSign.PISCES]: {
-                label: 'Плутон в знаке Рыб',
-                description: {}
-            },
-        },
-        houseMatchDictionary: {
-            1: {
-                label: 'Плутон в I доме',
-                description: {}
-            },
-            2: {
-                label: 'Плутон в II доме',
-                description: {}
-            },
-            3: {
-                label: 'Плутон в III доме',
-                description: {}
-            },
-            4: {
-                label: 'Плутон в IV доме',
-                description: {}
-            },
-            5: {
-                label: 'Плутон в V доме',
-                description: {}
-            },
-            6: {
-                label: 'Плутон в VI доме',
-                description: {}
-            },
-            7: {
-                label: 'Плутон в VII доме',
-                description: {}
-            },
-            8: {
-                label: 'Плутон в VIII доме',
-                description: {}
-            },
-            9: {
-                label: 'Плутон в IX доме',
-                description: {}
-            },
-            10: {
-                label: 'Плутон в X доме',
-                description: {}
-            },
-            11: {
-                label: 'Плутон в XI доме',
-                description: {}
-            },
-            12: {
-                label: 'Плутон в XII доме',
-                description: {}
-            }
-        }
-    },
+    [EAstroSigns.PLUTO]: PLUTO,
     [EAstroSigns.PROSERPINA]: {
         sign: EAstroSigns.PROSERPINA,
         label: 'Прозерпина',

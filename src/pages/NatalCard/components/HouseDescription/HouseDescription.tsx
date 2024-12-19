@@ -144,7 +144,7 @@ export function HouseDescription ({ onClickZodiac, onClickHouse, onClickSign, on
                     </div>
                     <h5 style={{ textAlign: 'left' }}>Исторические Названия</h5>
                     <p>{houseData.historicalNames.join(', ')}</p>
-                    <h5 style={{ textAlign: 'left' }}>Доминанты</h5>
+                    <h5 style={{ textAlign: 'left' }}>Управители</h5>
                     {dominants.map((sign) => (
                         <SignInfo key={sign.name} sign={sign} withAspects={true} withHouse={true} />
                     ))}
