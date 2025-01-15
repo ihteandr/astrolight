@@ -1,3 +1,7 @@
 .DateTime {
     display: flex;
+    flex-direction: column;
+}
+.DateTimeSection {
+    display: flex;
 }

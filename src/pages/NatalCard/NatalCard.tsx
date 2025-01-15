@@ -27,7 +27,7 @@ export default function NatalCard () {
     const [selectedZodiac, setSelectedZodiac] = useState<EAstroZodiacSign>()
     const [parsedNatalCardData, setParsedNatalCardData] = useState<any>()
     const { data } = useNatalCardData(JSON.parse(decode(request as string)))
-    
+
     useEffect(() => {
         if (data) {
             setParsedNatalCardData(parseNatalCardData(data))
@@ -70,10 +70,12 @@ export default function NatalCard () {
                         <SignsDetails
                             onClickSign={setSelectedSign}
                             data={parsedNatalCardData}/>
-                        <HousesDetails
-                            onClickHouse={setSelectedHouse}
-                            data={parsedNatalCardData}
-                        />
+                        <ShouldRender should={parsedNatalCardData?.houses?.positions.length > 0}>
+                            <HousesDetails
+                                onClickHouse={setSelectedHouse}
+                                data={parsedNatalCardData}
+                            />
+                        </ShouldRender>
                         <AspectsDetails data={parsedNatalCardData}/>
                     </div>
                 </ShouldRender>

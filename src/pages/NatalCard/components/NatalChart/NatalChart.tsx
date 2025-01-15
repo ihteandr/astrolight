@@ -58,6 +58,7 @@ export function NatalChart ({
         x: size / 2,
         y: size / 2
     }
+    
     useEffect(() => {
         if (data) {
             Storage.add('natal-card-data', data, 'local')
@@ -74,7 +75,7 @@ export function NatalChart ({
                     return vAspect.isSame(aspect)
                 }) : true
             }))
-            let degree = data.houses.house[0] / 180 * Math.PI;
+            let degree = data.houses.length > 0 ? data.houses.house[0] / 180 * Math.PI : 0;
             setRotateDegree(degree)
         }
     }, [data, setSigns, setHouses, setAspects, setRotateDegree, visibilityOptions])

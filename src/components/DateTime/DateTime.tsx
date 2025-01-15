@@ -53,54 +53,52 @@ export function DateTime ({ onChange, value }: DateTimeTypes) {
     }
     return (
         <div className={styles.DateTime}>
-            <div>
-                <div>День</div>
-                <select defaultValue={value.day} onChange={updateSelectedDate('day')}>
-                    {days.map((day) => {
-                        return <option value={day} key={day}>{day}</option>
-                    })}
-                </select>
+            <div className={styles.DateTimeSection}>
+                <div>
+                    <div>День</div>
+                    <select defaultValue={value.day} onChange={updateSelectedDate('day')}>
+                        {days.map((day) => {
+                            return <option value={day} key={day}>{day}</option>
+                        })}
+                    </select>
+                </div>
+
+                <div>
+                    <div>Месяц</div>
+                    <select defaultValue={value.month} onChange={updateSelectedDate('month')}>
+                        {months.map((month) => {
+                            return <option value={month.value} key={month.value}>{month.name}</option>
+                        })}
+                    </select>
+                </div>
+
+                <div>
+                    <div>Год</div>
+                    <select defaultValue={value.year} onChange={updateSelectedDate('year')}>
+                        {years.map((year) => {
+                            return <option value={year} key={year}>{year}</option>
+                        })}
+                    </select>
+                </div>
             </div>
 
-            <div>
-                <div>Месяц</div>
-                <select defaultValue={value.month} onChange={updateSelectedDate('month')}>
-                    {months.map((month) => {
-                        return <option value={month.value} key={month.value}>{month.name}</option>
-                    })}
-                </select>
-            </div>
-
-            <div>
-                <div>Год</div>
-                <select defaultValue={value.year} onChange={updateSelectedDate('year')}>
-                    {years.map((year) => {
-                        return <option value={year} key={year}>{year}</option>
-                    })}
-                </select>
-            </div>
-
-            <div>
-                <div>Час</div>
-                <select defaultValue={value.hour} onChange={updateSelectedDate('hour')}>
-                    {hours.map((hour) => {
-                        return <option value={hour} key={hour}>{hour}</option>
-                    })}
-                </select>
-            </div>
-
-            <div>
-                <div>Минута</div>
-                <select defaultValue={value.minute} onChange={updateSelectedDate('minute')}>
-                    {minutes.map((minute) => {
-                        return <option value={minute} key={minute}>{minute}</option>
-                    })}
-                </select>
-            </div>
-
-            <div>
-                <div>Часавой пояс</div>
-                <input value={value.timezone} style={{ width: 35 }} onChange={updateSelectedDate('timezone')} />
+            <div className={styles.DateTimeSection}>
+                <div>
+                    <div>Час</div>
+                    <select defaultValue={value.hour} onChange={updateSelectedDate('hour')}>
+                        {hours.map((hour) => {
+                            return <option value={hour} key={hour}>{hour}</option>
+                        })}
+                    </select>
+                </div>
+                <div>
+                    <div>Минута</div>
+                    <select defaultValue={value.minute} onChange={updateSelectedDate('minute')}>
+                        {minutes.map((minute) => {
+                            return <option value={minute} key={minute}>{minute}</option>
+                        })}
+                    </select>
+                </div>
             </div>
         </div>
     )

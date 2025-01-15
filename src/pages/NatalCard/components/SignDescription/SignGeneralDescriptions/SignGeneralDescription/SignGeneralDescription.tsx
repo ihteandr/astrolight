@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { SIGNS_SYMBOL_DATA } from '../../../../../../data/sings-data/SignsData'
 import { EAstroAspectType, IHouse } from '../../../../../../types/astro'
 import { EAstroSigns, ISign } from '../../../../../../types/signs'
@@ -18,7 +18,7 @@ export function SignGeneralDescription ({ data, sign }: SunDescriptionProps) {
     const generalSignData = SIGNS_SYMBOL_DATA[generalSing.name]
     const zodiacData = ZODIAC_SYMBOL_DATA[generalSing.zodiac]
     
-    const aspectsDictionaries = SIGNS_SYMBOL_DATA[generalSing.name].houseMatchAndAspectMatch?.[(generalSing.house as IHouse).number]
+    const aspectsDictionaries = generalSing.house ? SIGNS_SYMBOL_DATA[generalSing.name].houseMatchAndAspectMatch?.[(generalSing.house as IHouse).number] : [];
 
     const aspectsExplanations = useMemo<IExplanation[]>(() => {
         const aspects = generalSing.aspects.filter((aspect) => {
@@ -34,7 +34,7 @@ export function SignGeneralDescription ({ data, sign }: SunDescriptionProps) {
             return dictionary?.dictionary[secondSign.name]
         }).filter(Boolean) as IExplanation[]
     }, [generalSing, aspectsDictionaries])
-
+    
     const signCrossDictionary = generalSignData.crossMatchDictinonary?.[zodiacData.cross];
     const signElementDictionary = generalSignData.elementMatchDictionary?.[zodiacData.element]
     const signSexDictionary = generalSignData.zodiacSexMatchDictionary?.[zodiacData.sex];

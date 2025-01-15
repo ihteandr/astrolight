@@ -10,18 +10,22 @@ import moment from 'moment'
 import { encode } from 'js-base64'
 import { useNavigate } from 'react-router-dom'
 export function NatalCardForm () {
+    const [timezone, setTimezone] = useState<string>('4')
     const [selectedDate, setSelectedDate] = useState<DateTimeValue>({
         day: 8,
         month: 12,
         year: 1988,
         hour: 16,
         minute: 50,
-        timezone: '4'
+        timezone: `${parseFloat(timezone) * 60 * 60}`
     })
     const navigate = useNavigate()
     const [system, setSystem] = useState('P')
     const avaialbelSystems = useMemo(() => {
         return [{
+            label: 'Нет',
+            value: ''
+        },{
             label: 'Кох',
             value: 'K'
         }, {
@@ -45,6 +49,19 @@ export function NatalCardForm () {
                 place: placeData[0].formatted_address
             })
             setRealPlace(placeData[0].formatted_address)
+
+            const pdate = parseDateTimeValue(selectedDate as DateTimeValue) 
+            googleTimezoneApi.data(
+                pos.lat,
+                pos.lng,
+                pdate.valueOf() / 1000,
+                (err: any, res:any) => {
+                    setSelectedDate((date) => ({
+                        ...date,
+                        timezone: res.raw_response.rawOffset
+                    }))
+                    setTimezone(`${res.raw_response.rawOffset / 60 / 60}`)
+                })    
         }
     }, [place, setAstroPlace, setRealPlace])
     const submitRequest = useCallback(() => {
@@ -52,28 +69,19 @@ export function NatalCardForm () {
             const request = encode(JSON.stringify({
                 ...selectedDate,
                 ...astroPlace,
-                timezone: parseFloat(selectedDate.timezone.toString()) * 60 * 60,
+                timezone: parseFloat(selectedDate.timezone.toString()),
                 system
             }))
             navigate(`/natal-card/${request}`)
-            const pdate = parseDateTimeValue(selectedDate as DateTimeValue) 
-            // googleTimezoneApi.data(
-            //     astroPlace?.latitude,
-            //     astroPlace?.longitude,
-            //     pdate.valueOf() / 1000,
-            //      (err: any, res:any) => {
-            //         const request = encode(JSON.stringify({
-            //             ...selectedDate,
-            //             ...astroPlace,
-            //             timezone: res.raw_response.rawOffset,
-            //             system
-            //         }))
-                        
-            //         navigate(`/natal-card/${request}`)
-            //     })    
         }
     }, [selectedDate, astroPlace, navigate, setRealDate, system])
-
+    const updateTimezone = useCallback((e: any) => {
+        const timezone = parseFloat(e.target.value) * 60 * 60;
+        setSelectedDate((date: any) => ({
+            ...date,
+            timezone
+        }))
+    }, [setSelectedDate])
     return (
         <div className={styles.NatalCardForm}>
             <div className={styles.NatalCardFormContent}>
@@ -83,6 +91,15 @@ export function NatalCardForm () {
                     <input onInput={(e) => setPlace(e.currentTarget.value)}/>
                     <button onClick={checkPlace}>Check</button>
                     <span>{realPlace}</span>
+                </div>
+
+                <div>
+                    <div>Часавой пояс</div>
+                    <input
+                        value={timezone}
+                        style={{ width: 35 }}
+                        onInput={(e: any) => setTimezone(e.target.value)}
+                        onBlur={updateTimezone} />
                 </div>
                 <div>
                     <div>Система Домов</div>

@@ -50,7 +50,8 @@ export function parseNatalCardData (data: any) {
             }
         }
     }))
-    const houses: IHouse[] = data.houses.positions.map((house: any) => {
+    
+    const houses: IHouse[] = data.houses?.positions.map((house: any) => {
         const zodiacIndex = house.zodiac - 1
         const zodiac = ZODIAC_ORDER[zodiacIndex]
         const zodiacData = ZODIAC_SYMBOL_DATA[zodiac]
@@ -76,7 +77,7 @@ export function parseNatalCardData (data: any) {
                 return start < sign.longitude && end > sign.longitude
             }
         }    
-    })
+    }) || [];
     signs.forEach((sign) => {
         sign.house = houses.find((house) => house.isContainsSign(sign) )
         sign.aspects = sortAspects(aspects.filter((aspect) => {
