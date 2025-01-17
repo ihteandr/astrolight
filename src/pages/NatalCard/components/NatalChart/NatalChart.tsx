@@ -75,7 +75,7 @@ export function NatalChart ({
                     return vAspect.isSame(aspect)
                 }) : true
             }))
-            let degree = data.houses.length > 0 ? data.houses.house[0] / 180 * Math.PI : 0;
+            let degree = data.houses.positions.length > 0 ? data.houses.house[0] / 180 * Math.PI : 0;
             setRotateDegree(degree)
         }
     }, [data, setSigns, setHouses, setAspects, setRotateDegree, visibilityOptions])
