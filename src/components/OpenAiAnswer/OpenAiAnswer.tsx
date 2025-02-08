@@ -35,7 +35,7 @@ export function OpenAiAnswer ({ question, isElaboration = false, openAiType }: O
                     return `Что олицетворяет у астрологическая планета "${question}"? ${formatingText}`
                 }
             case EOpenAiType.SYNTHESIS:
-                return `Как синтезировать "${question}" в астрологии? ${formatingText}`
+                return `Дай полный синтез астрологических характеристик "${question}"? ${formatingText}`
             default:
                 return null
         }
