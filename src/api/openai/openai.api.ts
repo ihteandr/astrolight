@@ -36,3 +36,14 @@ export function useOpenaiElaborationQuestion () {
         }
     })
 }
+
+
+export function useOpenaiSynthesisQuestion() {
+    return useMutation({
+        mutationKey: ['openai-synthesis-question'],
+        mutationFn: (data: OpenaiDataParams) => {
+            return axios.post(`${API_URL}/openai/synthesis/description`, data)
+                .then(res => res.data)
+        }
+    })
+}

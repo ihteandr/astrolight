@@ -83,6 +83,9 @@ export function parseNatalCardData (data: any) {
         sign.aspects = sortAspects(aspects.filter((aspect) => {
             return aspect.sign1.name === sign.name || aspect.sign2.name === sign.name
         }))
+        sign.getAspect = (signName: EAstroSigns) => {
+            return sign.aspects.find((aspect) => aspect.sign1.name === signName || aspect.sign2.name === signName) || null
+        }
     })
     
     return {

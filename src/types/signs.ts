@@ -75,7 +75,9 @@ export interface ISign {
     rflag: number,
     aspects: IAstroAspect[],
     house?: IHouse,
-    type: ESingType
+    type: ESingType,
+
+    getAspect: (signName: EAstroSigns) => IAstroAspect | null
 }
 
 

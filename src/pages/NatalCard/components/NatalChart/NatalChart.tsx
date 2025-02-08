@@ -37,7 +37,8 @@ export type NatalChartTypes = {
     onClickZodiac?: (zodiac: EAstroZodiacSign) => void 
     data?: any;
     visibilityOptions?: INatalChartVisibilityOptions,
-    hoverHightlight?: boolean
+    hoverHightlight?: boolean;
+    selectedSigns?: ISign[],
 }
 
 export function NatalChart ({
@@ -47,7 +48,8 @@ export function NatalChart ({
     onClickHouse,
     visibilityOptions,
     onClickSign,
-    hoverHightlight = true
+    hoverHightlight = true,
+    selectedSigns = []
 }: NatalChartTypes) {
     const signSize = 20
     const [signs, setSigns] = useState<ISign[]>([])
@@ -113,7 +115,7 @@ export function NatalChart ({
             point={getSignPostion(sign)}
             key={sign.name} 
             hoverHightlight={hoverHightlight}
-            highlight={visibilityOptions?.highlightSigns?.includes(sign.name)}
+            highlight={!!selectedSigns.find((selectedSign) => selectedSign.name === sign.name) || visibilityOptions?.highlightSigns?.includes(sign.name)}
             signSize={signSize} />
     }
 

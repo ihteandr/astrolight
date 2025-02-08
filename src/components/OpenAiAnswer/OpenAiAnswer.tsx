@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { EOpenAiType } from '../../types/openai'
 import styles from './OpenAiAnswer.module.css'
-import { useOpenaiAspectQuestion, useOpenaiElaborationQuestion, useOpenaiInterpretationQuestion } from '../../api/openai/openai.api'
+import { useOpenaiAspectQuestion, useOpenaiElaborationQuestion, useOpenaiInterpretationQuestion, useOpenaiSynthesisQuestion } from '../../api/openai/openai.api'
 import { formatOpenAiMessage } from '../../utils/format.utils'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -34,6 +34,8 @@ export function OpenAiAnswer ({ question, isElaboration = false, openAiType }: O
                 } else {
                     return `Что олицетворяет у астрологическая планета "${question}"? ${formatingText}`
                 }
+            case EOpenAiType.SYNTHESIS:
+                return `Как синтезировать "${question}" в астрологии? ${formatingText}`
             default:
                 return null
         }
@@ -47,7 +49,10 @@ export function OpenAiAnswer ({ question, isElaboration = false, openAiType }: O
     } = useOpenaiInterpretationQuestion()
     const {
         mutateAsync: getAspectAnswer
-    } = useOpenaiAspectQuestion()
+    } = useOpenaiAspectQuestion();
+    const {
+        mutateAsync: getSynthesisAnswer
+    } = useOpenaiSynthesisQuestion()
     
     const [message, setMessage] = useState('')
     const displayMessage = useMemo(() => {
@@ -68,6 +73,9 @@ export function OpenAiAnswer ({ question, isElaboration = false, openAiType }: O
                         break;
                     case EOpenAiType.ASPECT:
                         getAspectAnswer({ question: fullQuestion }).then(setMessage)
+                        break;
+                    case EOpenAiType.SYNTHESIS:
+                        getSynthesisAnswer({ question: fullQuestion }).then(setMessage)
                         break;
                 }    
             }

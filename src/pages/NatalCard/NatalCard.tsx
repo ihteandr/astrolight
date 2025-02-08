@@ -20,7 +20,12 @@ import { EAstroZodiacSign, ISign } from "../../types/signs";
 import { SignDescription } from "./components/SignDescription/SIgnDescription";
 import { ZodiacDescription } from "./components/ZodiacDescription/ZodiacDescription";
 import { PersonDetails } from "./components/PersonDetails/PersonDetails";
+import { set } from "lodash";
+import { SynthesisDescription } from "./components/SynthesisDescription/SynthesisDescription";
 export default function NatalCard () {
+    const [showSynthesis, setShowSynthesis] = useState(false)
+    const [synthesisEnabled, setSynthesisEnabled] = useState(false)
+    const [synthesisSigns, setSynthesisSigns] = useState<ISign[]>([])
     const [selectedHouse, setSelectedHouse] = useState<IHouse>()
     const [selectedSign, setSelectedSign] = useState<ISign>()
     const { request } = useParams()
@@ -39,28 +44,64 @@ export default function NatalCard () {
         setSelectedZodiac(undefined);
     }, [setSelectedHouse, setSelectedSign, setSelectedZodiac])
     const selectZodiac = useCallback((zodiac: EAstroZodiacSign) => {
-        resetSelected()
-        setSelectedZodiac(zodiac)
-    }, [resetSelected, setSelectedZodiac])
+        if (synthesisEnabled) {
+        } else {
+            resetSelected()
+            setSelectedZodiac(zodiac)    
+        }
+    }, [resetSelected, setSelectedZodiac, synthesisEnabled])
 
     const selectSign = useCallback((sign: ISign) => {
-        resetSelected()
-        setSelectedSign(sign)
-    }, [resetSelected, setSelectedSign])
+        if (synthesisEnabled) {
+            setSynthesisSigns(signs => signs.length <= 2 ? [...signs, sign] : signs)
+        } else {
+            resetSelected()
+            setSelectedSign(sign)    
+        }
+    }, [resetSelected, setSelectedSign, synthesisEnabled])
 
     const selectHouse = useCallback((house: IHouse) => {
-        resetSelected()
-        setSelectedHouse(house)
-    }, [resetSelected, setSelectedHouse])
+        if (synthesisEnabled) {
+
+        } else {
+            resetSelected()
+            setSelectedHouse(house)    
+        }
+    }, [resetSelected, setSelectedHouse, synthesisEnabled])
+    const displaySynthesis = useCallback(() => {
+        setShowSynthesis(true)
+    }, []);
+    const disableSynthesis = useCallback(() => {
+        setShowSynthesis(false)
+        setSynthesisEnabled(false)
+        setSynthesisSigns([])
+    }, [])
+    const enableSysthesis = useCallback(() => {
+        setSynthesisEnabled(true)
+        setSynthesisSigns([])
+        setSelectedHouse(undefined);
+        setSelectedSign(undefined);
+        setSelectedZodiac(undefined);
+    }, [setSynthesisEnabled, setSynthesisSigns, setSelectedHouse, setSelectedSign, setSelectedZodiac])
     return (
         <div>
             <h1>Натальная карта</h1>
-            <div className={styles.NatalCardContent}>    
+            <div className={styles.NatalCardContent}>
+                <div>
+                    <button onClick={enableSysthesis}>Синтезировать</button>
+                    <ShouldRender should={synthesisEnabled}>
+                        <div>
+                            <button onClick={disableSynthesis}>Отменить синтез</button>
+                            <button onClick={displaySynthesis}>Результат синтеза</button>
+                        </div>
+                    </ShouldRender>
+                </div>
                  <ShouldRender should={!!parsedNatalCardData}>
                     <div className={styles.NatalCardDetails}>
                         <div className={styles.NatalCardContent}>
                             <PersonDetails data={parsedNatalCardData} />
                             <NatalChart
+                                selectedSigns={synthesisSigns}
                                 data={parsedNatalCardData}
                                 size={500}
                                 onClickZodiac={selectZodiac}
@@ -109,6 +150,9 @@ export default function NatalCard () {
                         data={parsedNatalCardData}
                         onClose={() => setSelectedZodiac(undefined)}
                         zodiac={selectedZodiac as EAstroZodiacSign}/>
+                </ShouldRender>
+                <ShouldRender should={showSynthesis}>
+                    <SynthesisDescription signs={synthesisSigns} onClose={disableSynthesis} />
                 </ShouldRender>
             </div>
         </div>

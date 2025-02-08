@@ -6,6 +6,7 @@ import { formatOpenAiMessage } from '../../utils/format.utils'
 import ShouldRender from '../../atoms/functional/ShouldRender'
 import { EOpenAiType } from '../../types/openai'
 import { OpenAiAnswer } from '../OpenAiAnswer/OpenAiAnswer'
+import { sortBy } from 'lodash'
 
 export type InfoDescriptionProps = {
     explanation: IExplanation,
@@ -14,7 +15,7 @@ export type InfoDescriptionProps = {
 
 export function InfoDescription({ explanation, openAiType }: InfoDescriptionProps) {
     const tabs = useMemo<TabItem[]>(() => {
-        return Object.keys(DICTIONARY_TYPES).filter((dictinaryType) => (
+        return sortBy(Object.keys(DICTIONARY_TYPES).filter((dictinaryType) => (
             !!explanation.description?.[dictinaryType]
         )).map((dictinaryType) => {
             return {
@@ -24,7 +25,7 @@ export function InfoDescription({ explanation, openAiType }: InfoDescriptionProp
         }).concat(openAiType ? [{
             label: 'Open AI',
             value: EDictinaryType.OPENAI
-        }] : [])
+        }] : []), (item) => item.value === EDictinaryType.OPENAI ? 0 : 1)
     }, [openAiType, explanation])
     const [selected, setSelected] = useState<EDictinaryType>(DEFAULT_DICTINARY_TYPE);
     const description = useMemo<string>(() => {
